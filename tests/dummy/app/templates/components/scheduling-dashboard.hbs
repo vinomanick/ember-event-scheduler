@@ -1,0 +1,13 @@
+{{#event-scheduler config=config as |scheduler|}}
+
+  {{#scheduler.calendar
+    selectedView='day'
+    as |calendar|}}
+    {{calendar.resourceHeader}}
+    {{calendar.gridHeader}}
+  {{/scheduler.calendar}}
+
+
+  {{scheduler.externalEvents}}
+
+{{/event-scheduler}}
