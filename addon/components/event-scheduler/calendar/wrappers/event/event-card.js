@@ -3,14 +3,12 @@ import layout from '../../../../../templates/components/event-scheduler/calendar
 import { reads } from '@ember/object/computed';
 import { get, computed, set, getProperties } from '@ember/object';
 import { htmlSafe } from '@ember/template';
-import TransitionMixin from 'ember-css-transitions/mixins/transition-mixin';
 
-export default Component.extend(TransitionMixin, {
+export default Component.extend({
   layout,
   classNames: ['event-wrapper'],
   classNameBindings: ['isExtendedLeft:extended-left', 'isExtendedRight:extended-right', 'dragState'],
   attributeBindings: ['style', 'data-test-es', 'data-event-id', 'draggable'],
-  transitionClass: 'event-wrapper',
   'data-test-es': 'event-wrapper',
   'data-event-id': reads('event.id'),
   style: computed('eventStartPosition', 'eventEndPosition', function() {

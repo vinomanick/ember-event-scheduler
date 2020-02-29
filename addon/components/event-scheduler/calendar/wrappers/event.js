@@ -24,7 +24,7 @@ export default Component.extend({
   getGridPosition(time) {
     let _selectedDate = get(this, 'selectedDate').clone().startOf(get(this, 'viewType'));
     let timeDifference = get(this, 'moment').moment(time).diff(_selectedDate);
-    let { interval: { format, value } } = get(this, 'slotInterval');
+    let { format, value } = get(this, 'slotInterval');
     let timeDuration = moment.duration(timeDifference).as(format);
     return (timeDuration / value) + 1;
   }

@@ -2,11 +2,18 @@
 
 $border-primary: #ebeef0;
 
+$text-light:  #fff;
+
 $bg-light: #fff;
 $bg-primary: #f4f9ff;
 $bg-drag-zone: rgba(188, 229, 255, 0.7);
 
-$bg-event: #424379;
+$event-bg: #424379;
+$event-bg-hover: #12344d;
+$event-border: #fff;
+$event-focus-border: #2e6ed8;
+
+
 
 // Font variables
 $font-weight-semibold: 500;
@@ -14,3 +21,5 @@ $font-weight-semibold: 500;
 $font-size-xsmall: 12px;
 $font-size-small: 14px;
 $font-size-medium: 16px;
+
+$radius: 4px;
