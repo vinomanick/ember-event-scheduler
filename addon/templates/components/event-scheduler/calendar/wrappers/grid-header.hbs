@@ -4,17 +4,17 @@
   {{#if (eq viewType VIEWS.DAY)}}
     {{#each slots as |slot columnIndex|}}
       {{#if (eq columnIndex 0)}}
-        <div class="calendar__row--slot" style={{grid-position 1 0 1 columnIndex 1 1}}></div>
-        <div class="calendar__row--slot" style={{grid-position 1 0 1 slots.length 0 1}}></div>
-      {{else if (eq (mod columnIndex 2) 0)}}
-        <div class="calendar__row--slot" style={{grid-position 1 0 1 columnIndex 0 2}}>
+        <div class="calendar-row__slot" style={{grid-position 1 0 1 columnIndex 1 1}}></div>
+        <div class="calendar-row__slot" style={{grid-position 1 0 1 slots.length 0 1}}></div>
+      {{else if (eq (modulus columnIndex 2) 0)}}
+        <div class="calendar-row__slot" style={{grid-position 1 0 1 columnIndex 0 2}}>
           {{moment-format slot slotFormat}}
         </div>
       {{/if}}
     {{/each}}
   {{else}}
     {{#each slots as |slot columnIndex|}}
-      <div class="calendar__row--slot" style={{grid-position 1 0 1 columnIndex 1 1}}>
+      <div class="calendar-row__slot" style={{grid-position 1 0 1 columnIndex 1 1}}>
         <div class="text--semibold">{{moment-format slot 'dddd'}}</div>
         <button {{action "navigate" slot}}
           data-test-es={{moment-format slot 'DD-MM-YYYY'}}

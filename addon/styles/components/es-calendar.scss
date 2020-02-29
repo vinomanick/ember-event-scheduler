@@ -1,0 +1,68 @@
+.es-calendar {
+  width: 100%;
+  height: 600px;
+  overflow: scroll;
+  flex-direction: column;
+
+  @extend %default-box-shadow;
+  @extend .d-flex;
+
+  .calendar-content {
+    flex-grow: 1;
+  }
+
+  .calendar-row {
+    display: flex;
+
+    &__name {
+      width: 200px;
+      min-width: 200px;
+      position: sticky;
+      left: 0;
+      border-right: solid 1px $border-primary;
+      border-bottom: solid 1px $border-primary;
+      background-color: $bg-light;
+      z-index: 2;
+
+      @extend .d-flex;
+      @extend .align-items--center;
+      @extend .justify-content--center;
+
+      .resource-name {
+        padding: 10px;
+
+        @extend .ellipsis;
+      }
+    }
+
+    &__grid {
+      position: relative;
+      display: grid;
+      grid-auto-rows: 50px;
+      grid-template-rows: 50px;
+      grid-auto-flow: dense;
+      flex-grow: 1;
+      border-bottom: solid 1px $border-primary;
+    }
+  }
+
+  &.day-view {
+    .calendar-row {
+      &__grid {
+        grid-template-columns: repeat(48, 50px);
+        background: repeating-linear-gradient(90deg, transparent, transparent 49px, $border-primary 50px);
+        background-color: $bg-light;
+      }
+    }
+  }
+
+  &.week-view {
+    .calendar-row {
+      &__grid {
+        grid-template-columns: repeat(7, minmax(120px, 1fr));
+        background: repeating-linear-gradient(90deg, transparent, transparent calc((100% / 7) - 2px), $border-primary calc(100% / 7));
+        background-color: $bg-light;
+      }
+    }
+  }
+}

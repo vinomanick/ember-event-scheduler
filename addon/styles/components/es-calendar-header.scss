@@ -1,0 +1,75 @@
+.es-calendar {
+  .calendar-header {
+    .calendar-row {
+      position: sticky;
+      top: 0;
+      z-index: 3;
+      min-height: 100px;
+      background-color: $bg-light;
+
+      .calendar-row {
+        &__name {
+          font-weight: $font-weight-semibold;
+          font-size: $font-size-medium;
+          // Need to find a better way to apply shadow as its creating a problem when there are no agents
+          // box-shadow: 1px -12px 18px 0 rgba(18, 52, 77, 0.06);
+        }
+      }
+
+      &__slot {
+        font-size: $font-size-xsmall;
+        background: $bg-light;
+        border-right: solid 1px $border-primary;
+        flex-direction: column;
+
+        @extend .d-flex;
+        @extend .align-items--center;
+        @extend .justify-content--center;
+
+        &:last-child {
+          border-right: none;
+        }
+
+        .day-number {
+          padding: 0;
+          margin-top: 6px;
+          font-size: $font-size-small;
+          height: 32px;
+          min-width: 32px;
+          border-radius: 4px;
+
+          // &:hover {
+          //   background: $app-icon-color-hover-bg;
+          //   border: 1px solid $app-icon-color-hover-bg;
+          // }
+
+          // &--today {
+          //   background: $btn-lg-primary-top;
+          //   color: $app-btn-text-light;
+          //   border-color: $btn-lg-primary-selected-border;
+
+          //   &:hover {
+          //     background: $btn-lg-primary-top;
+          //     border: 1px solid $btn-lg-primary-top;
+          //   }
+          // }
+
+          // &--selected {
+          //   border: 1px solid $btn-lg-primary-selected-border;
+
+          //   &:hover {
+          //     border: 1px solid $btn-lg-primary-selected-border;
+          //   }
+          // }
+        }
+      }
+    }
+  }
+
+  &.day-view {
+    .calendar-row__slot {
+      border: none;
+      border-bottom: solid 1px $border-primary;
+    }
+  }
+}

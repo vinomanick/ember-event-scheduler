@@ -13,5 +13,8 @@ export default Component.extend({
   'data-test-id': 'scheduling-dashboard',
   selectedDate: computed(function() {
     return this.get('moment').moment().startOf('day');
-  })
+  }),
+  resources: computed(function() {
+    return new Map();
+  }),
 });

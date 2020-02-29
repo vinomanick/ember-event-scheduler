@@ -1,0 +1,9 @@
+.es-calendar {
+  .calendar-content {
+    .calendar-row {
+      &--empty {
+        height: 100%;
+      }
+    }
+  }
+}

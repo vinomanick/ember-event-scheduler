@@ -8,7 +8,7 @@ export default Component.extend({
   moment: service(),
   layout,
   VIEWS,
-  classNames: ['calendar__row--grid'],
+  classNames: ['calendar-row__grid'],
   attributeBindings: ['data-test-es'],
   'data-test-es': 'grid-header',
   today: computed(function() {

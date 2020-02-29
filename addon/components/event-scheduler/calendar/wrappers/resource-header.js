@@ -3,7 +3,7 @@ import layout from '../../../../templates/components/event-scheduler/calendar/wr
 
 export default Component.extend({
   layout,
-  classNames: ['calendar__row--name'],
+  classNames: ['calendar-row__name'],
   attributeBindings: ['data-test-es'],
   'data-test-es': 'resource-header'
 });

@@ -1,5 +1,5 @@
-<div class="es-calendar__header">
-  <div class="es-calendar__row">
+<div class="calendar-header">
+  <div class="calendar-row">
     {{yield (hash resourceHeader = (component 'event-scheduler/calendar/wrappers/resource-header'))}}
     {{yield (hash gridHeader = (component 'event-scheduler/calendar/wrappers/grid-header'
       slots=slots
@@ -8,7 +8,9 @@
       slotFormat=slotConfig.format))}}
   </div>
 </div>
-<div class="es-calendar__content">
+<div class="calendar-content">
+  {{yield (hash empty=(component 'event-scheduler/calendar/wrappers/empty'))}}
+
   {{yield (hash resource = (component 'event-scheduler/calendar/wrappers/resource'
     viewType=viewType
     viewConfig=viewConfig

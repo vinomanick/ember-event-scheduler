@@ -1,0 +1,108 @@
+.d-flex {
+  display: flex;
+}
+
+.align-items {
+  &--start {
+    align-items: flex-start;
+  }
+
+  &--center {
+    align-items: center;
+  }
+
+  &--end {
+    align-items: flex-end;
+  }
+}
+
+.justify-content {
+  &--center {
+    justify-content: center;
+  }
+
+  &--end {
+    justify-content: flex-end;
+  }
+}
+
+
+.ma {
+  @for $i from 0 through 20 {
+    &-#{$i} {
+      margin: #{($i * 1)}px;
+    }
+  }
+}
+
+.ml {
+  @for $i from 0 through 20 {
+    &-#{$i} {
+      margin-left: #{($i * 1)}px;
+    }
+  }
+}
+
+.mr {
+  @for $i from 0 through 20 {
+    &-#{$i} {
+      margin-right: #{($i * 1)}px;
+    }
+  }
+}
+
+.pa {
+  @for $i from 0 through 20 {
+    &-#{$i} {
+      padding: #{($i * 1)}px;
+    }
+  }
+}
+
+.pl {
+  @for $i from 0 through 20 {
+    &-#{$i} {
+      padding-left: #{($i * 1)}px;
+    }
+  }
+}
+
+.pr {
+  @for $i from 0 through 20 {
+    &-#{$i} {
+      padding-right: #{($i * 1)}px;
+    }
+  }
+}
+
+.pt {
+  @for $i from 0 through 20 {
+    &-#{$i} {
+      padding-top: #{($i * 1)}px;
+    }
+  }
+}
+
+.mt {
+  @for $i from 0 through 20 {
+    &-#{$i} {
+      margin-top: #{($i * 1)}px;
+    }
+  }
+}
+
+.pb {
+  @for $i from 0 through 20 {
+    &-#{$i} {
+      padding-bottom: #{($i * 1)}px;
+    }
+  }
+}
+
+.mb {
+  @for $i from 0 through 20 {
+    &-#{$i} {
+      margin-bottom: #{($i * 1)}px;
+    }
+  }
+}

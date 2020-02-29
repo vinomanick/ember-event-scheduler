@@ -10,10 +10,19 @@ export default Component.extend({
   moment: service(),
   layout,
   classNames: ['es-calendar'],
+  classNameBindings: ['viewClass'],
   attributeBindings: ['data-test-es'],
   'data-test-es': 'es-calendar',
   viewType: reads('viewConfig.type'),
   slotConfig: reads('viewConfig.slot'),
+  viewClass: computed('viewType', function() {
+    return `${get(this, 'viewType')}-view`;
+  }),
+  viewConfig: computed('selectedView', function() {
+    let _selectedView = get(this, 'selectedView');
+    let _views = get(this, 'config.views');
+    return _views[_selectedView];
+  }),
   daySlots: computed(function() {
     let startOf = VIEWS.DAY;
     let { duration, interval,  startAt } = get(this, 'slotConfig');

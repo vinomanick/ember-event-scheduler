@@ -1,0 +1,8 @@
+<div class="calendar-row__name">
+  {{#if hasBlock}}
+    {{yield}}
+  {{else}}
+    <div class="empty-message">{{message}}</div>
+  {{/if}}
+</div>
+<div class="calendar-row__grid"></div>

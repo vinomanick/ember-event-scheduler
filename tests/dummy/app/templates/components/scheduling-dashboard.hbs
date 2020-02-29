@@ -7,6 +7,13 @@
     as |calendar|}}
     {{calendar.resourceHeader name='Field technicians'}}
     {{calendar.gridHeader}}
+
+    {{#each-in resources as |key resource| }}
+      {{calendar.resource resource=resource}}
+    {{else}}
+      {{calendar.empty message='No resources to display'}}
+    {{/each-in}}
+
   {{/scheduler.calendar}}
 
 
