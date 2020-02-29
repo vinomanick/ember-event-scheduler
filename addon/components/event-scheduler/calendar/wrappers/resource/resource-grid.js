@@ -9,7 +9,7 @@ import { VIEWS } from '../../../../../constants/event-scheduler';
 export default Component.extend({
   moment: service(),
   layout,
-  classNames: ['calendar-row__grid'],
+  classNames: ['calendar__row__grid'],
   classNameBindings: ['dragClass'],
   attributeBindings: ['data-test-es', 'data-resource-id', 'data-test-es'],
   'data-resource-id': reads('resourceId'),

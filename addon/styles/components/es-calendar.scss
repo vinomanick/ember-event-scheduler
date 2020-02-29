@@ -11,7 +11,7 @@
     flex-grow: 1;
   }
 
-  .calendar-row {
+  .calendar__row {
     display: flex;
 
     &__name {
@@ -47,7 +47,7 @@
   }
 
   &.day-view {
-    .calendar-row {
+    .calendar__row {
       &__grid {
         grid-template-columns: repeat(48, 50px);
         background: repeating-linear-gradient(90deg, transparent, transparent 49px, $border-primary 50px);
@@ -57,7 +57,7 @@
   }
 
   &.week-view {
-    .calendar-row {
+    .calendar__row {
       &__grid {
         grid-template-columns: repeat(7, minmax(120px, 1fr));
         background: repeating-linear-gradient(90deg, transparent, transparent calc((100% / 7) - 2px), $border-primary calc(100% / 7));

@@ -64,6 +64,7 @@
       user-select: none;
       touch-action: none;
       box-sizing: border-box;
+      cursor: grab;
 
       &:hover {
         background-color: $event-bg-hover;

@@ -3,7 +3,7 @@ import layout from '../../../../templates/components/event-scheduler/calendar/wr
 
 export default Component.extend({
   layout,
-  classNames: ['calendar-row', 'calendar-row--empty'],
+  classNames: ['calendar__row', 'calendar__row--empty'],
   attributeBindings: ['data-test-es'],
   'data-test-es': 'empty-row',
 });

@@ -1,16 +1,16 @@
 .es-calendar {
   .calendar-content {
-    .calendar-row {
+    .calendar__row {
       &--empty {
         height: 100%;
       }
 
       &:nth-child(even) {
-        .calendar-row__name {
+        .calendar__row__name {
           background-color: $bg-primary;
         }
 
-        .calendar-row__grid {
+        .calendar__row__grid {
           background-color: $bg-primary;
         }
 

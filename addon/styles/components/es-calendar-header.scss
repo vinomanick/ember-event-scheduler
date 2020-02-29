@@ -1,10 +1,10 @@
 .es-calendar {
-  .calendar-header {
+  .calendar__header {
     position: sticky;
     top: 0;
     z-index: 2;
 
-    .calendar-row {
+    .calendar__row {
       min-height: 100px;
       background-color: $bg-light;
 
@@ -66,15 +66,15 @@
   }
 
   &.day-view {
-    .calendar-row__slot {
+    .calendar__row__slot {
       border: none;
       border-bottom: solid 1px $border-primary;
     }
   }
 
   &.week-view {
-    .calendar-header {
-      .calendar-row__grid {
+    .calendar__header {
+      .calendar__row__grid {
         grid-auto-rows: 100px;
         grid-template-rows: 100px;
       }

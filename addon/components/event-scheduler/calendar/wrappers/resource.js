@@ -4,7 +4,7 @@ import { get, computed } from '@ember/object';
 
 export default Component.extend({
   layout,
-  classNames: ['calendar-row'],
+  classNames: ['calendar__row'],
   attributeBindings: ['data-test-es'],
   'data-test-es': computed(function() {
     return `resource-${get(this, 'resource.id')}`;
