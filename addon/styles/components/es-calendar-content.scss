@@ -4,6 +4,30 @@
       &--empty {
         height: 100%;
       }
+
+      &:nth-child(even) {
+        .calendar-row__name {
+          background-color: $bg-primary;
+        }
+
+        .calendar-row__grid {
+          background-color: $bg-primary;
+        }
+
+        .extended-event {
+          border-color: $bg-primary;
+          border-right-color: transparent;
+        }
+      }
+
+      &__grid {
+        padding: 6px 0;
+        grid-row-gap: 6px;
+
+        &.activated {
+          background: $bg-drag-zone;
+        }
+      }
     }
   }
 }

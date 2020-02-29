@@ -1,10 +1,10 @@
 import Component from '@ember/component';
-import layout from 'app/templates/components/event-scheduler/calendar/wrappers/resource/resource-grid';
+import layout from '../../../../../templates/components/event-scheduler/calendar/wrappers/resource/resource-grid';
 import { get, set, getProperties, setProperties } from '@ember/object';
 import { reads } from '@ember/object/computed';
-import { getColumnFromPos, buildEventTime, getEventDuration, overrideTime } from 'app/utils/event-scheduler';
+import { getColumnFromPos, buildEventTime, getEventDuration, overrideTime } from '../../../../../utils/event-scheduler';
 import { inject as service } from '@ember/service';
-import { VIEWS } from 'app/constants/event-scheduler';
+import { VIEWS } from '../../../../../constants/event-scheduler';
 
 export default Component.extend({
   moment: service(),

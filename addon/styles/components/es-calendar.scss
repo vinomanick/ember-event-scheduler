@@ -22,7 +22,7 @@
       border-right: solid 1px $border-primary;
       border-bottom: solid 1px $border-primary;
       background-color: $bg-light;
-      z-index: 2;
+      z-index: 1;
 
       @extend .d-flex;
       @extend .align-items--center;

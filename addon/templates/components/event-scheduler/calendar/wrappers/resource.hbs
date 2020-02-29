@@ -2,10 +2,10 @@
   {{#if hasBlock}}
     {{yield}}
   {{else}}
-    <div class="resource-name">{{resource.label}}</div>
+    <div class="resource-name">{{resource.name}}</div>
   {{/if}}
 </div>
-{{ui-components/event-scheduler/wrappers/resource/resource-grid
+{{event-scheduler/calendar/wrappers/resource/resource-grid
   viewType=viewType
   viewConfig=viewConfig
   slotConfig=slotConfig

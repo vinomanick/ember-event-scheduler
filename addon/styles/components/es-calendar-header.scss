@@ -1,19 +1,18 @@
 .es-calendar {
   .calendar-header {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+
     .calendar-row {
-      position: sticky;
-      top: 0;
-      z-index: 3;
       min-height: 100px;
       background-color: $bg-light;
 
-      .calendar-row {
-        &__name {
-          font-weight: $font-weight-semibold;
-          font-size: $font-size-medium;
-          // Need to find a better way to apply shadow as its creating a problem when there are no agents
-          // box-shadow: 1px -12px 18px 0 rgba(18, 52, 77, 0.06);
-        }
+      &__name {
+        font-weight: $font-weight-semibold;
+        font-size: $font-size-medium;
+        // Need to find a better way to apply shadow as its creating a problem when there are no agents
+        // box-shadow: 1px -12px 18px 0 rgba(18, 52, 77, 0.06);
       }
 
       &__slot {
