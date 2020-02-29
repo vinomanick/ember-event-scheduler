@@ -15,7 +15,6 @@ export default EmberObject.extend({
   slotInterval: undefined,
   slotsLength: undefined,
 
-
   resource: computed('resourceId', function() {
     let _resourceId = this.get('resourceId');
     return document.querySelector(`[data-resource-id="${_resourceId}"]`);

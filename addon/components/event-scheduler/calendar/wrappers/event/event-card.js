@@ -1,18 +1,29 @@
 import Component from '@ember/component';
 import layout from '../../../../../templates/components/event-scheduler/calendar/wrappers/event/event-card';
 import { reads } from '@ember/object/computed';
-import { get, set, getProperties } from '@ember/object';
+import { get, computed, set, getProperties } from '@ember/object';
+import { htmlSafe } from '@ember/template';
 import TransitionMixin from 'ember-css-transitions/mixins/transition-mixin';
 
-export default Component.extend(TransitionMixin,{
+export default Component.extend(TransitionMixin, {
   layout,
   classNames: ['event-wrapper'],
-  classNameBindings: ['event.isExtendedLeft:extended-left', 'event.isExtendedRight:extended-right', 'dragState'],
-  attributeBindings: ['event.style:style', 'data-test-es', 'data-event-id', 'draggable'],
+  classNameBindings: ['isExtendedLeft:extended-left', 'isExtendedRight:extended-right', 'dragState'],
+  attributeBindings: ['style', 'data-test-es', 'data-event-id', 'draggable'],
   transitionClass: 'event-wrapper',
   'data-test-es': 'event-wrapper',
   'data-event-id': reads('event.id'),
-
+  style: computed('eventStartPosition', 'eventEndPosition', function() {
+    let _columnStart = get(this, 'isExtendedLeft') ? 1 : get(this, 'eventStartPosition');
+    let _columnEnd = get(this, 'isExtendedRight') ? get(this, 'slotsLength') + 1 : get(this, 'eventEndPosition');
+    return htmlSafe(`grid-column-start:${_columnStart}; grid-column-end:${_columnEnd}`);
+  }),
+  isExtendedLeft: computed('eventStartPosition', function() {
+    return get(this, 'eventStartPosition') < 1;
+  }),
+  isExtendedRight: computed('eventEndPosition', function() {
+    return get(this, 'eventEndPosition') > get(this, 'slotsLength') + 1;
+  }),
   dragStart(event) {
     if (get(this, 'draggable')) {
       let offset = 4;
