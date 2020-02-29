@@ -71,4 +71,13 @@
       border-bottom: solid 1px $border-primary;
     }
   }
+
+  &.week-view {
+    .calendar-header {
+      .calendar-row__grid {
+        grid-auto-rows: 100px;
+        grid-template-rows: 100px;
+      }
+    }
+  }
 }

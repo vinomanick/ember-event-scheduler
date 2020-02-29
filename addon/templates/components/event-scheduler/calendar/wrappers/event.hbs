@@ -1,1 +1,14 @@
-{{yield}}
+{{#if event.canDisplayEvent}}
+  {{#ember-wormhole destinationElement=event.resource}}
+    {{#ui-components/event-scheduler/wrappers/event/event-card
+      event=event
+      draggable=draggable
+    }}
+      {{#if hasBlock}}
+        {{yield}}
+      {{else}}
+        <div class="event">{{event.title}}</div>
+      {{/if}}
+    {{/ui-components/event-scheduler/wrappers/event/event-card}}
+  {{/ember-wormhole}}
+{{/if}}

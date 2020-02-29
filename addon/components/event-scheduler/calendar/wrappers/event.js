@@ -4,3 +4,4 @@ import layout from '../../../../templates/components/event-scheduler/calendar/wr
 export default Component.extend({
   layout
 });
+

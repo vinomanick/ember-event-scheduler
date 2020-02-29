@@ -21,8 +21,8 @@
 </div>
 
 {{yield (hash event = (component 'event-scheduler/calendar/wrappers/event'
-  slots=slots
+  slotsLength=slots.length
   draggable=config.events.draggable
   viewType=viewType
-  slotConfig=slotConfig
+  slotInterval=slotConfig.interval
   selectedDate=selectedDate))}}
