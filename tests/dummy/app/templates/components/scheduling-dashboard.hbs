@@ -2,8 +2,10 @@
 
   {{#scheduler.calendar
     selectedView='day'
+    selectedDuration=90
+    selectedDate=selectedDate
     as |calendar|}}
-    {{calendar.resourceHeader}}
+    {{calendar.resourceHeader name='Field technicians'}}
     {{calendar.gridHeader}}
   {{/scheduler.calendar}}
 

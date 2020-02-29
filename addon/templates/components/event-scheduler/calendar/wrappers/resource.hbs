@@ -1,1 +1,15 @@
-{{yield}}
+<div class="calendar__row--name" data-test-es='resource'>
+  {{#if hasBlock}}
+    {{yield}}
+  {{else}}
+    <div class="resource-name">{{resource.label}}</div>
+  {{/if}}
+</div>
+{{ui-components/event-scheduler/wrappers/resource/resource-grid
+  viewType=viewType
+  viewConfig=viewConfig
+  slotConfig=slotConfig
+  resourceId=resource.id
+  selectedDate=selectedDate
+  selectedDuration=selectedDuration
+  onEventDrop=onEventDrop}}

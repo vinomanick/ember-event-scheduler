@@ -1,6 +1,12 @@
 import Component from '@ember/component';
 import layout from '../../../../templates/components/event-scheduler/calendar/wrappers/resource';
+import { get, computed } from '@ember/object';
 
 export default Component.extend({
-  layout
+  layout,
+  classNames: ['calendar__row'],
+  attributeBindings: ['data-test-es'],
+  'data-test-es': computed(function() {
+    return `resource-${get(this, 'resource.id')}`;
+  })
 });

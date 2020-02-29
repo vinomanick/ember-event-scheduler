@@ -1,1 +1,26 @@
-{{yield}}
+<div class="es-calendar__header">
+  <div class="es-calendar__row">
+    {{yield (hash resourceHeader = (component 'event-scheduler/calendar/wrappers/resource-header'))}}
+    {{yield (hash gridHeader = (component 'event-scheduler/calendar/wrappers/grid-header'
+      slots=slots
+      viewType=viewType
+      selectedDate=selectedDate
+      slotFormat=slotConfig.format))}}
+  </div>
+</div>
+<div class="es-calendar__content">
+  {{yield (hash resource = (component 'event-scheduler/calendar/wrappers/resource'
+    viewType=viewType
+    viewConfig=viewConfig
+    slotConfig=slotConfig
+    selectedDate=selectedDate
+    selectedDuration=selectedDuration
+  ))}}
+</div>
+
+{{yield (hash event = (component 'event-scheduler/calendar/wrappers/event'
+  slots=slots
+  draggable=config.events.draggable
+  viewType=viewType
+  slotConfig=slotConfig
+  selectedDate=selectedDate))}}
