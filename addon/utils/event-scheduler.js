@@ -8,6 +8,15 @@ const slotDefaultChoices = {
   startOf: 'day'
 };
 
+
+const getCustomResourceId = (id) => {
+  return `resource_${id}`;
+};
+
+const getCustomEventId = (id) => {
+  return `event_${id}`;
+};
+
 const getTimeRange = (durationObj, selectedDate, interval, timeFormat) => {
   let timeRange = [];
   let { value, format } = interval;
@@ -123,4 +132,5 @@ const getTimerPos = (durationInMins, slotConfig) => {
 };
 
 export { getSlots, getTimeDropdownChoices, getEventDuration, overrideTime,
-  buildEventTime, getCompactEventTime, getColumnFromPos, getCurrentPeriod, getTimerPos };
+  buildEventTime, getCompactEventTime, getColumnFromPos, getCurrentPeriod, getTimerPos,
+  getCustomResourceId, getCustomEventId };

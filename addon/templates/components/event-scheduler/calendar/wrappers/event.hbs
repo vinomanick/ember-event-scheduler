@@ -3,9 +3,10 @@
     {{#event-scheduler/calendar/wrappers/event/event-card
       event=event
       draggable=draggable
-      slotsLength=slotsLength
-      eventStartPosition=eventStartPosition
-      eventEndPosition=eventEndPosition
+      style=eventStyle
+      isExtendedLeft=isExtendedLeft
+      isExtendedRight=isExtendedRight
+      css-transition="event-wrapper"
     }}
       {{#if hasBlock}}
         {{yield}}

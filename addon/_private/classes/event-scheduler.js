@@ -1,18 +1,23 @@
 import EmberObject from '@ember/object';
-import { reads } from '@ember/object/computed';
 import { assert } from '@ember/debug';
 import { isPresent } from '@ember/utils';
+import Calendar from './calendar';
 
 export default EmberObject.extend({
-  calendar: undefined,
-  externalEvents: reads('slotConfig.internal'),
-  slotsLength: reads('slots.length'),
+  // calendar: undefined,
+  // externalEvents: undefined,
 
   init() {
-    assert('selected date is required', isPresent(this.get('selectedDate')));
-    assert('slotConfig is required', isPresent(this.get('config')));
-    assert('slots is required', isPresent(this.get('slots')));
+    let { config, selectedDate, selectedView }
+      = this.getProperties(['config', 'selectedDate', 'selectedView'])
+    assert('selected date is required', isPresent(selectedDate));
+    assert('selected view is required', isPresent(selectedView));
+    assert('config is required', isPresent(config));
 
-    this.set('calendarEvents', new Map());
+    this.set('calendar', new Calendar({
+      config,
+      selectedDate,
+      selectedView
+    }));
   }
 });

@@ -1,15 +1,16 @@
-{{#event-scheduler config=config as |scheduler|}}
+{{#event-scheduler config=config
+  selectedView='day'
+  selectedDuration=90
+  selectedDate=selectedDate
+  onSchedulerLoad=(action 'loadScheduler')
+  as |scheduler|}}
 
-  {{#scheduler.calendar
-    selectedView='day'
-    selectedDuration=90
-    selectedDate=selectedDate
-    as |calendar|}}
+  {{#scheduler.calendar as |calendar|}}
     {{calendar.resourceHeader name='Field technicians'}}
     {{calendar.gridHeader}}
 
     {{#each-in resources as |key resource| }}
-      {{calendar.resource resource=resource}}
+      {{calendar.resource resource=resource onEventDrop=(action 'updateEventTicket')}}
     {{else}}
       {{calendar.empty message='No resources to display'}}
     {{/each-in}}

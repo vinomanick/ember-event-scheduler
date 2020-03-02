@@ -9,20 +9,24 @@
   </div>
 </div>
 <div class="calendar-content">
-  {{yield (hash empty=(component 'event-scheduler/calendar/wrappers/empty'))}}
-
-  {{yield (hash resource = (component 'event-scheduler/calendar/wrappers/resource'
-    viewType=viewType
-    viewConfig=viewConfig
-    slotConfig=slotConfig
-    selectedDate=selectedDate
-    selectedDuration=selectedDuration
-  ))}}
+  {{#each resources as |resource| }}
+    {{yield (hash resource = (component "event-scheduler/calendar/wrappers/resource"
+        calendar=calendar))}}
+  {{else}}
+    {{yield (hash empty = (component "event-scheduler/calendar/wrappers/empty"
+      message='No resources to display'}}
+  {{/each}}
 </div>
+
+{{#each-in resources as |key resource| }}
+  {{calendar.resource resource=resource onEventDrop=(action 'updateEventTicket')}}
+{{else}}
+  {{calendar.empty message='No resources to display'}}
+{{/each-in}}
 
 {{yield (hash event = (component 'event-scheduler/calendar/wrappers/event'
   slotsLength=slots.length
-  draggable=config.events.draggable
+  draggable=isEventsDraggable
   viewType=viewType
-  slotInterval=slotConfig.interval
+  slotInterval=slotInterval
   selectedDate=selectedDate))}}

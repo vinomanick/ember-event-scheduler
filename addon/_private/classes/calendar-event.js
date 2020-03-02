@@ -7,13 +7,13 @@ import { htmlSafe } from '@ember/template';
 
 export default EmberObject.extend({
   moment: service(),
-  id: undefined,
-  startTime: undefined,
-  endTime: undefined,
-  viewType: undefined,
-  selectedDate: undefined,
-  slotInterval: undefined,
-  slotsLength: undefined,
+  // id: undefined,
+  // startTime: undefined,
+  // endTime: undefined,
+  // viewType: undefined,
+  // selectedDate: undefined,
+  // slotInterval: undefined,
+  // slotsLength: undefined,
 
   resource: computed('resourceId', function() {
     let _resourceId = this.get('resourceId');

@@ -14,7 +14,6 @@ export default Component.extend({
   attributeBindings: ['data-test-es', 'data-resource-id', 'data-test-es'],
   'data-resource-id': reads('resourceId'),
   'data-test-es': 'resource-grid',
-  timePickerConfig: reads('viewConfig.timePicker'),
   didRender() {
     this._super(...arguments);
     let elementStyle = window.getComputedStyle(this.element);
@@ -45,14 +44,15 @@ export default Component.extend({
   },
 
   triggerDropAction(eventData, startTimeOffset) {
-    let { selectedDate, slotConfig: { interval }, viewType } = getProperties(this, ['selectedDate', 'slotConfig', 'viewType']);
+    let { selectedDate, slotInterval, viewType }
+      = getProperties(this, ['selectedDate', 'slotInterval', 'viewType']);
     let { id, position, startTime: prevStartTime, endTime: prevEndTime } = eventData;
     let resourceId = get(this, 'resourceId');
     let columnStart = getColumnFromPos(position, get(this, 'slotWidth'), get(this, 'slotsLength'));
 
     let duration = this.getDuration(prevStartTime, prevEndTime);
     let offsetDuration = this.getOffsetDuration(viewType, prevStartTime, startTimeOffset);
-    let { startTime, endTime } = buildEventTime(viewType, selectedDate, columnStart, offsetDuration, duration, interval);
+    let { startTime, endTime } = buildEventTime(viewType, selectedDate, columnStart, offsetDuration, duration, slotInterval);
     this.onEventDrop({ id, resourceId, startTime, endTime });
     set(this, 'dragClass', undefined);
   },

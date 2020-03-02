@@ -13,8 +13,11 @@ export default Component.extend({
   classNameBindings: ['viewClass'],
   attributeBindings: ['data-test-es'],
   'data-test-es': 'es-calendar',
+  isEventsDraggable: reads('config.events.draggable'),
   viewType: reads('viewConfig.type'),
+  timePickerConfig: reads('viewConfig.timePicker'),
   slotConfig: reads('viewConfig.slot'),
+  slotInterval: reads('slotConfig.interval'),
   viewClass: computed('viewType', function() {
     return `${get(this, 'viewType')}-view`;
   }),

@@ -3,6 +3,7 @@ import layout from '../../../../templates/components/event-scheduler/calendar/wr
 import { get, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import moment from 'moment';
+import { htmlSafe } from '@ember/template';
 
 export default Component.extend({
   layout,
@@ -20,6 +21,17 @@ export default Component.extend({
   }),
   eventEndPosition: computed('event.endTime', function() {
     return Math.ceil(this.getGridPosition(get(this, 'event.endTime')));
+  }),
+  eventStyle: computed('eventStartPosition', 'eventEndPosition', function() {
+    let _columnStart = get(this, 'isExtendedLeft') ? 1 : get(this, 'eventStartPosition');
+    let _columnEnd = get(this, 'isExtendedRight') ? get(this, 'slotsLength') + 1 : get(this, 'eventEndPosition');
+    return htmlSafe(`grid-column-start:${_columnStart}; grid-column-end:${_columnEnd}`);
+  }),
+  isExtendedLeft: computed('eventStartPosition', function() {
+    return get(this, 'eventStartPosition') < 1;
+  }),
+  isExtendedRight: computed('eventEndPosition', function() {
+    return get(this, 'eventEndPosition') > get(this, 'slotsLength') + 1;
   }),
   getGridPosition(time) {
     let _selectedDate = get(this, 'selectedDate').clone().startOf(get(this, 'viewType'));

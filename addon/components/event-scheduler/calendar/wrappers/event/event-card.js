@@ -1,8 +1,7 @@
 import Component from '@ember/component';
 import layout from '../../../../../templates/components/event-scheduler/calendar/wrappers/event/event-card';
 import { reads } from '@ember/object/computed';
-import { get, computed, set, getProperties } from '@ember/object';
-import { htmlSafe } from '@ember/template';
+import { get, set, getProperties } from '@ember/object';
 
 export default Component.extend({
   layout,
@@ -11,17 +10,7 @@ export default Component.extend({
   attributeBindings: ['style', 'data-test-es', 'data-event-id', 'draggable'],
   'data-test-es': 'event-wrapper',
   'data-event-id': reads('event.id'),
-  style: computed('eventStartPosition', 'eventEndPosition', function() {
-    let _columnStart = get(this, 'isExtendedLeft') ? 1 : get(this, 'eventStartPosition');
-    let _columnEnd = get(this, 'isExtendedRight') ? get(this, 'slotsLength') + 1 : get(this, 'eventEndPosition');
-    return htmlSafe(`grid-column-start:${_columnStart}; grid-column-end:${_columnEnd}`);
-  }),
-  isExtendedLeft: computed('eventStartPosition', function() {
-    return get(this, 'eventStartPosition') < 1;
-  }),
-  isExtendedRight: computed('eventEndPosition', function() {
-    return get(this, 'eventEndPosition') > get(this, 'slotsLength') + 1;
-  }),
+
   dragStart(event) {
     if (get(this, 'draggable')) {
       let offset = 4;
