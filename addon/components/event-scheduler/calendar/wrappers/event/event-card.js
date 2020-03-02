@@ -6,8 +6,8 @@ import { get, set, getProperties } from '@ember/object';
 export default Component.extend({
   layout,
   classNames: ['event-wrapper'],
-  classNameBindings: ['isExtendedLeft:extended-left', 'isExtendedRight:extended-right', 'dragState'],
-  attributeBindings: ['style', 'data-test-es', 'data-event-id', 'draggable'],
+  classNameBindings: ['event.isExtendedLeft:extended-left', 'event.isExtendedRight:extended-right', 'dragState'],
+  attributeBindings: ['event.style:style', 'data-test-es', 'data-event-id', 'draggable'],
   'data-test-es': 'event-wrapper',
   'data-event-id': reads('event.id'),
 

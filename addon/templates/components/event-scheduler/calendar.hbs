@@ -2,31 +2,19 @@
   <div class="calendar__row">
     {{yield (hash resourceHeader = (component 'event-scheduler/calendar/wrappers/resource-header'))}}
     {{yield (hash gridHeader = (component 'event-scheduler/calendar/wrappers/grid-header'
-      slots=slots
-      viewType=viewType
-      selectedDate=selectedDate
-      slotFormat=slotConfig.format))}}
+      calendarInst=calendarInst))}}
   </div>
 </div>
 <div class="calendar-content">
-  {{#each resources as |resource| }}
-    {{yield (hash resource = (component "event-scheduler/calendar/wrappers/resource"
-        calendar=calendar))}}
+  {{#each calendarInst.resources as |resource| }}
+    {{event-scheduler/calendar/wrappers/resource resource=resource calendarInst=calendarInst}}
   {{else}}
     {{yield (hash empty = (component "event-scheduler/calendar/wrappers/empty"
-      message='No resources to display'}}
+      message='No resources to display'))}}
   {{/each}}
 </div>
-
-{{#each-in resources as |key resource| }}
-  {{calendar.resource resource=resource onEventDrop=(action 'updateEventTicket')}}
-{{else}}
-  {{calendar.empty message='No resources to display'}}
+{{#each-in calendarInst.events as |eventId eventObj| }}
+  {{event-scheduler/calendar/wrappers/event
+    event=eventObj
+    draggable=calendarInst.isEventsDraggable}}
 {{/each-in}}
-
-{{yield (hash event = (component 'event-scheduler/calendar/wrappers/event'
-  slotsLength=slots.length
-  draggable=isEventsDraggable
-  viewType=viewType
-  slotInterval=slotInterval
-  selectedDate=selectedDate))}}

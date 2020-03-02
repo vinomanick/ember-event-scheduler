@@ -1,12 +1,12 @@
 import EmberObject, { computed } from '@ember/object';
 import { assert } from '@ember/debug';
 import { isPresent } from '@ember/utils';
-import { inject as service } from '@ember/service';
+// import { inject as service } from '@ember/service';
 import moment from 'moment';
 import { htmlSafe } from '@ember/template';
 
 export default EmberObject.extend({
-  moment: service(),
+  // moment: service(),
   // id: undefined,
   // startTime: undefined,
   // endTime: undefined,
@@ -15,14 +15,8 @@ export default EmberObject.extend({
   // slotInterval: undefined,
   // slotsLength: undefined,
 
-  resource: computed('resourceId', function() {
-    let _resourceId = this.get('resourceId');
-    return document.querySelector(`[data-resource-id="${_resourceId}"]`);
-  }),
-
-  canDisplayEvent: computed('resource', function() {
-    return this.get('resource')
-      && (this.get('startPosition') <= this.get('slotsLength') && this.get('endPosition') > 1);
+  isValidEvent: computed('resource', function() {
+    return this.get('startPosition') <= this.get('slotsLength') && this.get('endPosition') > 1;
   }),
 
   startPosition: computed('startTime', function() {
@@ -54,9 +48,11 @@ export default EmberObject.extend({
     assert('event should have an id', isPresent(this.get('id')));
     assert('start time is required', isPresent(this.get('startTime')));
     assert('end time is required', isPresent(this.get('endTime')));
+    assert('resource id is required', isPresent(this.get('resourceId')));
+    assert('moment  is required', isPresent(this.get('moment')));
   },
 
-  _getGridPosition(time) {
+  getGridPosition(time) {
     let { selectedDate, viewType, slotInterval: { format, value } }
       = this.getProperties(['selectedDate', 'viewType', 'slotInterval'])
     let _selectedDate = selectedDate.clone().startOf(viewType);

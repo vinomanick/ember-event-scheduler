@@ -5,19 +5,13 @@
   onSchedulerLoad=(action 'loadScheduler')
   as |scheduler|}}
 
-  {{#scheduler.calendar as |calendar|}}
+  {{#scheduler.calendar
+    onEventDrop=(action 'updateEventTicket')
+    as |calendar|}}
     {{calendar.resourceHeader name='Field technicians'}}
     {{calendar.gridHeader}}
 
-    {{#each-in resources as |key resource| }}
-      {{calendar.resource resource=resource onEventDrop=(action 'updateEventTicket')}}
-    {{else}}
-      {{calendar.empty message='No resources to display'}}
-    {{/each-in}}
-
-    {{#each eventsList as |event| }}
-      {{calendar.event event=event}}
-    {{/each}}
+    {{calendar.empty}}
 
   {{/scheduler.calendar}}
 

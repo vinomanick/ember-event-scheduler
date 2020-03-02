@@ -7,6 +7,6 @@ export default Component.extend({
   classNames: ['calendar__row'],
   attributeBindings: ['data-test-es'],
   'data-test-es': computed(function() {
-    return `resource-${get(this, 'resource.id')}`;
+    return `resource_${get(this, 'resource.id')}`;
   })
 });

@@ -4,24 +4,43 @@ import { config } from '../constants/scheduling-dashboard';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 
-const resources = {
-  100: { id: 100, name: 'vino'},
-  101: { id: 101, name: 'Ram'},
-  102: { id: 102, name: 'Sri'},
-  103: { id: 103, name: 'Dinesh'},
-  104: { id: 104, name: 'Preeti'},
-  105: { id: 105, name: 'Swathi'},
-  106: { id: 106, name: 'Chira'},
-  107: { id: 107, name: 'Ramya'},
-  108: { id: 108, name: 'Selvi'},
-  109: { id: 109, name: 'Manickam'},
-  110: { id: 110, name: 'Venki'},
-  111: { id: 111, name: 'Puneet'},
-  112: { id: 112, name: 'Sengo'},
-  113: { id: 113, name: 'Vignesh'},
-  114: { id: 114, name: 'Deepak'},
-  115: { id: 115, name: 'Harish'}
-};
+// const resources = {
+//   100: { id: 100, name: 'vino'},
+//   101: { id: 101, name: 'Ram'},
+//   102: { id: 102, name: 'Sri'},
+//   103: { id: 103, name: 'Dinesh'},
+//   104: { id: 104, name: 'Preeti'},
+//   105: { id: 105, name: 'Swathi'},
+//   106: { id: 106, name: 'Chira'},
+//   107: { id: 107, name: 'Ramya'},
+//   108: { id: 108, name: 'Selvi'},
+//   109: { id: 109, name: 'Manickam'},
+//   110: { id: 110, name: 'Venki'},
+//   111: { id: 111, name: 'Puneet'},
+//   112: { id: 112, name: 'Sengo'},
+//   113: { id: 113, name: 'Vignesh'},
+//   114: { id: 114, name: 'Deepak'},
+//   115: { id: 115, name: 'Harish'}
+// };
+
+const resources = [
+  { id: 100, name: 'vino'},
+  { id: 101, name: 'Ram'},
+  { id: 102, name: 'Sri'},
+  { id: 103, name: 'Dinesh'},
+  { id: 104, name: 'Preeti'},
+  { id: 105, name: 'Swathi'},
+  { id: 106, name: 'Chira'},
+  { id: 107, name: 'Ramya'},
+  { id: 108, name: 'Selvi'},
+  { id: 109, name: 'Manickam'},
+  { id: 110, name: 'Venki'},
+  { id: 111, name: 'Puneet'},
+  { id: 112, name: 'Sengo'},
+  { id: 113, name: 'Vignesh'},
+  { id: 114, name: 'Deepak'},
+  { id: 115, name: 'Harish'}
+];
 
 const events = [
   { id: '1', resourceId: '101', title: 'First service task for Puneet', startTime: "2020-03-02T10:00:00+05:30", endTime: "2020-03-02T11:00:00+05:30" },
@@ -50,17 +69,18 @@ export default Component.extend({
     loadScheduler(scheduler){
       this.set('schedulerInst', scheduler);
       this.set('calendarInst', scheduler.get('calendar'));
-      console.log(this.get('calendarInst'));
-    },
-
-    addData() {
-      let calendar = this.get('calendarInst');
-      calendar.addResources(resources)
-      calendar.addEvents(events)
+      this.addData();
     },
 
     updateEventTicket() {
+      // eslint-disable-next-line no-console
       console.log('Update event called');
     }
+  },
+
+  addData() {
+    let calendar = this.get('calendarInst');
+    calendar.addResources(resources)
+    calendar.addEvents(events)
   }
 });
