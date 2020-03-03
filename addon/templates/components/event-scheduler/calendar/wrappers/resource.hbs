@@ -5,6 +5,5 @@
     <div class="resource-name">{{resource.name}}</div>
   {{/if}}
 </div>
-{{event-scheduler/calendar/wrappers/resource/resource-grid
-  resourceId=resource.id
-  calendarInst=calendarInst}}
+<div class="calendar__row__grid" data-name="resource" data-test-es= "resource-grid" data-resource-id={{resource.id}}>
+</div>

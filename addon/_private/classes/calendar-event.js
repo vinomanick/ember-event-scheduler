@@ -1,4 +1,5 @@
 import EmberObject, { computed } from '@ember/object';
+import { reads } from '@ember/object/computed';
 import { assert } from '@ember/debug';
 import { isPresent } from '@ember/utils';
 // import { inject as service } from '@ember/service';
@@ -10,10 +11,8 @@ export default EmberObject.extend({
   // id: undefined,
   // startTime: undefined,
   // endTime: undefined,
-  // viewType: undefined,
-  // selectedDate: undefined,
-  // slotInterval: undefined,
-  // slotsLength: undefined,
+  // resourceId: undefined,
+  slotsLength: reads('calendarInst.slotsLength'),
 
   isValidEvent: computed('resource', function() {
     return this.get('startPosition') <= this.get('slotsLength') && this.get('endPosition') > 1;
@@ -41,10 +40,8 @@ export default EmberObject.extend({
   }),
 
   init() {
-    assert('selected date is required', isPresent(this.get('selectedDate')));
-    assert('view type is required', isPresent(this.get('viewType')));
-    assert('slot interval is required', isPresent(this.get('slotInterval')));
-    assert('slots length is required', isPresent(this.get('slotsLength')));
+    assert('calendar instance is required', isPresent(this.get('calendarInst')));
+
     assert('event should have an id', isPresent(this.get('id')));
     assert('start time is required', isPresent(this.get('startTime')));
     assert('end time is required', isPresent(this.get('endTime')));
@@ -54,7 +51,7 @@ export default EmberObject.extend({
 
   getGridPosition(time) {
     let { selectedDate, viewType, slotInterval: { format, value } }
-      = this.getProperties(['selectedDate', 'viewType', 'slotInterval'])
+      = this.get('calendarInst').getProperties(['selectedDate', 'viewType', 'slotInterval'])
     let _selectedDate = selectedDate.clone().startOf(viewType);
     let timeDifference = this.get('moment').moment(time).diff(_selectedDate);
     let timeDuration = moment.duration(timeDifference).as(format);

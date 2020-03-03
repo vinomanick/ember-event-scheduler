@@ -43,15 +43,15 @@ const resources = [
 ];
 
 const events = [
-  { id: '1', resourceId: '101', title: 'First service task for Puneet', startTime: "2020-03-02T10:00:00+05:30", endTime: "2020-03-02T11:00:00+05:30" },
+  { id: '1', resourceId: '101', title: 'First service task for Puneet', startTime: "2020-03-03T10:00:00+05:30", endTime: "2020-03-03T11:00:00+05:30" },
   { id: '2', resourceId: '101', title: 'Second service task for Puneet', startTime: "2019-06-13T10:30:00+05:30", endTime: "2019-06-13T12:00:00+05:30"  },
-  { id: '3', resourceId: '101', title: 'Third service task for Puneet', startTime: "2020-03-02T15:00:00+05:30", endTime: "2020-03-02T16:00:00+05:30" },
+  { id: '3', resourceId: '101', title: 'Third service task for Puneet', startTime: "2020-03-03T15:00:00+05:30", endTime: "2020-03-03T16:00:00+05:30" },
   { id: '4', resourceId: '102', title: 'First service task for Balaji',  startTime: "2019-06-09T12:00:00+05:30", endTime: "2019-06-09T13:00:00+05:30" },
-  { id: '5', resourceId: '102', title: 'Second service task for Balaji',  startTime: "2020-03-02T15:00:00+05:30", endTime: "2020-03-02T18:00:00+05:30" },
-  { id: '6', resourceId: '103', title: 'First service task for Sengo', startTime: "2020-03-02T12:00:00+05:30", endTime: "2020-03-02T13:00:00+05:30" },
-  { id: '7', resourceId: '104', title: 'First service task for Deepak', startTime: "2020-03-02T10:00:00+05:30", endTime: "2020-03-02T10:30:00+05:30" },
-  { id: '8', resourceId: '106', title: 'First service task for Supraja', startTime: "2020-03-02T10:30:00+05:30", endTime: "2020-03-02T12:00:00+05:30"  },
-  { id: '9', resourceId: '101', title: 'Fourth service task for Puneet', startTime: "2020-03-02T08:00:00+05:30", endTime: "2020-03-02T08:30:00+05:30" },
+  { id: '5', resourceId: '102', title: 'Second service task for Balaji',  startTime: "2020-03-03T15:00:00+05:30", endTime: "2020-03-03T18:00:00+05:30" },
+  { id: '6', resourceId: '103', title: 'First service task for Sengo', startTime: "2020-03-03T12:00:00+05:30", endTime: "2020-03-03T13:00:00+05:30" },
+  { id: '7', resourceId: '104', title: 'First service task for Deepak', startTime: "2020-03-03T10:00:00+05:30", endTime: "2020-03-03T10:30:00+05:30" },
+  { id: '8', resourceId: '106', title: 'First service task for Supraja', startTime: "2020-03-03T10:30:00+05:30", endTime: "2020-03-03T12:00:00+05:30"  },
+  { id: '9', resourceId: '101', title: 'Fourth service task for Puneet', startTime: "2020-03-03T08:00:00+05:30", endTime: "2020-03-03T08:30:00+05:30" },
   { id: '10', resourceId: '101', title: 'Fifth service task for Puneet', startTime: "2019-06-14T09:00:00+05:30", endTime: "2019-06-14T09:30:00+05:30" },
 ];
 
@@ -65,6 +65,10 @@ export default Component.extend({
   selectedDate: computed(function() {
     return this.get('moment').moment().startOf('day');
   }),
+  selectedDuration: computed(function() {
+    return { value: 90, format: 'minutes' };
+  }),
+
   actions: {
     loadScheduler(scheduler){
       this.set('schedulerInst', scheduler);

@@ -1,15 +1,16 @@
-{{log canDisplayEvent}}
 {{#if canDisplayEvent}}
   {{#ember-wormhole destinationElement=resource}}
     {{#event-scheduler/calendar/wrappers/event/event-card
       event=event
       draggable=draggable
     }}
-      {{#if hasBlock}}
-        {{yield}}
-      {{else}}
-        <div class="event">{{event.title}}</div>
-      {{/if}}
+      <div class="event" data-name="event">
+        {{#if hasBlock}}
+          {{yield}}
+        {{else}}
+          {{event.title}}
+        {{/if}}
+      </div>
     {{/event-scheduler/calendar/wrappers/event/event-card}}
   {{/ember-wormhole}}
 {{/if}}

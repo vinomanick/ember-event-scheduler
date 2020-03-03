@@ -1,13 +1,7 @@
 import moment from 'moment';
 import { VIEWS } from '../constants/event-scheduler';
-
-const slotDefaultChoices = {
-  duration: { value: 1, format: 'day' },
-  interval: { value: 30, format: 'minute' },
-  startAt: { value: 0, format: 'hour' },
-  startOf: 'day'
-};
-
+import { getTimeRange } from './date-util';
+import CalendarEvent from '../_private/classes/calendar-event';
 
 const getCustomResourceId = (id) => {
   return `resource_${id}`;
@@ -17,63 +11,25 @@ const getCustomEventId = (id) => {
   return `event_${id}`;
 };
 
-const getTimeRange = (durationObj, selectedDate, interval, timeFormat) => {
-  let timeRange = [];
-  let { value, format } = interval;
-  let duration = durationObj.as(format);
-  for (let i = 0; i < duration; i += value) {
-    selectedDate.add(i === 0 ? 0 : value, format);
-    timeRange.push(timeFormat ? selectedDate.format(timeFormat) : selectedDate.clone());
-  }
-  return timeRange;
+const buildCalendarEvent = (event, calendarInst, moment) => {
+  let { id, startTime, endTime, resourceId, title } = event;
+  let eventObj = CalendarEvent.create({
+    id,
+    title,
+    startTime,
+    endTime,
+    resourceId,
+    calendarInst,
+    moment
+  });
+  return eventObj;
 };
 
-const getTimeDropdownChoices = (selectedDate, options) => {
-  let { duration, interval,  startAt, format } = options;
-  let durationObj = moment.duration(duration.value, duration.format);
-  let _selectedDate = selectedDate.clone().startOf('day').add(startAt.value, startAt.format);
-  return getTimeRange(durationObj, _selectedDate, interval, format);
-};
-
-const getDuration = (startTime, endTime) => {
-  if (startTime && endTime) {
-    let timeDifference = moment(endTime).diff(moment(startTime));
-    return timeDifference && moment.duration(timeDifference);
-  }
-};
-
-const getSlots = (selectedDate, options = slotDefaultChoices) => {
+const getSlots = (selectedDate, options) => {
   let { duration, interval, startAt, startOf } = options;
   let durationObj = moment.duration(duration.value, duration.format);
   let offsetDate = selectedDate.clone().startOf(startOf).add(startAt.value, startAt.format);
   return getTimeRange(durationObj, offsetDate, interval);
-};
-
-const getEventDuration = (startTime, endTime, format = 'minutes') => {
-  let duration = getDuration(startTime, endTime);
-  return duration && { value: duration.as(format), format };
-};
-
-const overrideTime = (selectedDate, timeConfig, momentService) => {
-  let _momentService = momentService || moment;
-  if (selectedDate && timeConfig) {
-    let updatedTime = _momentService.utc(timeConfig.value, timeConfig.format);
-    let dateWithNewTime = _momentService.moment(selectedDate).add({
-      hours: updatedTime.get('hour'),
-      minutes: updatedTime.get('minute')
-    });
-    return dateWithNewTime.toISOString();
-  }
-};
-
-const buildEventTime = (viewType, selectedDate, columnStart, offset, duration, slotInterval) => {
-  let _selectedDate = selectedDate.clone().startOf(viewType);
-  let startTime = _selectedDate.add(columnStart * slotInterval.value, slotInterval.format);
-  if (offset) {
-    startTime.add(offset.value, offset.format);
-  }
-  let endTime = startTime.clone().add(duration.value, duration.format);
-  return { startTime: startTime.toISOString(), endTime: endTime.toISOString() };
 };
 
 const getCompactEventTime = (eventStartTime, eventEndTime, momentService) => {
@@ -110,13 +66,6 @@ const getCurrentPeriod = (viewType, selectedDate, dayDateFormat = 'DD MMMM YYYY'
   }
 };
 
-const getColumnFromPos = (position, slotWidth, slotsLength) => {
-  let columnStart = position % slotWidth < (4 * slotWidth) / 5
-    ? Math.floor(position / slotWidth)
-    : Math.ceil(position / slotWidth);
-  return columnStart === slotsLength ? columnStart - 1 : columnStart;
-};
-
 /**
  *
  * @param {Number} durationInMins
@@ -131,6 +80,6 @@ const getTimerPos = (durationInMins, slotConfig) => {
   return (durationInMins * width) / intervalInMins;
 };
 
-export { getSlots, getTimeDropdownChoices, getEventDuration, overrideTime,
-  buildEventTime, getCompactEventTime, getColumnFromPos, getCurrentPeriod, getTimerPos,
+export { getSlots, buildCalendarEvent,
+   getCompactEventTime, getCurrentPeriod, getTimerPos,
   getCustomResourceId, getCustomEventId };

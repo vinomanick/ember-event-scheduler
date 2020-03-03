@@ -1,14 +1,14 @@
 {{#if hasBlock}}
   {{yield}}
 {{else}}
-  {{#if (eq calendarInst.viewType VIEWS.DAY)}}
-    {{#each calendarInst.slots as |slot columnIndex|}}
+  {{#if (eq viewType VIEWS.DAY)}}
+    {{#each slots as |slot columnIndex|}}
       {{#if (eq columnIndex 0)}}
         <div class="calendar__row__slot" style={{grid-position 1 0 1 columnIndex 1 1}}></div>
-        <div class="calendar__row__slot" style={{grid-position 1 0 1 calendarInst.slots.length 0 1}}></div>
+        <div class="calendar__row__slot" style={{grid-position 1 0 1 slots.length 0 1}}></div>
       {{else if (eq (modulus columnIndex 2) 0)}}
         <div class="calendar__row__slot" style={{grid-position 1 0 1 columnIndex 0 2}}>
-          {{moment-format slot calendarInst.slotFormat}}
+          {{moment-format slot slotFormat}}
         </div>
       {{/if}}
     {{/each}}
@@ -20,7 +20,7 @@
           data-test-es={{moment-format slot 'DD-MM-YYYY'}}
           class="es-day-number
           {{if (is-same slot today precision='day') 'es-day-number--today'}}
-          {{if (is-same slot calendarInst.selectedDate precision='day') 'es-day-number--selected'}}">
+          {{if (is-same slot selectedDate precision='day') 'es-day-number--selected'}}">
           {{moment-format slot 'DD'}}
         </button>
       </div>

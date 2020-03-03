@@ -15,8 +15,8 @@ export default Component.extend({
     if (get(this, 'draggable')) {
       let offset = 4;
       let schedulerEvent = get(this, 'event');
-      let { id, startTime, endTime } = getProperties(schedulerEvent, ['id', 'startTime', 'endTime']);
-      let data = { id, startTime, endTime, offset };
+      let { id, startTime, endTime, title } = getProperties(schedulerEvent, ['id', 'startTime', 'endTime', 'title']);
+      let data = { id, startTime, endTime, offset, title };
       set(this, 'dragState', 'dragged');
       event.dataTransfer.setData('text/data', JSON.stringify(data));
       event.dataTransfer.effectAllowed = 'move';

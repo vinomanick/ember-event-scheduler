@@ -2,4 +2,6 @@
   externalEvents=(component "event-scheduler/external-events" ))}}
 
 {{yield (hash
-  calendar=(component "event-scheduler/calendar" calendarInst=calendarInst))}}
+  calendar=(component "event-scheduler/calendar"
+    selectedDuration=selectedDuration
+    calendarInst=calendarInst))}}

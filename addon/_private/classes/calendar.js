@@ -2,9 +2,9 @@ import EmberObject, { computed, get, set } from '@ember/object';
 import { reads } from '@ember/object/computed';
 import { assert } from '@ember/debug';
 import { isPresent } from '@ember/utils';
-import CalendarEvent from './calendar-event';
+import { run } from '@ember/runloop';
 import { VIEWS } from '../../constants/event-scheduler';
-import { getSlots, getCustomEventId } from '../../utils/event-scheduler';
+import { getSlots, getCustomEventId, buildCalendarEvent } from '../../utils/event-scheduler';
 // import { inject as service } from '@ember/service';
 
 export default EmberObject.extend({
@@ -15,7 +15,6 @@ export default EmberObject.extend({
 
   isEventsDraggable: reads('config.events.draggable'),
   viewType: reads('viewConfig.type'),
-  timePickerConfig: reads('viewConfig.timePicker'),
   slotConfig: reads('viewConfig.slot'),
   slotInterval: reads('slotConfig.interval'),
   slotFormat: reads('slotConfig.format'),
@@ -40,16 +39,15 @@ export default EmberObject.extend({
   }),
 
   init() {
-    let { config, selectedDate, selectedView, selectedDuration, moment }
-      = this.getProperties(['config', 'selectedDate', 'selectedView', 'selectedDuration', 'moment']);
+    let { config, selectedDate, selectedView, moment }
+      = this.getProperties(['config', 'selectedDate', 'selectedView', 'moment']);
 
     assert('config is required', isPresent(config));
     assert('selected date is required', isPresent(selectedDate));
     assert('selected view is required', isPresent(selectedView));
-    assert('selected duration is required', isPresent(selectedDuration));
     assert('moment  is required', isPresent(moment));
 
-    this.set('events', {});
+    this.set('events', EmberObject.create());
     this.set('resources', []);
   },
 
@@ -67,28 +65,33 @@ export default EmberObject.extend({
 
   // Events manipulation
   addEvents(events = []) {
-    let _events = this.get('events');
-    let { selectedDate, slotInterval, slotsLength, viewType, moment }
-      = this.getProperties(['selectedDate', 'slotInterval', 'slotsLength', 'viewType', 'moment']);
-    events.forEach(({ id, startTime, endTime, resourceId, title }) => {
-      let eventObj = CalendarEvent.create({
-        id,
-        title,
-        startTime,
-        endTime,
-        resourceId,
-        selectedDate,
-        slotInterval,
-        slotsLength,
-        viewType,
-        moment
-      });
-      set(_events, getCustomEventId(id), eventObj);
+    let { events: _events, moment }
+      = this.getProperties(['events', 'moment']);
+    events.forEach((event) => {
+      let eventObj = buildCalendarEvent(event, this, moment)
+      set(_events, getCustomEventId(event.id), eventObj);
     });
   },
 
+  updateEvent(event) {
+    let { id } = event;
+    let _event = this.findEvent(id);
+    if (_event) {
+      this.removeEvent(id);
+      run.next(() => this.addEvents([event]));
+    } else {
+      this.addEvents([event]);
+    }
+  },
+
+  findEvent(id) {
+    let _events = this.get('events');
+    let eventId = getCustomEventId(id);
+    return _events[eventId];
+  },
+
   removeEvent(id) {
-    let _events = this.get('_events');
+    let _events = this.get('events');
     let eventId = getCustomEventId(id);
     let eventObj = get(_events, eventId);
     if (eventObj) {
@@ -98,7 +101,7 @@ export default EmberObject.extend({
   },
 
   deleteAllEvents() {
-    let _events = this.get('_events');
+    let _events = this.get('events');
     _events.forEach((eventObj) => eventObj.destroy());
     set(this, _events, {});
   }

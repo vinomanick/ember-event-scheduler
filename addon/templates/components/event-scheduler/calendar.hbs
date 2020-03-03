@@ -2,12 +2,19 @@
   <div class="calendar__row">
     {{yield (hash resourceHeader = (component 'event-scheduler/calendar/wrappers/resource-header'))}}
     {{yield (hash gridHeader = (component 'event-scheduler/calendar/wrappers/grid-header'
-      calendarInst=calendarInst))}}
+      slots=calendarInst.slots
+      viewType=calendarInst.viewType
+      selectedDate=calendarInst.selectedDate
+      slotFormat=calendarInst.slotConfig.format
+      ))}}
   </div>
 </div>
-<div class="calendar-content">
+<div class="calendar-content"
+  ondrop={{action "droppedEvent"}}
+  ondragOver={{action "draggedOver"}}
+  ondragLeave={{action "draggedAway"}}>
   {{#each calendarInst.resources as |resource| }}
-    {{event-scheduler/calendar/wrappers/resource resource=resource calendarInst=calendarInst}}
+    {{event-scheduler/calendar/wrappers/resource resource=resource}}
   {{else}}
     {{yield (hash empty = (component "event-scheduler/calendar/wrappers/empty"
       message='No resources to display'))}}
@@ -18,3 +25,4 @@
     event=eventObj
     draggable=calendarInst.isEventsDraggable}}
 {{/each-in}}
+

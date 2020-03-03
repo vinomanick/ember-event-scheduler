@@ -8,7 +8,7 @@ export default Component.extend({
     let _resourceId = this.get('event.resourceId');
     return document.querySelector(`[data-resource-id="${_resourceId}"]`);
   }),
-  canDisplayEvent: computed('resource', function() {
+  canDisplayEvent: computed('resource', 'event.isValidEvent', function() {
     return this.get('resource') && this.get('event.isValidEvent');
   })
 });
