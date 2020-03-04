@@ -1,5 +1,7 @@
 {{yield (hash
-  externalEvents=(component "event-scheduler/external-events" ))}}
+  externalEvents=(component "event-scheduler/external-events"
+    externalEventsInst=externalEventsInst
+    config=config.externalEvents))}}
 
 {{yield (hash
   calendar=(component "event-scheduler/calendar"

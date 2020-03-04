@@ -3,6 +3,7 @@ import layout from '../templates/components/scheduling-dashboard';
 import { config } from '../constants/scheduling-dashboard';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
+// import { run } from '@ember/runloop';
 
 // const resources = {
 //   100: { id: 100, name: 'vino'},
@@ -44,15 +45,19 @@ const resources = [
 
 const events = [
   { id: '1', resourceId: '101', title: 'First service task for Puneet', startTime: "2020-03-04T10:00:00+05:30", endTime: "2020-03-04T11:00:00+05:30" },
-  { id: '2', resourceId: '101', title: 'Second service task for Puneet', startTime: "2019-06-13T10:30:00+05:30", endTime: "2019-06-13T12:00:00+05:30"  },
-  { id: '3', resourceId: '101', title: 'Third service task for Puneet', startTime: "2020-03-04T15:00:00+05:30", endTime: "2020-03-04T16:00:00+05:30" },
-  { id: '4', resourceId: '102', title: 'First service task for Balaji',  startTime: "2019-06-09T12:00:00+05:30", endTime: "2019-06-09T13:00:00+05:30" },
+  { id: '2', resourceId: '101', title: 'Second service task for Puneet', startTime: "2020-03-05T10:30:00+05:30", endTime: "2020-03-05T12:00:00+05:30"  },
+  { id: '4', resourceId: '102', title: 'First service task for Balaji',  startTime: "2020-03-03T12:00:00+05:30", endTime: "2020-03-03T13:00:00+05:30" },
   { id: '5', resourceId: '102', title: 'Second service task for Balaji',  startTime: "2020-03-04T15:00:00+05:30", endTime: "2020-03-04T18:00:00+05:30" },
   { id: '6', resourceId: '103', title: 'First service task for Sengo', startTime: "2020-03-04T12:00:00+05:30", endTime: "2020-03-04T13:00:00+05:30" },
   { id: '7', resourceId: '104', title: 'First service task for Deepak', startTime: "2020-03-04T10:00:00+05:30", endTime: "2020-03-04T10:30:00+05:30" },
   { id: '8', resourceId: '106', title: 'First service task for Supraja', startTime: "2020-03-04T10:30:00+05:30", endTime: "2020-03-04T12:00:00+05:30"  },
   { id: '9', resourceId: '101', title: 'Fourth service task for Puneet', startTime: "2020-03-04T08:00:00+05:30", endTime: "2020-03-04T08:30:00+05:30" },
-  { id: '10', resourceId: '101', title: 'Fifth service task for Puneet', startTime: "2019-06-14T09:00:00+05:30", endTime: "2019-06-14T09:30:00+05:30" },
+  { id: '10', resourceId: '101', title: 'Fifth service task for Puneet', startTime: "2020-03-06T09:00:00+05:30", endTime: "2020-03-06T09:30:00+05:30" },
+];
+
+const externalEventsData = [
+  { id: '3', resourceId: '101', title: 'Third service task for Puneet', startTime: "2020-03-04T15:00:00+05:30", endTime: "2020-03-04T16:00:00+05:30" },
+  { id: '9', resourceId: '101', title: 'Fourth service task for Puneet', startTime: "2020-03-04T08:00:00+05:30", endTime: "2020-03-04T08:30:00+05:30" },
 ];
 
 export default Component.extend({
@@ -73,18 +78,23 @@ export default Component.extend({
     loadScheduler(scheduler){
       this.set('schedulerInst', scheduler);
       this.set('calendarInst', scheduler.get('calendar'));
+      this.set('externalEventsInst', scheduler.get('externalEvents'));
       this.addData();
     },
 
     updateEventTicket(updatedEvent) {
       // eslint-disable-next-line no-console
       console.log('Update event called', updatedEvent);
+      // let calendar = this.get('calendarInst');
+      // run.next(() => calendar.removeEvent(updatedEvent.id));
     }
   },
 
   addData() {
     let calendar = this.get('calendarInst');
-    calendar.addResources(resources)
-    calendar.addEvents(events)
+    let externalEvents = this.get('externalEventsInst');
+    calendar.addResources(resources);
+    calendar.addEvents(events);
+    externalEvents.addEvents(externalEventsData);
   }
 });

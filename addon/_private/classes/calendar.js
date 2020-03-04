@@ -1,4 +1,4 @@
-import EmberObject, { computed, get, set } from '@ember/object';
+import EmberObject, { computed } from '@ember/object';
 import { reads } from '@ember/object/computed';
 import { assert } from '@ember/debug';
 import { isPresent } from '@ember/utils';
@@ -69,16 +69,19 @@ export default EmberObject.extend({
       = this.getProperties(['events', 'moment']);
     events.forEach((event) => {
       let eventObj = buildCalendarEvent(event, this, moment)
-      set(_events, getCustomEventId(event.id), eventObj);
+      _events.set(getCustomEventId(event.id), eventObj);
     });
   },
 
   updateEvent(event) {
-    let { id } = event;
-    let _event = this.findEvent(id);
-    if (_event) {
-      this.removeEvent(id);
-      run.next(() => this.addEvents([event]));
+    let _events = this.get('events');
+    let eventId = getCustomEventId(event.id);
+    let eventObj = _events.get(eventId);
+    if (eventObj) {
+      let { startTime, endTime, resourceId } = event;
+      eventObj.setProperties({ startTime, endTime, resourceId });
+      _events.set(eventId, undefined);
+      run.next(() => _events.set(eventId, eventObj))
     } else {
       this.addEvents([event]);
     }
@@ -87,24 +90,23 @@ export default EmberObject.extend({
   findEvent(id) {
     let _events = this.get('events');
     let eventId = getCustomEventId(id);
-    return _events[eventId];
+    return _events.get(eventId);
   },
 
   removeEvent(id) {
     let _events = this.get('events');
     let eventId = getCustomEventId(id);
-    let eventObj = get(_events, eventId);
+    let eventObj = _events[eventId];
     if (eventObj) {
       eventObj.destroy();
-      set(_events, eventId, undefined);
-      delete _events[eventId];
+      _events.set(eventId, undefined);
     }
   },
 
   deleteAllEvents() {
     let _events = this.get('events');
     _events.forEach((eventObj) => eventObj.destroy());
-    set(this, _events, {});
+    this.set('events', EmberObject.create());
   }
 
 });

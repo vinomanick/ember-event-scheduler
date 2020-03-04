@@ -16,6 +16,10 @@
   {{/scheduler.calendar}}
 
 
-  {{scheduler.externalEvents}}
+  {{#scheduler.externalEvents as |externalEvents|}}
+    {{externalEvents.header name="Service tasks"}}
+
+    {{externalEvents.empty}}
+  {{/scheduler.externalEvents}}
 
 {{/event-scheduler}}

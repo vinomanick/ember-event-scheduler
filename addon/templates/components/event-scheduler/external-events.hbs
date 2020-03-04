@@ -1,1 +1,13 @@
-{{yield}}
+{{yield (hash header = (component 'event-scheduler/external-events/wrappers/header'))}}
+<div class="external-events__content"
+  ondragStart={{action "dragStarted"}}
+  ondragEnd={{action "dragEnded"}}>
+  {{#each-in events as |eventId eventObj| }}
+    {{#if eventObj}}
+      {{event-scheduler/external-events/wrappers/event event=eventObj draggable=config.draggable}}
+    {{/if}}
+  {{else}}
+    {{yield (hash empty = (component 'event-scheduler/external-events/wrappers/empty'
+      message='No events to display'))}}
+  {{/each-in}}
+</div>

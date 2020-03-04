@@ -22,6 +22,7 @@ export default Component.extend({
       moment
     });
     this.set('calendarInst', schedulerInst.get('calendar'));
+    this.set('externalEventsInst', schedulerInst.get('externalEvents'));
     this.onSchedulerLoad(schedulerInst);
   }
 });

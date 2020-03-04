@@ -3,3 +3,9 @@
   white-space: nowrap;
   overflow: hidden;
 }
+
+.text {
+  &--xxmedium {
+    font-size: 18px;
+  }
+}

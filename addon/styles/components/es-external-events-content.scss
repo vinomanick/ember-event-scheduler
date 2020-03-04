@@ -1,0 +1,42 @@
+.external-events__content {
+  flex-grow: 1;
+  padding: 0 10px;
+  overflow: scroll;
+
+  .empty-message {
+    height: 100%;
+    flex-direction: column;
+
+    @extend .d-flex;
+    @extend .align-items--center;
+    @extend .justify-content--center;
+  }
+
+  .external-event-wrapper {
+    &[draggable='true'] {
+      cursor: grab;
+    }
+
+    &.dragged {
+      opacity: 0.5;
+    }
+
+    &:not(.dragged) {
+      .event:hover {
+        background-color: $bg-grey;
+      }
+    }
+
+    .event {
+      padding: 8px;
+      margin-bottom: 8px;
+      background-color: $bg-light;
+      border-radius: $radius;
+      user-select: none;
+      touch-action: none;
+
+      @extend .ellipsis;
+      @extend %light-box-shadow;
+    }
+  }
+}
