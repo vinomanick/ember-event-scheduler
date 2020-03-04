@@ -14,7 +14,7 @@ export default EmberObject.extend({
   // resourceId: undefined,
   slotsLength: reads('calendarInst.slotsLength'),
 
-  isValidEvent: computed('resource', function() {
+  isValidEvent: computed('resourceId', 'startPosition', 'endPosition', function() {
     return this.get('startPosition') <= this.get('slotsLength') && this.get('endPosition') > 1;
   }),
 

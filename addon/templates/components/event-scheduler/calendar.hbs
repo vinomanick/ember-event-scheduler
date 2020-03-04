@@ -21,8 +21,10 @@
   {{/each}}
 </div>
 {{#each-in calendarInst.events as |eventId eventObj| }}
-  {{event-scheduler/calendar/wrappers/event
-    event=eventObj
-    draggable=calendarInst.isEventsDraggable}}
+  {{#if eventObj}}
+    {{event-scheduler/calendar/wrappers/event
+      event=eventObj
+      draggable=calendarInst.isEventsDraggable}}
+    {{/if}}
 {{/each-in}}
 

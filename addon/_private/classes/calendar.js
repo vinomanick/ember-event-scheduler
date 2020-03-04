@@ -96,8 +96,9 @@ export default EmberObject.extend({
     let eventObj = get(_events, eventId);
     if (eventObj) {
       eventObj.destroy();
+      set(_events, eventId, undefined);
+      delete _events[eventId];
     }
-    delete _events[eventId];
   },
 
   deleteAllEvents() {
