@@ -39,6 +39,7 @@
   .sidebar {
     flex: 1;
     background: $bg-app;
+    height: 100%;
   }
 
   .main-content {
@@ -46,5 +47,6 @@
     flex: 3;
     margin-left: 0.5rem;
     overflow: scroll;
+    height: 100%;
   }
 }

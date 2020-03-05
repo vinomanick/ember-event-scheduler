@@ -1,6 +1,7 @@
 .es-calendar {
   position: absolute;
   flex-direction: column;
+  height: 100%;
 
   @extend %default-box-shadow;
   @extend .d-flex;

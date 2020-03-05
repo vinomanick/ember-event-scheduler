@@ -5,6 +5,7 @@ import { isPresent } from '@ember/utils';
 import { run } from '@ember/runloop';
 import { VIEWS } from '../../constants/event-scheduler';
 import { getSlots, getCustomEventId, buildCalendarEvent } from '../../utils/event-scheduler';
+import { A } from '@ember/array';
 // import { inject as service } from '@ember/service';
 
 export default EmberObject.extend({
@@ -48,7 +49,7 @@ export default EmberObject.extend({
     assert('moment  is required', isPresent(moment));
 
     this.set('events', EmberObject.create());
-    this.set('resources', []);
+    this.set('resources', A());
   },
 
   // Resources manipulation
@@ -105,8 +106,15 @@ export default EmberObject.extend({
 
   deleteAllEvents() {
     let _events = this.get('events');
-    _events.forEach((eventObj) => eventObj.destroy());
+    Object.values(_events).forEach((eventObj) => eventObj.destroy());
     this.set('events', EmberObject.create());
+  },
+
+  refreshCalendar(selectedDate, selectedView) {
+    selectedDate && this.set('selectedDate', selectedDate);
+    selectedView && this.set('selectedView', selectedView);
+    this.deleteAllEvents();
+    this.deleteAllResources();
   }
 
 });

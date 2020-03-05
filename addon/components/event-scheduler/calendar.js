@@ -32,6 +32,7 @@ export default Component.extend({
   }),
 
   actions: {
+
     draggedOver(event) {
       event.dataTransfer.dropEffect = 'copyMove';
       event.preventDefault();
@@ -64,10 +65,16 @@ export default Component.extend({
         this.triggerDropAction(eventData);
       }
     },
+
     updateStartTime(eventData, selectedTime) {
       this.set('displayTimeFieldDialog', false);
       let startTimeOffset = { value: selectedTime, format: this.get('timePickerConfig.format') };
       this.triggerDropAction(eventData, startTimeOffset);
+    },
+
+    dateViewChanged(selectedDate) {
+      this.get('calendarInst').refreshCalendar(selectedDate, VIEWS.DAY);
+      this.onCalendarRefresh();
     }
   },
 

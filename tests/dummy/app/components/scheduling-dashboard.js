@@ -88,6 +88,12 @@ export default Component.extend({
       console.log('Update event called', updatedEvent);
       // let calendar = this.get('calendarInst');
       // run.next(() => calendar.removeEvent(updatedEvent.id));
+    },
+
+    updateCalendar() {
+      let calendar = this.get('calendarInst');
+      calendar.addResources(resources);
+      // calendar.addEvents(events);
     }
   },
 
