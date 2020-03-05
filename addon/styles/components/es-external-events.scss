@@ -1,10 +1,6 @@
 .es-external-events {
-  width: 25%;
-  margin-right: 10px;
-  height: 600px;
   overflow: scroll;
   flex-direction: column;
-  background: $bg-app;
 
   @extend .d-flex;
 }

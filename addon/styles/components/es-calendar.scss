@@ -1,7 +1,5 @@
 .es-calendar {
-  width: 75%;
-  height: 600px;
-  overflow: scroll;
+  position: absolute;
   flex-direction: column;
 
   @extend %default-box-shadow;

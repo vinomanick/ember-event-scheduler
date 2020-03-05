@@ -1,3 +1,16 @@
 .event-scheduler {
   display: flex;
+  height: 600px;
+
+  .sidebar {
+    flex: 1;
+    background: $bg-app;
+  }
+
+  .main-content {
+    position: relative;
+    flex: 3;
+    margin-left: 0.5rem;
+    overflow: scroll;
+  }
 }

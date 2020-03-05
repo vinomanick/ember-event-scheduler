@@ -1,9 +1,13 @@
-{{yield (hash
-  externalEvents=(component "event-scheduler/external-events"
-    externalEventsInst=externalEventsInst
-    config=config.externalEvents))}}
+<aside class="sidebar">
+  {{yield (hash
+    externalEvents=(component "event-scheduler/external-events"
+      externalEventsInst=externalEventsInst
+      config=config.externalEvents))}}
+</aside>
 
-{{yield (hash
-  calendar=(component "event-scheduler/calendar"
-    selectedDuration=selectedDuration
-    calendarInst=calendarInst))}}
+<section class="main-content">
+  {{yield (hash
+    calendar=(component "event-scheduler/calendar"
+      selectedDuration=selectedDuration
+      calendarInst=calendarInst))}}
+</section>

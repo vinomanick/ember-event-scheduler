@@ -1,5 +1,9 @@
 {{#if hasBlock}}
   {{yield}}
 {{else}}
-  <div class="event">{{event.title}}</div>
+  <div class="event">
+    <div>{{event.title}}</div>
+    <div>{{eventPeriod}}</div>
+    <div>{{event.resourceId}}</div>
+  </div>
 {{/if}}
