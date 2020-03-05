@@ -1,1 +1,0 @@
-export { default } from 'ember-event-scheduler/components/event-scheduler/calendar/wrappers/resource/resource-grid';
