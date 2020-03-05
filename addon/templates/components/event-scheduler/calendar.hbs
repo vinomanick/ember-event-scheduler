@@ -28,3 +28,10 @@
     {{/if}}
 {{/each-in}}
 
+{{#if displayTimeFieldDialog}}
+  {{event-scheduler/calendar/time-field-dialog
+    timeFieldChoices=timeFieldChoices
+    onStartTimeUpdate=(action 'updateStartTime' displayTimeFieldDialog)
+    onClose=(action (mut displayTimeFieldDialog false))
+    }}
+{{/if}}

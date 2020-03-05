@@ -1,0 +1,15 @@
+{{#ember-wormhole to='es-app-overlays'}}
+  <div class="modal-wrapper transcluent">
+    <div class="modal-overlay">
+      <div class="modal-overlay__header">
+        {{yield (hash header="event-scheduler/ui-components/blank-template")}}
+      </div>
+      <div class="modal-overlay__body">
+        {{yield (hash body="event-scheduler/ui-components/blank-template")}}
+      </div>
+      <div class="modal-overlay__footer">
+        {{yield (hash footer="event-scheduler/ui-components/blank-template")}}
+      </div>
+    </div>
+  </div>
+{{/ember-wormhole}}

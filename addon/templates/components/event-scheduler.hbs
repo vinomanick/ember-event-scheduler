@@ -1,3 +1,4 @@
+<div id="es-app-overlays" class="es-app-overlays"></div>
 <aside class="sidebar">
   {{yield (hash
     externalEvents=(component "event-scheduler/external-events"
@@ -8,6 +9,7 @@
 <section class="main-content">
   {{yield (hash
     calendar=(component "event-scheduler/calendar"
+      onEventDrop=(action "updateExternalEventAndBubble")
       selectedDuration=selectedDuration
       calendarInst=calendarInst))}}
 </section>

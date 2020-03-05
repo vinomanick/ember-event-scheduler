@@ -4,6 +4,7 @@ import { computed } from '@ember/object';
 
 export default Component.extend({
   layout,
+  tagName: '',
   resource: computed('event.resourceId', function() {
     let _resourceId = this.get('event.resourceId');
     return document.querySelector(`[data-resource-id="${_resourceId}"]`);

@@ -11,7 +11,7 @@ import {
   buildEventTime,
   getResourceId
 } from '../../utils/event-drop';
-import { getDurationInFormat } from '../../utils/date-util';
+import { getDurationInFormat, getTimeDropdownChoices } from '../../utils/date-util';
 
 export default Component.extend({
   moment: service(),
@@ -20,10 +20,15 @@ export default Component.extend({
   classNameBindings: ['viewClass'],
   attributeBindings: ['data-test-es'],
   'data-test-es': 'es-calendar',
+  selectedDate: reads('calendarInst.selectedDate'),
   viewType: reads('calendarInst.viewType'),
-  timePicketFormat: reads('calendarInst.viewConfig.timePickerConfig.format'),
+  timePickerConfig: reads('calendarInst.viewConfig.timePicker'),
   viewClass: computed('viewType', function() {
     return `${this.get('viewType')}-view`;
+  }),
+  timeFieldChoices: computed(function() {
+    let { selectedDate, timePickerConfig } = this.getProperties(['selectedDate', 'timePickerConfig']);
+    return getTimeDropdownChoices(selectedDate, timePickerConfig);
   }),
 
   actions: {
@@ -59,19 +64,24 @@ export default Component.extend({
         this.triggerDropAction(eventData);
       }
     },
+    updateStartTime(eventData, selectedTime) {
+      this.set('displayTimeFieldDialog', false);
+      let startTimeOffset = { value: selectedTime, format: this.get('timePickerConfig.format') };
+      this.triggerDropAction(eventData, startTimeOffset);
+    }
   },
 
-  triggerDropAction(eventData, startTimeOffsetValue) {
-    let { selectedDate, slotInterval, viewType }
-      = this.get('calendarInst').getProperties(['selectedDate', 'slotInterval', 'viewType']);
+  triggerDropAction(eventData, startTimeOffset) {
+    let { selectedDate, slotInterval, viewType, moment }
+      = this.get('calendarInst').getProperties(['selectedDate', 'slotInterval', 'viewType', 'moment']);
     let { id, startTime: prevStartTime, endTime: prevEndTime, title } = eventData;
 
     let resourceId = getResourceId(eventData.resourceElement);
     let columnStart = this._getColumnStart(eventData);
-    let startTimeOffset = this._getStartTimeOffset(startTimeOffsetValue, prevStartTime);
+    let _startTimeOffset = getStartTimeOffset(viewType, prevStartTime, startTimeOffset, moment);
     let eventDuration = getDurationInFormat(prevStartTime, prevEndTime) || this.get('selectedDuration');
 
-    let { startTime, endTime } = buildEventTime(viewType, selectedDate, columnStart, slotInterval, startTimeOffset, eventDuration);
+    let { startTime, endTime } = buildEventTime(viewType, selectedDate, columnStart, slotInterval, _startTimeOffset, eventDuration);
     let updatedEvent = { id, resourceId, startTime, endTime, title };
     this.get('calendarInst').updateEvent(updatedEvent);
     this.onEventDrop(updatedEvent);
@@ -80,13 +90,5 @@ export default Component.extend({
   _getColumnStart(eventData) {
     let { clientX, offset, resourceElement } = eventData;
     return getColumnStart(resourceElement, clientX, offset);
-  },
-
-  _getStartTimeOffset(startTimeOffsetValue, prevStartTime) {
-    let { viewType, timePicketFormat, moment } = this.getProperties(['viewType', 'timePicketFormat', 'moment']);
-    if(startTimeOffsetValue) {
-      let offset = { value: startTimeOffsetValue, format: timePicketFormat};
-      return getStartTimeOffset(viewType, prevStartTime, offset, moment);
-    }
   }
 });

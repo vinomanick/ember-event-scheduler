@@ -24,5 +24,12 @@ export default Component.extend({
     this.set('calendarInst', schedulerInst.get('calendar'));
     this.set('externalEventsInst', schedulerInst.get('externalEvents'));
     this.onSchedulerLoad(schedulerInst);
+  },
+
+  actions: {
+    updateExternalEventAndBubble(updatedEvent) {
+      this.get('externalEventsInst').updateEvent(updatedEvent);
+      this.onEventDrop(updatedEvent);
+    }
   }
 });

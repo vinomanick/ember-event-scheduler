@@ -5,6 +5,10 @@
 }
 
 .text {
+  &--align-right {
+    text-align: right;
+  }
+
   &--xxmedium {
     font-size: 18px;
   }

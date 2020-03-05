@@ -58,6 +58,7 @@ const events = [
 const externalEventsData = [
   { id: '3', resourceId: '101', title: 'Third service task for Puneet', startTime: "2020-03-04T15:00:00+05:30", endTime: "2020-03-04T16:00:00+05:30" },
   { id: '9', resourceId: '101', title: 'Fourth service task for Puneet', startTime: "2020-03-04T08:00:00+05:30", endTime: "2020-03-04T08:30:00+05:30" },
+  { id: '11', resourceId: '103', title: 'Second service task for Sengo', startTime: null, endTime: null },
 ];
 
 export default Component.extend({
