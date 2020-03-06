@@ -22,6 +22,7 @@
     "ember-cli-babel": "^6.6.0",
     "ember-cli-htmlbars": "^2.0.1",
     "ember-cli-sass": "^10.0.1",
+    "ember-svg-jar": "^2.2.3",
     "sass": "^1.26.2"
   },
   "devDependencies": {
@@ -49,7 +50,6 @@
     "ember-power-select": "^2.3.5",
     "ember-resolver": "^4.0.0",
     "ember-source": "~2.18.0",
-    "ember-svg-jar": "^2.2.3",
     "ember-truth-helpers": "^2.1.0",
     "ember-wormhole": "^0.5.5",
     "eslint-plugin-ember": "^5.0.0",

@@ -16,7 +16,7 @@
     {{#event-scheduler/ui-components/button-throttle data-test-id='previous-btn' type="button"
       onclick=(action 'navigate' 'previous')
       throttleSpeed=throttleTime
-      class="app-icon-btn navigation navigation--left"
+      class="icon-btn navigation navigation--left"
       disabled=disablePrevious
       aria-label=(t 'previous')}}
       {{svg-jar "left-arrow" class="app-icon"}}
@@ -25,7 +25,7 @@
     {{#event-scheduler/ui-components/button-throttle data-test-id='next-btn' type="button"
       onclick=(action 'navigate' 'next')
       throttleSpeed=throttleTime
-      class="app-icon-btn navigation navigation--right"
+      class="icon-btn navigation navigation--right"
       disabled=disableNext
       aria-label=(t 'next')}}
       {{svg-jar "right-arrow" class="app-icon"}}
@@ -41,13 +41,13 @@
           <span class="ember-power-select-status-icon date-picker--arrow"></span>
         {{/dropdown.trigger}}
         {{#dropdown.content}}
-          {{!-- {{ui-form/controls/calendar-picker
-              value=selectedDate
-              minDate=minDate
-              maxDate=maxDate
-              data-test-date-dropdown='scheduler-date-picker'
-              oncancel=(action 'close' dropdown)
-              onchange=(action 'selectDate' dropdown)}} --}}
+          {{#power-calendar
+              class="es-calendar-picker"
+              selected=selectedDate
+              onSelect=(action 'selectDate' dropdown) as |calendar|}}
+              {{calendar.nav}}
+              {{calendar.days}}
+          {{/power-calendar}}
         {{/dropdown.content}}
       {{/basic-dropdown}}
     </div>

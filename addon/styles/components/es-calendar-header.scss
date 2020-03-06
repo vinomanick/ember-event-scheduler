@@ -29,7 +29,7 @@
           border-right: none;
         }
 
-        .day-number {
+        .es-day-number {
           padding: 0;
           margin-top: 6px;
           font-size: $font-size-small;
@@ -37,29 +37,29 @@
           min-width: 32px;
           border-radius: 4px;
 
-          // &:hover {
-          //   background: $app-icon-color-hover-bg;
-          //   border: 1px solid $app-icon-color-hover-bg;
-          // }
+          &:hover {
+            background: $icon-hover-bg;
+            border: 1px solid $icon-hover-bg;
+          }
 
-          // &--today {
-          //   background: $btn-lg-primary-top;
-          //   color: $app-btn-text-light;
-          //   border-color: $btn-lg-primary-selected-border;
+          &--today {
+            background: $btn-primary;
+            color: $text-light;
+            border-color: $btn-primary;
 
-          //   &:hover {
-          //     background: $btn-lg-primary-top;
-          //     border: 1px solid $btn-lg-primary-top;
-          //   }
-          // }
+            &:hover {
+              background: $btn-primary;
+              border: 1px solid $btn-primary;
+            }
+          }
 
-          // &--selected {
-          //   border: 1px solid $btn-lg-primary-selected-border;
+          &--selected {
+            border: 1px solid $btn-primary;
 
-          //   &:hover {
-          //     border: 1px solid $btn-lg-primary-selected-border;
-          //   }
-          // }
+            &:hover {
+              border: 1px solid $btn-primary;
+            }
+          }
         }
       }
     }

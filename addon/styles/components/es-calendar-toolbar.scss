@@ -4,11 +4,7 @@
   background: $bg-secondary;
 
   .arrow {
-    top: 5px;
-    width: 6px;
-    height: 6px;
-    border-top: 2px solid $icon-color;
-    border-right: 2px solid $icon-color;
+    border-color: $icon-color transparent transparent transparent;
   }
 
   &__panel {

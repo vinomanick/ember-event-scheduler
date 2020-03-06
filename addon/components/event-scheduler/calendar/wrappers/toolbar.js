@@ -45,7 +45,7 @@ export default Component.extend({
       let newDate = event === 'next' ? _currentDate.add(1, _viewType) : _currentDate.subtract(1, _viewType);
       this.onDateChange(newDate);
     },
-    selectDate(dropdown, selectedDate) {
+    selectDate(dropdown, { date: selectedDate }) {
       this.send('close', dropdown);
       let newDate = this.get('moment').moment().set({
         date: selectedDate.getDate(),
