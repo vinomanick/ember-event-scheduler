@@ -55,21 +55,15 @@
 
   <div class="es-toolbar__panel align-items--center">
     <div class="event-duration" data-test-es="event-duration">
-      {{#basic-dropdown as |dropdown|}}
-        {{#dropdown.trigger class="pt-8 pb-8"}}
-          <span class="muted mr-2">{{t 'default_duration'}}</span>
-          <span data-test-es="current-duration" class="event-duration--value">{{currentDuration}}</span>
-          <span class="ember-power-select-status-icon event-duration--arrow"></span>
-        {{/dropdown.trigger}}
-        {{#dropdown.content class="es-event-duration-dd"}}
-          {{ui-form/custom-radio-group
-            options=durations
-            groupName='durations'
-            valuePath='durations'
-            customClass='durations-list'
-            onChange=(action 'changeEventDuration' dropdown)}}
-        {{/dropdown.content}}
-      {{/basic-dropdown}}
+        <div class="muted mr-8">{{t 'duration'}}</div>
+        {{#power-select
+          searchEnabled=false
+          selected=selectedDuration
+          options=durationConfig.options
+          onchange=(action "changeEventDuration")
+          as |duration| }}
+          {{t (concat 'time.' duration.format) count=duration.value }}
+        {{/power-select}}
     </div>
     {{#if (gt viewsList.length 1)}}
       <div class="view-type" data-test-es="view-type">
@@ -77,7 +71,6 @@
           searchEnabled=false
           selected=selectedView
           options=viewsList
-          renderInPlace=true
           onchange=(action "changeView")
           as |view| }}
           {{t (get (get views view) 'label')}}

@@ -14,13 +14,14 @@ export default Component.extend({
   init() {
     this._super(...arguments);
     this.get('intl').setLocale(['en-us']);
-    let { config, selectedDate, selectedView, moment }
-      = this.getProperties(['config', 'selectedDate', 'selectedView', 'moment']);
+    let { config, selectedDate, selectedView, selectedDuration, moment }
+      = this.getProperties(['config', 'selectedDate', 'selectedView', 'selectedDuration', 'moment']);
 
     let schedulerInst = new EventScheduler({
       config,
       selectedDate,
       selectedView,
+      selectedDuration,
       moment
     });
     this.set('calendarInst', schedulerInst.get('calendar'));

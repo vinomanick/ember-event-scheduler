@@ -37,20 +37,21 @@ export default EmberObject.extend({
   }),
 
   init() {
-    let { config, selectedDate, selectedView, moment }
-      = this.getProperties(['config', 'selectedDate', 'selectedView', 'moment']);
+    let { config, selectedDate, selectedView, selectedDuration, moment }
+      = this.getProperties(['config', 'selectedDate', 'selectedView', 'selectedDuration', 'moment']);
 
     assert('config is required', isPresent(config));
     assert('selected date is required', isPresent(selectedDate));
     assert('selected view is required', isPresent(selectedView));
+    assert('selected duration is required', isPresent(selectedDuration));
     assert('moment  is required', isPresent(moment));
 
     this.set('events', EmberObject.create());
     this.set('resources', A());
   },
 
-  setDuration(duration) {
-    this.set('selectedDuration', duration);
+  setDuration(selectedDuration) {
+    this.set('selectedDuration', selectedDuration);
   },
 
   // Resources manipulation

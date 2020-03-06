@@ -20,6 +20,7 @@ export default Component.extend({
   attributeBindings: ['data-test-es'],
   'data-test-es': 'es-container',
   selectedDate: reads('calendarInst.selectedDate'),
+  selectedDuration: reads('calendarInst.selectedDuration'),
   viewType: reads('calendarInst.viewType'),
   timePickerConfig: reads('calendarInst.viewConfig.timePicker'),
   viewClass: computed('viewType', function() {

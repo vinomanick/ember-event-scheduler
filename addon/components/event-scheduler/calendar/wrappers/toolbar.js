@@ -3,7 +3,6 @@ import layout from '../../../../templates/components/event-scheduler/calendar/wr
 import {  computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { getCalendarPeriod } from '../../../../utils/event-scheduler';
-import moment from 'moment';
 import { reads } from '@ember/object/computed';
 
 export default Component.extend({
@@ -14,6 +13,8 @@ export default Component.extend({
   attributeBindings: ['data-test-es'],
   'data-test-es': 'es-toolbar',
   throttleTime: 800,
+  selectedDuration: reads('calendarInst.selectedDuration'),
+  selectedView: reads('calendarInst.selectedView'),
   views: reads('calendarInst.config.views'),
   toolbarConfig: reads('calendarInst.config.toolbar'),
   slotConfig: reads('calendarInst.slotConfig'),
@@ -37,24 +38,6 @@ export default Component.extend({
       = this.getProperties(['selectedDate', 'toolbarConfig', 'slotConfig']);
     return getCalendarPeriod(selectedDate, dateFormat, slotConfig);
   }),
-  currentDuration: computed('selectedDuration', function() {
-    let { value, format } = this.get('selectedDuration');
-    return this.get('intl').t(`time.${format}`, { count: value });
-  }),
-  durations: computed('selectedDuration', function() {
-    let durations = this.get('durationConfig.options');
-    let { value, format } = this.get('selectedDuration');
-    let selectedDurationinMins = moment.duration(value, format).asMinutes();
-    return durations.map(({ value, format }) => {
-      let durationinMins = moment.duration(value, format).asMinutes();
-      return {
-        translatedLabel: this.get('intl').t(`time.${format}`, { count: value }),
-        value: durationinMins,
-        meta: { value, format },
-        checked: durationinMins === selectedDurationinMins
-      };
-    });
-  }),
   actions: {
     navigate(event) {
       let _currentDate = this.get('selectedDate').clone();
@@ -77,10 +60,9 @@ export default Component.extend({
     close(dropdown) {
       dropdown.actions.close();
     },
-    changeEventDuration(dropdown, durationValue) {
-      let { meta } = this.get('durations').find((duration) => duration.value === durationValue);
-      this.get('calendarInst').setDuration(meta);
-      dropdown.actions.close();
+    changeEventDuration(newDuration) {
+      // let { meta } = this.get('durations').find((duration) => duration.value === durationValue);
+      this.get('calendarInst').setDuration(newDuration);
     },
     changeView(view) {
       this.get('calendarInst').refreshCalendar(null, view);

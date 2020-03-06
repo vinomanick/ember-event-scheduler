@@ -61,7 +61,9 @@
 
   .event-duration {
     position: relative;
-    padding-right: 24px;
+    padding-right: 16px;
+    display: flex;
+    align-items: center;
 
     &--value {
       font-weight: $font-weight-semibold;
@@ -69,31 +71,6 @@
 
     &--arrow {
       @extend .arrow;
-    }
-  }
-}
-
-.es-event-duration-dd {
-  border-radius: $radius;
-
-  @extend %default-box-shadow;
-
-  .durations-list {
-    margin: 16px;
-
-    input[type='radio'] {
-      & + label {
-        display: block;
-        margin-bottom: 12px;
-
-        &::before {
-          top: 5px;
-        }
-      }
-
-      &:checked + label::after {
-        top: 8px;
-      }
     }
   }
 }

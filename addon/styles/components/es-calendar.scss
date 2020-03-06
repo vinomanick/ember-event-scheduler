@@ -12,10 +12,6 @@
   @extend %default-box-shadow;
   @extend .d-flex;
 
-  .calendar__content {
-    flex-grow: 1;
-  }
-
   .calendar__row {
     display: flex;
 

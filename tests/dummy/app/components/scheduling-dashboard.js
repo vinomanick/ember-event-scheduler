@@ -72,7 +72,7 @@ export default Component.extend({
     return this.get('moment').moment().startOf('day');
   }),
   selectedDuration: computed(function() {
-    return { value: 90, format: 'minutes' };
+    return { value: 90, format: 'minute' };
   }),
 
   actions: {
