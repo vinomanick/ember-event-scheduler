@@ -16,7 +16,7 @@
     {{#event-scheduler/ui-components/button-throttle data-test-id='previous-btn' type="button"
       onclick=(action 'navigate' 'previous')
       throttleSpeed=throttleTime
-      class="icon-btn navigation navigation--left"
+      class="btn--icon navigation navigation--left"
       disabled=disablePrevious
       aria-label=(t 'previous')}}
       {{svg-jar "left-arrow" class="app-icon"}}
@@ -25,7 +25,7 @@
     {{#event-scheduler/ui-components/button-throttle data-test-id='next-btn' type="button"
       onclick=(action 'navigate' 'next')
       throttleSpeed=throttleTime
-      class="icon-btn navigation navigation--right"
+      class="btn--icon navigation navigation--right"
       disabled=disableNext
       aria-label=(t 'next')}}
       {{svg-jar "right-arrow" class="app-icon"}}

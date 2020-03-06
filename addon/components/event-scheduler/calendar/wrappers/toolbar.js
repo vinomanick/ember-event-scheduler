@@ -66,10 +66,12 @@ export default Component.extend({
     },
     changeView(view) {
       this.get('calendarInst').refreshCalendar(null, view);
+      this.onCalendarRefresh();
     }
   },
 
   onDateChange(newDate) {
     this.get('calendarInst').refreshCalendar(newDate);
+    this.onCalendarRefresh();
   }
 });

@@ -1,5 +1,6 @@
 .event-scheduler {
   display: flex;
+  background: $bg-app;
 
   .es-app-overlays {
     .modal-wrapper {
@@ -29,7 +30,7 @@
 
         &__footer {
           padding: 1rem;
-          background: $bg-grey;
+          background: $bg-secondary;
         }
       }
     }
@@ -37,7 +38,7 @@
 
   .sidebar {
     flex: 1;
-    background: $bg-app;
+    border-right: solid 1px $border-primary;
   }
 
   .main-content {

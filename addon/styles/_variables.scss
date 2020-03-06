@@ -1,14 +1,13 @@
 // event scheduler base variables
-
-$border-primary: #ebeef0;
-
-$text-light:  #fff;
+$border-primary: #cfd7df;
+$table-border: #ebeef0;
 
 $bg-app: #ebeff3;
 $bg-light: #fff;
-$bg-grey:#f8f9fa;
-$bg-primary: #f4f9ff;
-$bg-secondary: #f5f7f9;
+$bg-primary: #f5f7f9;
+$bg-secondary:#f8f9fa;
+
+$bg-alt-row: #f4f9ff;
 $bg-drag-zone: rgba(188, 229, 255, 0.7);
 
 $event-bg: #424379;
@@ -19,12 +18,16 @@ $event-focus-border: #2e6ed8;
 $icon-color: #12344d;
 $icon-hover-bg: #ebedf0;
 
-// Font variables
+
+// Font variables and color
+$text-light:  #fff;
+
 $font-weight-semibold: 500;
 
 $font-size-xsmall: 12px;
 $font-size-small: 14px;
 $font-size-medium: 16px;
+$font-size-large: 18px;
 
 $radius: 4px;
 

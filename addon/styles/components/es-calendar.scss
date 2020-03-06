@@ -3,8 +3,9 @@
   height: 600px;
   overflow: scroll;
   margin: 8px;
+  background: $bg-light;
 
-  @extend %default-box-shadow;
+  @extend %box-shadow--default;
 }
 
 .es-calendar {
@@ -23,8 +24,8 @@
       min-width: 200px;
       position: sticky;
       left: 0;
-      border-right: solid 1px $border-primary;
-      border-bottom: solid 1px $border-primary;
+      border-right: solid 1px $table-border;
+      border-bottom: solid 1px $table-border;
       background-color: $bg-light;
       z-index: 1;
 
@@ -46,7 +47,7 @@
       grid-template-rows: 50px;
       grid-auto-flow: dense;
       flex-grow: 1;
-      border-bottom: solid 1px $border-primary;
+      border-bottom: solid 1px $table-border;
     }
   }
 
@@ -54,8 +55,7 @@
     .calendar__row {
       &__grid {
         grid-template-columns: repeat(48, 50px);
-        background: repeating-linear-gradient(90deg, transparent, transparent 49px, $border-primary 50px);
-        background-color: $bg-light;
+        background: repeating-linear-gradient(90deg, transparent, transparent 49px, $table-border 49px, $table-border 50px);
       }
     }
   }
@@ -64,8 +64,7 @@
     .calendar__row {
       &__grid {
         grid-template-columns: repeat(7, minmax(120px, 1fr));
-        background: repeating-linear-gradient(90deg, transparent, transparent calc((100% / 7) - 2px), $border-primary calc(100% / 7));
-        background-color: $bg-light;
+        background: repeating-linear-gradient(90deg, transparent, transparent calc((100% / 7) - 1px), $table-border calc((100% / 7) - 1px), $table-border calc(100% / 7));
       }
     }
   }

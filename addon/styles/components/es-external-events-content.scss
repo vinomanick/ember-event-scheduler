@@ -23,7 +23,7 @@
 
     &:not(.dragged) {
       .event:hover {
-        background-color: $bg-grey;
+        background-color: $bg-secondary;
       }
     }
 
@@ -36,7 +36,7 @@
       touch-action: none;
 
       @extend .ellipsis;
-      @extend %light-box-shadow;
+      @extend %box-shadow--light;
     }
   }
 }

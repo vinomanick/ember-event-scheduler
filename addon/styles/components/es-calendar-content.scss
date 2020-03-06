@@ -11,15 +11,15 @@
 
       &:nth-child(even) {
         .calendar__row__name {
-          background-color: $bg-primary;
+          background-color: $bg-alt-row;
         }
 
         .calendar__row__grid {
-          background-color: $bg-primary;
+          background-color: $bg-alt-row;
         }
 
         .extended-event {
-          border-color: $bg-primary;
+          border-color: $bg-alt-row;
           border-right-color: transparent;
         }
       }

@@ -11,14 +11,13 @@
       &__name {
         font-weight: $font-weight-semibold;
         font-size: $font-size-medium;
-        // Need to find a better way to apply shadow as its creating a problem when there are no agents
-        // box-shadow: 1px -12px 18px 0 rgba(18, 52, 77, 0.06);
+        box-shadow: 1px -12px 18px 0 rgba(18, 52, 77, 0.06);
       }
 
       &__slot {
         font-size: $font-size-xsmall;
         background: $bg-light;
-        border-right: solid 1px $border-primary;
+        border-right: solid 1px $table-border;
         flex-direction: column;
 
         @extend .d-flex;
@@ -68,7 +67,7 @@
   &.day-view {
     .calendar__row__slot {
       border: none;
-      border-bottom: solid 1px $border-primary;
+      border-bottom: solid 1px $table-border;
     }
   }
 
