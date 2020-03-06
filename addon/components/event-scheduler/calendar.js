@@ -32,7 +32,6 @@ export default Component.extend({
   }),
 
   actions: {
-
     draggedOver(event) {
       event.dataTransfer.dropEffect = 'copyMove';
       event.preventDefault();

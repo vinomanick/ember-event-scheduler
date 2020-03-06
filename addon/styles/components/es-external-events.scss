@@ -1,5 +1,7 @@
 .es-external-events {
-  overflow: scroll;
+  height: 100%;
+  width: 100%;
+  position: absolute;
   flex-direction: column;
 
   @extend .d-flex;

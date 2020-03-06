@@ -22,7 +22,7 @@ export default EmberObject.extend({
     return Math.floor(this.getGridPosition(this.get('startTime')));
   }),
   endPosition: computed('endTime', function() {
-    return Math.floor(this.getGridPosition(this.get('endTime')));
+    return Math.ceil(this.getGridPosition(this.get('endTime')));
   }),
 
   isExtendedLeft: computed('startPosition', function() {
