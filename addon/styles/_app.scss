@@ -5,13 +5,22 @@
 
 button {
   cursor: pointer;
-  background: white;
+}
+
+.btn {
+  padding: 4px 15px 5px;
+  background: $bg-light;
   font-size: 14px;
   border-radius: 4px;
   min-width: 80px;
+
+  &--primary {
+    background: $btn-primary;
+    color: $text-light;
+  }
 }
 
 .icon-btn {
-  padding-top: 5px;
+  padding: 5px 7px 2px;
   min-width: 32px;
 }

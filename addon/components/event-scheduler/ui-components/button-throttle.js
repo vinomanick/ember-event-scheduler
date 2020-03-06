@@ -5,6 +5,7 @@ import { run } from '@ember/runloop';
 export default Component.extend({
   layout,
   tagName: 'button',
+  classNames: ['btn'],
   attributeBindings: ['type', 'data-test-id', 'aria-label', 'disabled'],
   type: 'button',
   click() {
