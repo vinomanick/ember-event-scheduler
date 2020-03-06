@@ -2,17 +2,7 @@ const config = {
   defaultView: 'day',
   showCurrentTime: true,
   currentTimePosInterval: 5 * 60 * 1000,
-  duration: {
-    default: { value: 60, format: 'minute' },
-    options: [
-      { value: 30, format: 'minute' },
-      { value: 60, format: 'minute' },
-      { value: 90, format: 'minute' },
-      { value: 120, format: 'minute' }
-    ]
-  },
   queryParamsDateFormat: 'YYYY-MM-DD',
-  emptyMessage: 'field_service_management.schedule_dashboard.empty_message',
   externalEvents: {
     draggable: true,
     perPage: 30,
@@ -20,27 +10,40 @@ const config = {
     emptyMessage: 'field_service_management.schedule_dashboard.external_events.empty_message'
   },
   resources: {
-    perPage: 20
+    perPage: 20,
+    emptyMessage: 'field_service_management.schedule_dashboard.empty_message',
   },
   events: {
     perPage: 20,
     draggable: true
   },
+  toolbar: {
+    duration: {
+      default: { value: 60, format: 'minute' },
+      options: [
+        { value: 30, format: 'minute' },
+        { value: 60, format: 'minute' },
+        { value: 90, format: 'minute' },
+        { value: 120, format: 'minute' }
+      ]
+    },
+    dateFormat: 'DD MMMM YYYY'
+  },
   views: {
     day: {
-      label: 'fd.day',
+      label: 'day',
       type: 'day',
-      toolbar: { dateFormat: 'DD MMMM YYYY' },
       slot: {
         width: 50,
         duration: { value: 1, format: 'day' },
         interval: { value: 30, format: 'minute' },
         startAt: { value: 0, format: 'hour' },
+        startOf: 'day',
         format: 'hh:mm A'
       }
     },
     week: {
-      label: 'fd.week',
+      label: 'week',
       type: 'week',
       timePicker: {
         duration: { value: 1, format: 'day' },
@@ -51,7 +54,8 @@ const config = {
       slot: {
         duration: { value: 7, format: 'day' },
         interval: { value: 1, format: 'day' },
-        startAt: { value: 0, format: 'hour' }
+        startAt: { value: 0, format: 'hour' },
+        startOf: 'week',
       }
     }
   }

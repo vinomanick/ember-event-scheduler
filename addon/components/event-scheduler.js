@@ -4,6 +4,7 @@ import EventScheduler from '../_private/classes/event-scheduler';
 import { inject as service } from '@ember/service';
 
 export default Component.extend({
+  intl: service(),
   moment: service(),
   layout,
   classNames: ['event-scheduler'],
@@ -12,6 +13,7 @@ export default Component.extend({
 
   init() {
     this._super(...arguments);
+    this.get('intl').setLocale(['en-us']);
     let { config, selectedDate, selectedView, moment }
       = this.getProperties(['config', 'selectedDate', 'selectedView', 'moment']);
 

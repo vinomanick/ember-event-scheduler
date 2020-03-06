@@ -28,15 +28,12 @@ export default EmberObject.extend({
 
   slots: computed('viewType', 'selectedDate', function() {
     let _viewType = this.get('viewType');
-    let { duration, interval,  startAt } = this.get('slotConfig');
     return _viewType === VIEWS.DAY
       ? this.get('daySlots')
-      : getSlots(this.get('selectedDate'), { duration, interval, startAt, startOf: _viewType });
+      : getSlots(this.get('selectedDate'), this.get('slotConfig'));
   }),
   daySlots: computed(function() {
-    let startOf = VIEWS.DAY;
-    let { duration, interval,  startAt } = this.get('slotConfig');
-    return getSlots(this.get('moment').moment(), { duration, interval, startAt, startOf });
+    return getSlots(this.get('moment').moment(), this.get('slotConfig'));
   }),
 
   init() {
@@ -50,6 +47,10 @@ export default EmberObject.extend({
 
     this.set('events', EmberObject.create());
     this.set('resources', A());
+  },
+
+  setDuration(duration) {
+    this.set('selectedDuration', duration);
   },
 
   // Resources manipulation

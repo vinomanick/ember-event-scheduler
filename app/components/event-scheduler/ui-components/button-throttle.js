@@ -1,0 +1,1 @@
+export { default } from 'ember-event-scheduler/components/event-scheduler/ui-components/button-throttle';

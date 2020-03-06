@@ -1,0 +1,99 @@
+.es-toolbar {
+  display: flex;
+  height: 56px;
+  background: $bg-secondary;
+
+  .arrow {
+    top: 5px;
+    width: 6px;
+    height: 6px;
+    border-top: 2px solid $icon-color;
+    border-right: 2px solid $icon-color;
+  }
+
+  &__panel {
+    padding: 10px;
+
+    @extend .d-flex;
+
+    &--center {
+      flex-grow: 1;
+
+      @extend .justify-content--center;
+      @extend .align-items--center;
+    }
+
+    .navigation {
+      height: 100%;
+      margin: 0;
+
+      &--left {
+        border-radius: 4px 0 0 4px;
+        position: relative;
+        right: -1px;
+      }
+
+      &--right {
+        border-radius: 0 4px 4px 0;
+      }
+    }
+  }
+
+  .date-picker {
+    position: relative;
+    padding-right: 24px;
+
+    &--icon {
+      vertical-align: middle;
+    }
+
+    &--period {
+      font-weight: $font-weight-semibold;
+      font-size: $font-size-medium;
+      vertical-align: middle;
+      margin: 0 4px;
+    }
+
+    &--arrow {
+      @extend .arrow;
+    }
+  }
+
+  .event-duration {
+    position: relative;
+    padding-right: 24px;
+
+    &--value {
+      font-weight: $font-weight-semibold;
+    }
+
+    &--arrow {
+      @extend .arrow;
+    }
+  }
+}
+
+.es-event-duration-dd {
+  border-radius: $radius;
+
+  @extend %default-box-shadow;
+
+  .durations-list {
+    margin: 16px;
+
+    input[type='radio'] {
+      & + label {
+        display: block;
+        margin-bottom: 12px;
+
+        &::before {
+          top: 5px;
+        }
+      }
+
+      &:checked + label::after {
+        top: 8px;
+      }
+    }
+  }
+}

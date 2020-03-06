@@ -31,19 +31,24 @@ const getSlots = (selectedDate, options) => {
   return getTimeRange(durationObj, offsetDate, interval);
 };
 
-const getCalendarPeriod = (startTime, endTime, dayFormat, _moment) => {
-  let _momentService = _moment || moment;
+const getStartEndDate = (selectedDate, options) => {
+  let { duration, startAt, startOf } = options;
+  let startTime = selectedDate.clone().startOf(startOf).add(startAt.value, startAt.format);
+  let endTime = startTime.clone().add(duration.value, duration.format).subtract(1, 'second');
+  return { startTime, endTime };
+};
+
+const getCalendarPeriod = (selectedDate, dayFormat, options) => {
+  let {startTime, endTime } = getStartEndDate(selectedDate, options);
   if (startTime && endTime) {
-    let _startTime = _momentService.moment(startTime);
-    let _endTime = _momentService.moment(endTime);
-    if (_startTime.isSame(_endTime, 'day')) {
-      _startTime.format(dayFormat);
-    } else if (_startTime.isSame(_endTime, 'month')) {
-      _startTime.format('MMMM YYYY');
-    } else if (_startTime.isSame(_endTime, 'year')) {
-      return `${_startTime.format('MMM')} - ${_endTime.format('MMM YYYY')}`;
+    if (startTime.isSame(endTime, 'day')) {
+      return startTime.format(dayFormat);
+    } else if (startTime.isSame(endTime, 'month')) {
+      return startTime.format('MMMM YYYY');
+    } else if (startTime.isSame(endTime, 'year')) {
+      return `${startTime.format('MMM')} - ${endTime.format('MMM YYYY')}`;
     }
-    return `${_startTime.format('MMM YYYY')} - ${_endTime.format('MMM YYYY')}`;
+    return `${startTime.format('MMM YYYY')} - ${endTime.format('MMM YYYY')}`;
   }
 };
 

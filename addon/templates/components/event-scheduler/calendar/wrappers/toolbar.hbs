@@ -1,1 +1,88 @@
-{{yield}}
+{{#if hasBlock}}
+  {{yield}}
+{{else}}
+  <div class="es-toolbar__panel">
+    <div id="externalEventsToggle"></div>
+    {{#event-scheduler/ui-components/button-throttle data-test-id='today-btn' type="button"
+      onclick=(action 'selectToday')
+      throttleSpeed=throttleTime
+      class="btn btn--secondary mr-8"
+      disabled=(is-same selectedDate today precision='day')
+      aria-label=(t 'today')
+      }}
+      {{t 'today'}}
+    {{/event-scheduler/ui-components/button-throttle}}
+
+    {{#event-scheduler/ui-components/button-throttle data-test-id='previous-btn' type="button"
+      onclick=(action 'navigate' 'previous')
+      throttleSpeed=throttleTime
+      class="app-icon-btn navigation navigation--left"
+      disabled=disablePrevious
+      aria-label=(t 'previous')}}
+      {{svg-jar "left-arrow" class="app-icon"}}
+    {{/event-scheduler/ui-components/button-throttle}}
+
+    {{#event-scheduler/ui-components/button-throttle data-test-id='next-btn' type="button"
+      onclick=(action 'navigate' 'next')
+      throttleSpeed=throttleTime
+      class="app-icon-btn navigation navigation--right"
+      disabled=disableNext
+      aria-label=(t 'next')}}
+      {{svg-jar "right-arrow" class="app-icon"}}
+    {{/event-scheduler/ui-components/button-throttle}}
+  </div>
+
+  <div class="es-toolbar__panel es-toolbar__panel--center">
+    <div class="date-picker" data-test-es="date-picker">
+      {{#basic-dropdown horizontalPosition='center' as |dropdown|}}
+        {{#dropdown.trigger}}
+          {{svg-jar 'calendar' class="app-icon app-icon--normal date-picker--icon"}}
+          <span data-test-es="current-period" class="date-picker--period">{{currentPeriod}}</span>
+          <span class="ember-power-select-status-icon date-picker--arrow"></span>
+        {{/dropdown.trigger}}
+        {{#dropdown.content}}
+          {{!-- {{ui-form/controls/calendar-picker
+              value=selectedDate
+              minDate=minDate
+              maxDate=maxDate
+              data-test-date-dropdown='scheduler-date-picker'
+              oncancel=(action 'close' dropdown)
+              onchange=(action 'selectDate' dropdown)}} --}}
+        {{/dropdown.content}}
+      {{/basic-dropdown}}
+    </div>
+  </div>
+
+  <div class="es-toolbar__panel align-items--center">
+    <div class="event-duration" data-test-es="event-duration">
+      {{#basic-dropdown as |dropdown|}}
+        {{#dropdown.trigger class="pt-8 pb-8"}}
+          <span class="muted mr-2">{{t 'default_duration'}}</span>
+          <span data-test-es="current-duration" class="event-duration--value">{{currentDuration}}</span>
+          <span class="ember-power-select-status-icon event-duration--arrow"></span>
+        {{/dropdown.trigger}}
+        {{#dropdown.content class="es-event-duration-dd"}}
+          {{ui-form/custom-radio-group
+            options=durations
+            groupName='durations'
+            valuePath='durations'
+            customClass='durations-list'
+            onChange=(action 'changeEventDuration' dropdown)}}
+        {{/dropdown.content}}
+      {{/basic-dropdown}}
+    </div>
+    {{#if (gt viewsList.length 1)}}
+      <div class="view-type" data-test-es="view-type">
+        {{#power-select
+          searchEnabled=false
+          selected=selectedView
+          options=viewsList
+          renderInPlace=true
+          onchange=(action "changeView")
+          as |view| }}
+          {{t (get (get views view) 'label')}}
+        {{/power-select}}
+      </div>
+    {{/if}}
+  </div>
+{{/if}}

@@ -16,10 +16,9 @@ import { getDurationInFormat, getTimeDropdownChoices } from '../../utils/date-ut
 export default Component.extend({
   moment: service(),
   layout,
-  classNames: ['es-calendar'],
-  classNameBindings: ['viewClass'],
+  classNames: ['es-container'],
   attributeBindings: ['data-test-es'],
-  'data-test-es': 'es-calendar',
+  'data-test-es': 'es-container',
   selectedDate: reads('calendarInst.selectedDate'),
   viewType: reads('calendarInst.viewType'),
   timePickerConfig: reads('calendarInst.viewConfig.timePicker'),
@@ -72,7 +71,7 @@ export default Component.extend({
       this.triggerDropAction(eventData, startTimeOffset);
     },
 
-    dateViewChanged(selectedDate) {
+    changeDateView(selectedDate) {
       this.get('calendarInst').refreshCalendar(selectedDate, VIEWS.DAY);
       this.onCalendarRefresh();
     }

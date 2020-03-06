@@ -1,7 +1,13 @@
+.es-calendar-container {
+  position: relative;
+  height: 600px;
+  overflow: scroll;
+}
+
 .es-calendar {
   position: absolute;
   flex-direction: column;
-  height: 100%;
+  min-height: 100%;
 
   @extend %default-box-shadow;
   @extend .d-flex;

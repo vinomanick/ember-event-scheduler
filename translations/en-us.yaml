@@ -1,0 +1,11 @@
+price_banner: The {product} costs {price, number, USD}
+today: 'Today'
+next: 'Next'
+previous: 'Previous'
+default_duration: 'Default duration'
+day: 'Day'
+week: 'Week'
+time:
+  minutes: '{count, plural, =1 {1 minute} other {# minutes}}'
+  hours: '{count, plural, =1 {1 hour} other {# hours}}'
+  days: '{count, plural, =1 {1 day} other {# days}}'
