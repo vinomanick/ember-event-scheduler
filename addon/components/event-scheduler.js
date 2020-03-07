@@ -2,6 +2,7 @@ import Component from '@ember/component';
 import layout from '../templates/components/event-scheduler';
 import EventScheduler from '../_private/classes/event-scheduler';
 import { inject as service } from '@ember/service';
+import { and } from '@ember/object/computed';
 
 export default Component.extend({
   intl: service(),
@@ -10,18 +11,21 @@ export default Component.extend({
   classNames: ['event-scheduler'],
   attributeBindings: ['data-test-es'],
   'data-test-es': 'event-scheduler',
+  canShowExternalEvents: and('config.hasExternalEvents', 'calendarInst.isExternalEventsExpanded'),
 
   init() {
     this._super(...arguments);
     this.get('intl').setLocale(['en-us']);
-    let { config, selectedDate, selectedView, selectedDuration, moment }
-      = this.getProperties(['config', 'selectedDate', 'selectedView', 'selectedDuration', 'moment']);
+    let { config, selectedDate, selectedView, selectedDuration, isExternalEventsExpanded, moment }
+      = this.getProperties(['config', 'selectedDate', 'selectedView',
+      'selectedDuration', 'isExternalEventsExpanded', 'moment']);
 
     let schedulerInst = new EventScheduler({
       config,
       selectedDate,
       selectedView,
       selectedDuration,
+      isExternalEventsExpanded,
       moment
     });
     this.set('calendarInst', schedulerInst.get('calendar'));

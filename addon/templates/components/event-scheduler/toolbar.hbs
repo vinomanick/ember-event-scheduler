@@ -1,8 +1,11 @@
 {{yield (hash left = (component 'event-scheduler/toolbar/wrappers/left-panel'
   selectedDate=selectedDate
   viewType=viewType
-  onDateChange=(action 'updateDateAndRefresh'
-  )))}}
+  showExternalEventsToggle=toolbarConfig.showExternalEventsToggle
+  isExternalEventsExpanded=calendarInst.isExternalEventsExpanded
+  onDateChange=(action 'updateDateAndRefresh')
+  onExternalEventsToggle=(action 'updateEventsToggleState')
+  ))}}
 
 {{yield (hash center = (component 'event-scheduler/toolbar/wrappers/center-panel'
   selectedDate=selectedDate

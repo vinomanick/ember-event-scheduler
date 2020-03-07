@@ -1,23 +1,22 @@
 const config = {
   defaultView: 'day',
   showCurrentTime: true,
+  hasExternalEvents: true,
   currentTimePosInterval: 5 * 60 * 1000,
   queryParamsDateFormat: 'YYYY-MM-DD',
   externalEvents: {
     draggable: true,
     perPage: 30,
-    defaultFilter: 'unresolved_service_tasks', // ToDo - Change to unassigned_service_tasks once it is made as a default filter
-    emptyMessage: 'field_service_management.schedule_dashboard.external_events.empty_message'
   },
   resources: {
     perPage: 20,
-    emptyMessage: 'field_service_management.schedule_dashboard.empty_message',
   },
   events: {
     perPage: 20,
     draggable: true
   },
   toolbar: {
+    showExternalEventsToggle: true,
     duration: {
       default: { value: 60, format: 'minute' },
       options: [

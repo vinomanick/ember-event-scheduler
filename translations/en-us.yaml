@@ -1,4 +1,5 @@
-price_banner: The {product} costs {price, number, USD}
+hide: 'Hide'
+show: 'Show'
 today: 'Today'
 next: 'Next'
 previous: 'Previous'

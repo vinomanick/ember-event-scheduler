@@ -1,10 +1,11 @@
 <div id="es-app-overlays" class="es-app-overlays"></div>
-<aside class="sidebar">
-  {{yield (hash
-    externalEvents=(component "event-scheduler/external-events"
+{{#if canShowExternalEvents}}
+  <aside class="sidebar">
+    {{yield (hash externalEvents=(component "event-scheduler/external-events"
       externalEventsInst=externalEventsInst
       config=config.externalEvents))}}
-</aside>
+  </aside>
+{{/if}}
 
 <section class="main-content">
   <div class="es-container" data-test-es='es-container'>

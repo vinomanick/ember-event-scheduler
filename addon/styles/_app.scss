@@ -16,9 +16,23 @@ button {
   }
 }
 
-.btn--icon {
+.btn-icon {
   padding: 5px 7px 2px;
   min-width: 32px;
+
+  &--active {
+    border: 1px solid $btn-active-border;
+    box-shadow: inset 0 0 4px 0 rgba(39,49,58,.26);
+  }
+}
+
+.btn-toggle {
+  transition: transform .1s linear;
+  display: inline-block;
+
+  &--expanded {
+    transform: rotateY(180deg)
+  }
 }
 
 .app-icon {

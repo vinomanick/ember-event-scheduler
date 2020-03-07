@@ -25,6 +25,9 @@ export default Component.extend({
     updateViewAndRefresh(view) {
       this.get('calendarInst').refreshCalendar(null, view);
       this.onCalendarRefresh();
+    },
+    updateEventsToggleState() {
+      this.get('calendarInst').toggleProperty('isExternalEventsExpanded');
     }
   },
 

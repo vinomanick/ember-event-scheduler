@@ -13,6 +13,7 @@ export default EmberObject.extend({
   // calendarEvents: undefined,
   // selectedDate: undefined,
   // selectedView: VIEWS.DAY,
+  // isExternalEventsExpanded: boolean,
 
   isEventsDraggable: reads('config.events.draggable'),
   viewType: reads('viewConfig.type'),
