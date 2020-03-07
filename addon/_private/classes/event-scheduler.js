@@ -9,8 +9,9 @@ export default EmberObject.extend({
   // externalEvents: undefined,
 
   init() {
-    let { config, selectedDate, selectedView, selectedDuration, moment }
-      = this.getProperties(['config', 'selectedDate', 'selectedView', 'selectedDuration', 'moment']);
+    let { config, selectedDate, selectedView, selectedDuration, isExternalEventsExpanded, moment }
+      = this.getProperties(['config', 'selectedDate', 'selectedView',
+      'selectedDuration', 'isExternalEventsExpanded', 'moment']);
     assert('selected date is required', isPresent(selectedDate));
     assert('selected view is required', isPresent(selectedView));
     assert('selected durationssss is required', isPresent(selectedDuration));
@@ -22,6 +23,7 @@ export default EmberObject.extend({
       selectedDate,
       selectedView,
       selectedDuration,
+      isExternalEventsExpanded,
       moment
     }));
 

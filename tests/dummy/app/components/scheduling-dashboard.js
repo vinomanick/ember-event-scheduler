@@ -76,6 +76,7 @@ export default Component.extend({
   classNames: ['scheduling-dashboard'],
   attributeBindings: ['data-test-id'],
   'data-test-id': 'scheduling-dashboard',
+  selectedView: 'day',
   selectedDate: computed(function() {
     return this.get('moment').moment().startOf('day');
   }),
