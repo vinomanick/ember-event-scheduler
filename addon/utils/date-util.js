@@ -1,5 +1,7 @@
 import moment from 'moment';
 
+const zeroPad = (number) => number >= 10 ? `${number}` : `0${number}`;
+
 const getTimeRange = (durationObj, selectedDate, interval, timeFormat) => {
   let timeRange = [];
   let { value, format } = interval;
@@ -9,6 +11,15 @@ const getTimeRange = (durationObj, selectedDate, interval, timeFormat) => {
     timeRange.push(timeFormat ? selectedDate.format(timeFormat) : selectedDate.clone());
   }
   return timeRange;
+};
+
+const getDurationAs = (timeDuration, type, divident, suffix) => {
+  let time = Math.floor(timeDuration.as(type) % divident);
+  if (time > 0) {
+    let _suffix = time == 1 ? suffix : `${suffix}s`;
+    return `${zeroPad(time)}${_suffix}`;
+  }
+  return '';
 };
 
 const getDuration = (startTime, endTime) => {
@@ -50,6 +61,7 @@ const getTimeDropdownChoices = (selectedDate, options) => {
 
 export {
   getDuration,
+  getDurationAs,
   getDurationInFormat,
   addDuration,
   overrideTime,

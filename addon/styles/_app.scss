@@ -38,4 +38,9 @@ button {
 .app-icon {
   width: 14px;
   height: 14px;
+
+  &--small {
+    width: 13px;
+    height: 13px;
+  }
 }

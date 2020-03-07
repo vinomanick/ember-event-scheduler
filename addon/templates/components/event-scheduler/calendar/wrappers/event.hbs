@@ -4,11 +4,20 @@
       event=event
       draggable=draggable
     }}
-      <div class="event" data-name="event">
+      <div class="event card" data-name="event">
         {{#if hasBlock}}
           {{yield}}
         {{else}}
-          {{event.title}}
+          <div class="card__header ellipsis">
+            {{#if (eq viewType VIEWS.DAY)}}
+              <span>{{t 'duration'}}</span>
+            {{/if}}
+            <span class="text--semi-bold" data-test-es="appointment-duration">{{appointmentDuration}}</span>
+          </div>
+          <div class="card__body ellipsis">
+            <span data-test-es="event-id">#{{event.id}}</span>
+            <span class="subject" data-test-es="event-title">{{event.title}}</span>
+          </div>
         {{/if}}
       </div>
     {{/event-scheduler/calendar/wrappers/event/event-card}}

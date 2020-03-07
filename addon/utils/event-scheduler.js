@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { getTimeRange } from './date-util';
+import { getTimeRange, getDurationAs } from './date-util';
 import CalendarEvent from '../_private/classes/calendar-event';
 
 const getCustomResourceId = (id) => {
@@ -52,7 +52,7 @@ const getCalendarPeriod = (selectedDate, dayFormat, options) => {
   }
 };
 
-const getEventPeriod = (startTime, endTime, dateTimeFormat, timeFormat, _moment) => {
+const getExternalEventPeriod = (startTime, endTime, dateTimeFormat, timeFormat, _moment) => {
   let _momentService = _moment || moment;
   if (startTime && endTime) {
     let _startTime = _momentService.moment(startTime);
@@ -63,7 +63,24 @@ const getEventPeriod = (startTime, endTime, dateTimeFormat, timeFormat, _moment)
   }
 };
 
-const getEventCompactPeriod = (startTime, endTime, _moment) => {
+const getEventPeriodDayView = (startTime, endTime, _moment) => {
+  let _momentService = _moment || moment;
+  if (startTime && endTime) {
+    let _startTime = _momentService.moment(startTime);
+    let _endTime = _momentService.moment(endTime);
+    let timeDifference = _endTime.diff(_startTime);
+    if (timeDifference > 0) {
+      let timeDuration = moment.duration(timeDifference);
+      let dayDivident = _startTime.isLeapYear() ?  366 : 365;
+      let days = getDurationAs(timeDuration, 'day', dayDivident, 'day');
+      let hours = getDurationAs(timeDuration, 'hour', 24, 'hr');
+      let minutes = getDurationAs(timeDuration, 'minute', 60, 'min');
+      return `${days} ${hours} ${minutes}`.trim();
+    }
+  }
+};
+
+const getEventPeriodCompact = (startTime, endTime, _moment) => {
   let _momentService = _moment || moment;
   if (startTime && endTime) {
     let _startTime = _momentService.moment(startTime);
@@ -97,5 +114,5 @@ const getTimerPos = (durationInMins, slotConfig) => {
 };
 
 export { getSlots, buildCalendarEvent, getTimerPos,
-  getCalendarPeriod, getEventPeriod, getEventCompactPeriod,
+  getCalendarPeriod, getExternalEventPeriod, getEventPeriodDayView, getEventPeriodCompact,
   getCustomResourceId, getCustomEventId };

@@ -39,6 +39,47 @@
 
       @extend .ellipsis;
       @extend %box-shadow--light;
+
+      &.card {
+        font-size: $font-size-xsmall;
+
+        .card__data {
+          margin-bottom: 4px;
+
+          @extend .d-flex;
+          @extend .align-items--center;
+
+          &--icon {
+            margin-right: 4px;
+            padding-top: 4px;
+          }
+
+          &--content {
+            flex-grow: 1;
+
+            @extend .ellipsis;
+          }
+        }
+
+        .card__body {
+          margin: 6px 12px 12px;
+
+          .subject {
+            font-weight: $font-weight-semibold;
+            font-size: $font-size-medium;
+          }
+        }
+
+        .card__footer {
+          padding: 6px 12px 2px;
+          border-top: 1px solid $border-primary;
+
+          .card__data:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
     }
+
   }
 }

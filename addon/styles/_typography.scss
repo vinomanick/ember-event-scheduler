@@ -9,7 +9,15 @@
     text-align: right;
   }
 
+  &--default {
+    font-size: $font-size-small;
+  }
+
   &--xxmedium {
     font-size: $font-size-large;
+  }
+
+  &--semi-bold {
+    font-weight: $font-weight-semibold;
   }
 }
