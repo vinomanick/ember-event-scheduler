@@ -1,0 +1,22 @@
+{{#if hasBlock}}
+  {{yield}}
+{{else}}
+  <div class="date-picker" data-test-es="date-picker">
+    {{#basic-dropdown horizontalPosition='center' as |dropdown|}}
+      {{#dropdown.trigger}}
+        {{svg-jar 'calendar' class="app-icon app-icon--normal date-picker--icon"}}
+        <span data-test-es="current-period" class="date-picker--period">{{currentPeriod}}</span>
+        <span class="ember-power-select-status-icon date-picker--arrow"></span>
+      {{/dropdown.trigger}}
+      {{#dropdown.content}}
+        {{#power-calendar
+            class="es-calendar-picker"
+            selected=selectedDate
+            onSelect=(action 'selectDate' dropdown) as |calendar|}}
+            {{calendar.nav}}
+            {{calendar.days}}
+        {{/power-calendar}}
+      {{/dropdown.content}}
+    {{/basic-dropdown}}
+  </div>
+{{/if}}

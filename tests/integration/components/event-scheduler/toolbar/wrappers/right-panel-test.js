@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('event-scheduler/calendar/wrappers/toolbar', 'Integration | Component | event scheduler/calendar/wrappers/toolbar', {
+moduleForComponent('event-scheduler/toolbar/wrappers/right-panel', 'Integration | Component | event scheduler/toolbar/wrappers/right panel', {
   integration: true
 });
 
@@ -9,15 +9,15 @@ test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{event-scheduler/calendar/wrappers/toolbar}}`);
+  this.render(hbs`{{event-scheduler/toolbar/wrappers/right-panel}}`);
 
   assert.equal(this.$().text().trim(), '');
 
   // Template block usage:
   this.render(hbs`
-    {{#event-scheduler/calendar/wrappers/toolbar}}
+    {{#event-scheduler/toolbar/wrappers/right-panel}}
       template block text
-    {{/event-scheduler/calendar/wrappers/toolbar}}
+    {{/event-scheduler/toolbar/wrappers/right-panel}}
   `);
 
   assert.equal(this.$().text().trim(), 'template block text');

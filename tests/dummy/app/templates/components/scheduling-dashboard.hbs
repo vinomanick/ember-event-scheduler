@@ -7,9 +7,13 @@
   onCalendarRefresh=(action 'updateCalendar')
   as |scheduler|}}
 
+  {{#scheduler.toolbar as |toolbar|}}
+      {{toolbar.left}}
+      {{toolbar.right}}
+      {{toolbar.center}}
+  {{/scheduler.toolbar}}
   {{#scheduler.calendar
     as |calendar|}}
-    {{calendar.toolbar}}
     {{calendar.resourceHeader name='Field technicians'}}
     {{calendar.gridHeader}}
 

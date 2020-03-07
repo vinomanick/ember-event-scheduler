@@ -7,9 +7,18 @@
 </aside>
 
 <section class="main-content">
-  {{yield (hash
-    calendar=(component "event-scheduler/calendar"
-      onEventDrop=(action "updateExternalEventAndBubble")
+  <div class="es-container" data-test-es='es-container'>
+    {{yield (hash toolbar = (component 'event-scheduler/toolbar'
+      calendarInst=calendarInst
       onCalendarRefresh=onCalendarRefresh
-      calendarInst=calendarInst))}}
+    ))}}
+    <div class="es-calendar-container">
+    {{yield (hash
+      calendar=(component "event-scheduler/calendar"
+        calendarInst=calendarInst
+        onEventDrop=(action "updateExternalEventAndBubble")
+        onCalendarRefresh=onCalendarRefresh
+        ))}}
+    </div>
+  </div>
 </section>

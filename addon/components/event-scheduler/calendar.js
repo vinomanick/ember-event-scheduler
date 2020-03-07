@@ -16,9 +16,10 @@ import { getDurationInFormat, getTimeDropdownChoices } from '../../utils/date-ut
 export default Component.extend({
   moment: service(),
   layout,
-  classNames: ['es-container'],
+  classNames: ['es-calendar'],
+  classNameBindings: ['viewClass'],
   attributeBindings: ['data-test-es'],
-  'data-test-es': 'es-container',
+  'data-test-es': 'es-calendar',
   selectedDate: reads('calendarInst.selectedDate'),
   selectedDuration: reads('calendarInst.selectedDuration'),
   viewType: reads('calendarInst.viewType'),
