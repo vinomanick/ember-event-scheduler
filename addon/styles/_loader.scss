@@ -1,0 +1,41 @@
+.placeholder-loader {
+  animation: placeholder-animation 1.5s ease-in-out infinite;
+
+  .placeholder-item {
+    background-color: $placeholder-primary-color;
+    height: 8px;
+    border-radius: 6px;
+
+    &--medium {
+      height: 12px;
+    }
+
+    &--large {
+      height: 15px;
+    }
+  }
+
+  .placeholder {
+    &-60 {
+      width: 60%;
+    }
+
+    &-80 {
+      width: 80%;
+    }
+  }
+}
+
+@keyframes placeholder-animation {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

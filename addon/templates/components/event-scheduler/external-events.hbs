@@ -7,7 +7,12 @@
       {{event-scheduler/external-events/wrappers/event event=eventObj draggable=config.draggable}}
     {{/if}}
   {{else}}
-    {{yield (hash empty = (component 'event-scheduler/external-events/wrappers/empty'
-      message='No events to display'))}}
+    {{#unless externalEventsInst.isLoading}}
+      {{yield (hash empty = (component 'event-scheduler/external-events/wrappers/empty'
+        message='No events to display'))}}
+    {{/unless}}
   {{/each-in}}
+  {{#if externalEventsInst.isLoading}}
+    {{event-scheduler/external-events/placeholders/event}}
+  {{/if}}
 </div>

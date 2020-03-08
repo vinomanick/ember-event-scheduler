@@ -1,0 +1,18 @@
+{{#if hasBlock}}
+  {{yield}}
+{{else}}
+  <div class="event card">
+    <div class="card__body">
+      <div class="card__data">
+        <div class="card__data--content">
+          <div class="placeholder-item placeholder-item--medium mt-4 mb-4" data-test-es="placeholder-title"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card__footer">
+      <div class="card__data">
+        <div class="placeholder-item placeholder-60 mt-4 mb-4" data-test-es="placeholder-time"></div>
+      </div>
+    </div>
+  </div>
+{{/if}}

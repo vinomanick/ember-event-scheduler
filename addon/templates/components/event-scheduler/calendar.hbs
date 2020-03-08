@@ -14,12 +14,21 @@
   ondrop={{action "droppedEvent"}}
   ondragOver={{action "draggedOver"}}
   ondragLeave={{action "draggedAway"}}>
+  <div class="calendar__row calendar__row--bg">
+    <div class="calendar__row__name"></div>
+    <div class="calendar__row__grid"></div>
+  </div>
   {{#each calendarInst.resources as |resource| }}
     {{event-scheduler/calendar/wrappers/resource resource=resource}}
   {{else}}
-    {{yield (hash empty = (component "event-scheduler/calendar/wrappers/empty"
-      message='No resources to display'))}}
+    {{#unless calendarInst.isLoading}}
+      {{yield (hash empty = (component "event-scheduler/calendar/wrappers/empty"
+        message='No resources to display'))}}
+    {{/unless}}
   {{/each}}
+  {{#if calendarInst.isLoading}}
+    {{event-scheduler/calendar/placeholders/resource}}
+  {{/if}}
 </div>
 {{#each-in calendarInst.events as |eventId eventObj| }}
   {{#if eventObj}}

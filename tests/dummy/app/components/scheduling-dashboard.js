@@ -3,7 +3,7 @@ import layout from '../templates/components/scheduling-dashboard';
 import { config } from '../constants/scheduling-dashboard';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
-// import { run } from '@ember/runloop';
+import { run } from '@ember/runloop';
 
 // const resources = {
 //   100: { id: 100, name: 'vino'},
@@ -101,16 +101,24 @@ export default Component.extend({
 
     updateCalendar() {
       let calendar = this.get('calendarInst');
-      calendar.addResources(resources);
-      calendar.addEvents(events);
+      run.later(() => {
+        calendar.set('isLoading', false);
+        calendar.addResources(resources);
+        calendar.addEvents(events);
+      }, 1000);
+
     }
   },
 
   addData() {
     let calendar = this.get('calendarInst');
     let externalEvents = this.get('externalEventsInst');
-    calendar.addResources(resources);
-    calendar.addEvents(events);
-    externalEvents.addEvents(externalEventsData);
+    run.later(() => {
+      calendar.set('isLoading', false);
+      calendar.addResources(resources);
+      calendar.addEvents(events);
+      externalEvents.set('isLoading', false);
+      externalEvents.addEvents(externalEventsData);
+    }, 1000);
   }
 });

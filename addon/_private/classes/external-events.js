@@ -2,6 +2,7 @@ import EmberObject, { computed, setProperties } from '@ember/object';
 import { getCustomEventId } from '../../utils/event-scheduler';
 
 export default EmberObject.extend({
+  isLoading: true,
   events: computed(function() {
     return EmberObject.create();
   }),
@@ -34,5 +35,11 @@ export default EmberObject.extend({
     let _events = this.get('events');
     let eventId = getCustomEventId(id);
     return _events.get(eventId);
+  },
+
+  deleteAllEvents() {
+    let _events = this.get('events');
+    Object.values(_events).forEach((eventObj) => eventObj.destroy());
+    this.set('events', EmberObject.create());
   },
 });

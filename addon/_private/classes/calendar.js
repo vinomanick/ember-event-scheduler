@@ -14,7 +14,7 @@ export default EmberObject.extend({
   // selectedDate: undefined,
   // selectedView: VIEWS.DAY,
   // isExternalEventsExpanded: boolean,
-
+  isLoading: true,
   isEventsDraggable: reads('config.events.draggable'),
   viewType: reads('viewConfig.type'),
   slotConfig: reads('viewConfig.slot'),
@@ -59,7 +59,7 @@ export default EmberObject.extend({
   addResources(resources = []) {
     let calendarResources = this.get('resources');
     resources.forEach(({ id, name }) => {
-      calendarResources.push({ id, name });
+      calendarResources.pushObject({ id, name });
     });
   },
 
@@ -114,6 +114,7 @@ export default EmberObject.extend({
   },
 
   refreshCalendar(selectedDate, selectedView) {
+    this.set('isLoading', true);
     selectedDate && this.set('selectedDate', selectedDate);
     selectedView && this.set('selectedView', selectedView);
     this.deleteAllEvents();
