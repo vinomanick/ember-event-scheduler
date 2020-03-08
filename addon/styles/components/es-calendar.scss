@@ -28,6 +28,7 @@
       border-bottom: solid 1px $table-border;
       background-color: $bg-light;
       z-index: 1;
+      // box-shadow: 1px 12px 18px 0 rgba(18, 52, 77, 0.06);
 
       @extend .d-flex;
       @extend .align-items--center;
@@ -65,6 +66,15 @@
       &__grid {
         grid-template-columns: repeat(7, minmax(120px, 1fr));
         background: repeating-linear-gradient(90deg, transparent, transparent calc((100% / 7) - 1px), $table-border calc((100% / 7) - 1px), $table-border calc(100% / 7));
+      }
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &.month-view.month-#{$i} {
+      .calendar__row__grid {
+        grid-template-columns: repeat(#{$i}, minmax(120px, 1fr));
+        background: repeating-linear-gradient(90deg, transparent, transparent calc((100% / #{$i}) - 1px), $table-border calc((100% / #{$i}) - 1px), $table-border calc(100% / #{$i}));
       }
     }
   }

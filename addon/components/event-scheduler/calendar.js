@@ -17,15 +17,20 @@ export default Component.extend({
   moment: service(),
   layout,
   classNames: ['es-calendar'],
-  classNameBindings: ['viewClass'],
+  classNameBindings: ['viewClass', 'monthViewClass'],
   attributeBindings: ['data-test-es'],
   'data-test-es': 'es-calendar',
   selectedDate: reads('calendarInst.selectedDate'),
   selectedDuration: reads('calendarInst.selectedDuration'),
   viewType: reads('calendarInst.viewType'),
-  timePickerConfig: reads('calendarInst.viewConfig.timePicker'),
+  timePickerConfig: reads('calendarInst.timePickerConfig'),
   viewClass: computed('viewType', function() {
     return `${this.get('viewType')}-view`;
+  }),
+  monthViewClass: computed('viewType', 'selectedDate', function() {
+    if (this.get('viewType') === VIEWS.MONTH) {
+      return `month-${this.get('selectedDate').daysInMonth()}`;
+    }
   }),
   timeFieldChoices: computed(function() {
     let { selectedDate, timePickerConfig } = this.getProperties(['selectedDate', 'timePickerConfig']);

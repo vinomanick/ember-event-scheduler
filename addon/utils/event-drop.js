@@ -17,12 +17,7 @@ const _getEventPosition = (element, clientX, offset) => {
 };
 
 const getResourceElement = (target) => {
-  let targetName = target && target.getAttribute('data-name');
-  if (targetName === 'resource') {
-    return target;
-  } else if (targetName === 'event') {
-    return target.closest('[data-name="resource"]');
-  }
+  return target.closest('[data-name="resource"]');
 };
 
 const getResourceId = (resourceElement) => {

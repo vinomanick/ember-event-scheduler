@@ -15,6 +15,12 @@ const config = {
     perPage: 20,
     draggable: true
   },
+  timePicker: {
+    duration: { value: 1, format: 'day' },
+    interval: { value: 30, format: 'minute' },
+    startAt: { value: 0, format: 'hour' },
+    format: 'hh:mm A'
+  },
   toolbar: {
     showExternalEventsToggle: true,
     duration: {
@@ -44,17 +50,20 @@ const config = {
     week: {
       label: 'week',
       type: 'week',
-      timePicker: {
-        duration: { value: 1, format: 'day' },
-        interval: { value: 30, format: 'minute' },
-        startAt: { value: 0, format: 'hour' },
-        format: 'hh:mm A'
-      },
       slot: {
         duration: { value: 7, format: 'day' },
         interval: { value: 1, format: 'day' },
         startAt: { value: 0, format: 'hour' },
         startOf: 'week',
+      }
+    },
+    month: {
+      label: 'month',
+      type: 'month',
+      slot: {
+        interval: { value: 1, format: 'day' },
+        startAt: { value: 0, format: 'hour' },
+        startOf: 'month',
       }
     }
   }

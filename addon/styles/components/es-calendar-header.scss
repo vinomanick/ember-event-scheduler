@@ -11,7 +11,6 @@
       &__name {
         font-weight: $font-weight-semibold;
         font-size: $font-size-medium;
-        box-shadow: 1px -12px 18px 0 rgba(18, 52, 77, 0.06);
       }
 
       &__slot {
@@ -71,7 +70,8 @@
     }
   }
 
-  &.week-view {
+  &.week-view,
+  &.month-view {
     .calendar__header {
       .calendar__row__grid {
         grid-auto-rows: 100px;

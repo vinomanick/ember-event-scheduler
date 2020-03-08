@@ -17,7 +17,7 @@ export default EmberObject.extend({
   isLoading: true,
   isEventsDraggable: reads('config.events.draggable'),
   viewType: reads('viewConfig.type'),
-  slotConfig: reads('viewConfig.slot'),
+  timePickerConfig: reads('config.timePicker'),
   slotInterval: reads('slotConfig.interval'),
   slotFormat: reads('slotConfig.format'),
   slotsLength: reads('slots.length'),
@@ -25,6 +25,13 @@ export default EmberObject.extend({
     let _selectedView = this.get('selectedView');
     let _views = this.get('config.views');
     return _views[_selectedView];
+  }),
+  slotConfig: computed('viewConfig', 'selectedDate', function() {
+    if (this.get('viewType') === VIEWS.MONTH) {
+      let duration = { format: 'day', value: this.get('selectedDate').daysInMonth() };
+      return Object.assign({ duration }, this.get('viewConfig.slot'));
+    }
+    return this.get('viewConfig.slot');
   }),
 
   slots: computed('viewType', 'selectedDate', function() {
@@ -49,6 +56,12 @@ export default EmberObject.extend({
 
     this.set('events', EmberObject.create());
     this.set('resources', A());
+  },
+
+  getMonthSlots() {
+    let duration = { format: 'day', value: this.get('selectedDate').daysInMonth() };
+    let _slotConfig = this.get('slotConfig');
+    return getSlots(this.get('selectedDate'), Object.assign({ duration }, _slotConfig));
   },
 
   setDuration(selectedDuration) {
