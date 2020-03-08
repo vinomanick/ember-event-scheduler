@@ -15,4 +15,9 @@
   {{#if externalEventsInst.isLoading}}
     {{event-scheduler/external-events/placeholders/event}}
   {{/if}}
+  {{#if externalEventsInst.isAllLoaded}}
+    <div class="end-of-list">
+      {{t 'all_loaded' type='events'}}
+    </div>
+  {{/if}}
 </div>

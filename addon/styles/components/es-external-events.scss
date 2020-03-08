@@ -3,6 +3,7 @@
   width: 100%;
   position: absolute;
   flex-direction: column;
+  overflow: scroll;
 
   @extend .d-flex;
 }

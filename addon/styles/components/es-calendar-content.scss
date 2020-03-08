@@ -16,6 +16,15 @@
         height: 100%;
       }
 
+      &__grid {
+        padding: 6px 0;
+        grid-row-gap: 6px;
+
+        &.activated {
+          background-color: $bg-drag-zone;
+        }
+      }
+
       &:not(.calendar__row--empty):nth-child(even) {
         .calendar__row__name {
           background-color: $bg-alt-row;
@@ -23,20 +32,15 @@
 
         .calendar__row__grid {
           background-color: $bg-alt-row;
+
+          &.activated {
+            background-color: $bg-drag-zone;
+          }
         }
 
         .extended-event {
           border-color: $bg-alt-row;
           border-right-color: transparent;
-        }
-      }
-
-      .calendar__row__grid {
-        padding: 6px 0;
-        grid-row-gap: 6px;
-
-        &.activated {
-          background: $bg-drag-zone;
         }
       }
     }

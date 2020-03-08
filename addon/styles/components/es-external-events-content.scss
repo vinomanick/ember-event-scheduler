@@ -3,7 +3,6 @@
   padding: 0 10px;
   margin-bottom: 10px;
   height: 100%;
-  overflow: scroll;
 
   .empty-message {
     height: 100%;
@@ -12,6 +11,13 @@
     @extend .d-flex;
     @extend .align-items--center;
     @extend .justify-content--center;
+  }
+
+  .end-of-list {
+    padding: 8px;
+    text-align: center;
+
+    @extend .muted;
   }
 
   .external-event-wrapper {

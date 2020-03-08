@@ -119,6 +119,7 @@ export default Component.extend({
       calendar.addEvents(events);
       externalEvents.set('isLoading', false);
       externalEvents.addEvents(externalEventsData);
+      externalEvents.set('isAllLoaded', true);
     }, 1000);
   }
 });

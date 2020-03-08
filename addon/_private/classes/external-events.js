@@ -3,6 +3,7 @@ import { getCustomEventId } from '../../utils/event-scheduler';
 
 export default EmberObject.extend({
   isLoading: true,
+  isAllLoaded: false,
   events: computed(function() {
     return EmberObject.create();
   }),

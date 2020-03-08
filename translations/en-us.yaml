@@ -6,6 +6,7 @@ previous: 'Previous'
 duration: 'Duration'
 day: 'Day'
 week: 'Week'
+all_loaded: 'No more {type} to load'
 time:
   minute: '{count, plural, =1 {1 minute} other {# minutes}}'
   hour: '{count, plural, =1 {1 hour} other {# hours}}'
