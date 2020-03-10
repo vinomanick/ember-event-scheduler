@@ -28,11 +28,11 @@ export default Component.extend({
   viewType: reads('calendarInst.viewType'),
   timePickerConfig: reads('calendarInst.timePickerConfig'),
   viewClass: computed('viewType', function() {
-    return `${this.get('viewType')}-view`;
+    return `${this.viewType}-view`;
   }),
   monthViewClass: computed('viewType', 'selectedDate', function() {
-    if (this.get('viewType') === VIEWS.MONTH) {
-      return `month-${this.get('selectedDate').daysInMonth()}`;
+    if (this.viewType === VIEWS.MONTH) {
+      return `month-${this.selectedDate.daysInMonth()}`;
     }
   }),
   timeFieldChoices: computed(function() {
@@ -65,7 +65,7 @@ export default Component.extend({
         eventData.resourceElement = resourceElement;
         eventData.clientX = event.clientX;
 
-        if (this.get('viewType') !== VIEWS.DAY && !eventData.startTime) {
+        if (this.viewType !== VIEWS.DAY && !eventData.startTime) {
           this.set('displayTimeFieldDialog', eventData);
           return;
         }
@@ -76,29 +76,29 @@ export default Component.extend({
 
     updateStartTime(eventData, selectedTime) {
       this.set('displayTimeFieldDialog', false);
-      let startTimeOffset = { value: selectedTime, format: this.get('timePickerConfig.format') };
+      let startTimeOffset = { value: selectedTime, format: this.timePickerConfig.format };
       this.triggerDropAction(eventData, startTimeOffset);
     },
 
     changeDateView(selectedDate) {
-      this.get('calendarInst').refreshCalendar(selectedDate, VIEWS.DAY);
+      this.calendarInst.refreshCalendar(selectedDate, VIEWS.DAY);
       this.onCalendarRefresh();
     }
   },
 
   triggerDropAction(eventData, startTimeOffset) {
     let { selectedDate, slotInterval, viewType, moment }
-      = this.get('calendarInst').getProperties(['selectedDate', 'slotInterval', 'viewType', 'moment']);
+      = this.calendarInst.getProperties(['selectedDate', 'slotInterval', 'viewType', 'moment']);
     let { id, startTime: prevStartTime, endTime: prevEndTime, title } = eventData;
 
     let resourceId = getResourceId(eventData.resourceElement);
     let columnStart = this._getColumnStart(eventData);
     let _startTimeOffset = getStartTimeOffset(viewType, prevStartTime, startTimeOffset, moment);
-    let eventDuration = getDurationInFormat(prevStartTime, prevEndTime) || this.get('selectedDuration');
+    let eventDuration = getDurationInFormat(prevStartTime, prevEndTime) || this.selectedDuration;
 
     let { startTime, endTime } = buildEventTime(viewType, selectedDate, columnStart, slotInterval, _startTimeOffset, eventDuration);
     let updatedEvent = { id, resourceId, startTime, endTime, title };
-    this.get('calendarInst').updateEvent(updatedEvent);
+    this.calendarInst.updateEvent(updatedEvent);
     this.onEventDrop(updatedEvent);
   },
 

@@ -13,7 +13,7 @@ export default EmberObject.extend({
 
   // Events manipulation
   addEvents(events = []) {
-    let _events = this.get('events');
+    let _events = this.events;
     events.forEach((event) => {
       _events.set(getCustomEventId(event.id), event);
     });
@@ -28,7 +28,7 @@ export default EmberObject.extend({
   },
 
   removeEvent(event) {
-    let _events = this.get('events');
+    let _events = this.events;
     let eventId = getCustomEventId(event.id);
     if (_events.get(eventId)) {
       _events.set(eventId, undefined);
@@ -36,13 +36,13 @@ export default EmberObject.extend({
   },
 
   findEvent(id) {
-    let _events = this.get('events');
+    let _events = this.events;
     let eventId = getCustomEventId(id);
     return _events.get(eventId);
   },
 
   deleteAllEvents() {
-    let _events = this.get('events');
+    let _events = this.events;
     Object.values(_events).forEach((eventObj) => eventObj.destroy());
     this.set('events', EmberObject.create());
   },

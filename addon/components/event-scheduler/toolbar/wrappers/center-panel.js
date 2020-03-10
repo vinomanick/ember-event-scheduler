@@ -9,12 +9,12 @@ export default Component.extend({
   layout,
   classNames: ['es-toolbar__panel', 'es-toolbar__panel--center'],
   disablePrevious: computed('selectedDate', function() {
-    let _minDate = this.get('minDate');
-    return _minDate && this.get('selectedDate').isSameOrBefore(_minDate, 'day');
+    let _minDate = this.minDate;
+    return _minDate && this.selectedDate.isSameOrBefore(_minDate, 'day');
   }),
   disableNext: computed('selectedDate', function() {
-    let _maxDate = this.get('maxDate');
-    return _maxDate && this.get('selectedDate').isSameOrAfter(_maxDate, 'day');
+    let _maxDate = this.maxDate;
+    return _maxDate && this.selectedDate.isSameOrAfter(_maxDate, 'day');
   }),
   currentPeriod: computed('selectedDate', 'viewType', function() {
     let { selectedDate, dateFormat, slotConfig }
@@ -24,7 +24,7 @@ export default Component.extend({
   actions: {
     selectDate(dropdown, { date: selectedDate }) {
       this.close(dropdown);
-      let newDate = this.get('moment').moment().set({
+      let newDate = this.moment.moment().set({
         date: selectedDate.getDate(),
         month: selectedDate.getMonth(),
         year: selectedDate.getFullYear()

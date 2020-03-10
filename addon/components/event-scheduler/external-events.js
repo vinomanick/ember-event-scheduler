@@ -17,7 +17,7 @@ export default Component.extend({
       if(eventElement) {
         let offset = 4;
         let eventId = getEventId(eventElement);
-        let externalEvent = this.get('events').get(getCustomEventId(eventId));
+        let externalEvent = this.events.get(getCustomEventId(eventId));
         let { id, startTime, endTime, title } = externalEvent;
         let data = { id, startTime, endTime, title, offset };
         eventElement.classList.add('dragged');

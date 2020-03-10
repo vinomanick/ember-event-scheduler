@@ -26,26 +26,26 @@ export default EmberObject.extend({
   slotFormat: reads('slotConfig.format'),
   slotsLength: reads('slots.length'),
   viewConfig: computed('selectedView', function() {
-    let _selectedView = this.get('selectedView');
-    let _views = this.get('config.views');
+    let _selectedView = this.selectedView;
+    let _views = this.config.views;
     return _views[_selectedView];
   }),
   slotConfig: computed('viewConfig', 'selectedDate', function() {
-    if (this.get('viewType') === VIEWS.MONTH) {
-      let duration = { format: 'day', value: this.get('selectedDate').daysInMonth() };
-      return Object.assign({ duration }, this.get('viewConfig.slot'));
+    if (this.viewType === VIEWS.MONTH) {
+      let duration = { format: 'day', value: this.selectedDate.daysInMonth() };
+      return Object.assign({ duration }, this.viewConfig.slot);
     }
-    return this.get('viewConfig.slot');
+    return this.viewConfig.slot;
   }),
 
   slots: computed('viewType', 'selectedDate', function() {
-    let _viewType = this.get('viewType');
+    let _viewType = this.viewType;
     return _viewType === VIEWS.DAY
-      ? this.get('daySlots')
-      : getSlots(this.get('selectedDate'), this.get('slotConfig'));
+      ? this.daySlots
+      : getSlots(this.selectedDate, this.slotConfig);
   }),
   daySlots: computed(function() {
-    return getSlots(this.get('moment').moment(), this.get('slotConfig'));
+    return getSlots(this.moment.moment(), this.slotConfig);
   }),
 
   init() {
@@ -63,9 +63,9 @@ export default EmberObject.extend({
   },
 
   getMonthSlots() {
-    let duration = { format: 'day', value: this.get('selectedDate').daysInMonth() };
-    let _slotConfig = this.get('slotConfig');
-    return getSlots(this.get('selectedDate'), Object.assign({ duration }, _slotConfig));
+    let duration = { format: 'day', value: this.selectedDate.daysInMonth() };
+    let _slotConfig = this.slotConfig;
+    return getSlots(this.selectedDate, Object.assign({ duration }, _slotConfig));
   },
 
   setDuration(selectedDuration) {
@@ -74,14 +74,14 @@ export default EmberObject.extend({
 
   // Resources manipulation
   addResources(resources = []) {
-    let calendarResources = this.get('resources');
+    let calendarResources = this.resources;
     resources.forEach(({ id, name }) => {
       calendarResources.pushObject({ id, name });
     });
   },
 
   deleteAllResources() {
-    this.get('resources').clear();
+    this.resources.clear();
   },
 
   // Events manipulation
@@ -95,7 +95,7 @@ export default EmberObject.extend({
   },
 
   updateEvent(event) {
-    let _events = this.get('events');
+    let _events = this.events;
     let eventId = getCustomEventId(event.id);
     let eventObj = _events.get(eventId);
     if (eventObj) {
@@ -109,13 +109,13 @@ export default EmberObject.extend({
   },
 
   findEvent(id) {
-    let _events = this.get('events');
+    let _events = this.events;
     let eventId = getCustomEventId(id);
     return _events.get(eventId);
   },
 
   removeEvent(id) {
-    let _events = this.get('events');
+    let _events = this.events;
     let eventId = getCustomEventId(id);
     let eventObj = _events[eventId];
     if (eventObj) {
@@ -125,7 +125,7 @@ export default EmberObject.extend({
   },
 
   deleteAllEvents() {
-    let _events = this.get('events');
+    let _events = this.events;
     Object.values(_events).forEach((eventObj) => eventObj.destroy());
     this.set('events', EmberObject.create());
   },

@@ -9,7 +9,7 @@ export default Component.extend({
   attributeBindings: ['type', 'data-test-id', 'aria-label', 'disabled'],
   type: 'button',
   click() {
-    run.throttle(this, this._click, this.get('throttleSpeed') || 500);
+    run.throttle(this, this._click, this.throttleSpeed || 500);
   },
   _click() {
     this.onclick();

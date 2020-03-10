@@ -12,7 +12,7 @@ export default Component.extend({
   attributeBindings: ['data-test-es'],
   'data-test-es': 'grid-header',
   today: computed(function() {
-    return this.get('moment').moment();
+    return this.moment.moment();
   }),
   actions: {
     navigate(selectedDate) {

@@ -78,7 +78,7 @@ export default Component.extend({
   'data-test-id': 'scheduling-dashboard',
   selectedView: 'day',
   selectedDate: computed(function() {
-    return this.get('moment').moment().startOf('day');
+    return this.moment.moment().startOf('day');
   }),
   selectedDuration: computed(function() {
     return { value: 90, format: 'minute' };
@@ -95,12 +95,12 @@ export default Component.extend({
     updateEventTicket(updatedEvent) {
       // eslint-disable-next-line no-console
       console.log('Update event called', updatedEvent);
-      // let calendar = this.get('calendarInst');
+      // let calendar = this.calendarInst');
       // run.next(() => calendar.removeEvent(updatedEvent.id));
     },
 
     updateCalendar() {
-      let calendar = this.get('calendarInst');
+      let calendar = this.calendarInst;
       run.later(() => {
         calendar.set('isLoading', false);
         calendar.addResources(resources);
@@ -111,8 +111,8 @@ export default Component.extend({
   },
 
   addData() {
-    let calendar = this.get('calendarInst');
-    let externalEvents = this.get('externalEventsInst');
+    let calendar = this.calendarInst;
+    let externalEvents = this.externalEventsInst;
     run.later(() => {
       calendar.set('isLoading', false);
       calendar.addResources(resources);

@@ -15,15 +15,15 @@ export default Component.extend({
   layout,
   tagName: '',
   resource: computed('event.resourceId', function() {
-    let _resourceId = this.get('event.resourceId');
+    let _resourceId = this.event.resourceId;
     return document.querySelector(`[data-resource-id="${_resourceId}"]`);
   }),
   canDisplayEvent: computed('resource', 'event.isValidEvent', function() {
-    return this.get('resource') && this.get('event.isValidEvent');
+    return this.resource && this.event.isValidEvent;
   }),
   appointmentDuration: computed('event.{startTime,endTime}', function() {
     let { viewType, moment } = this.getProperties(['viewType', 'moment']);
-    let { startTime, endTime } = this.get('event').getProperties('startTime', 'endTime');
+    let { startTime, endTime } = this.event.getProperties('startTime', 'endTime');
     return viewType === VIEWS.DAY
       ? getEventPeriodDayView(startTime, endTime, moment)
       : getEventPeriodCompact(startTime, endTime, moment);

@@ -18,8 +18,8 @@ export default Component.extend({
   'data-name': 'event',
   'data-external-event-id': reads('event.id'),
   serviceTime: computed('event.{startTime,endTime}', function() {
-    let { startTime, endTime } = this.get('event');
-    let serviceTime = getExternalEventPeriod(startTime, endTime, dateTimeFormat, timeFormat, this.get('moment'));
+    let { startTime, endTime } = this.event;
+    let serviceTime = getExternalEventPeriod(startTime, endTime, dateTimeFormat, timeFormat, this.moment);
     return serviceTime || '--';
   })
 });

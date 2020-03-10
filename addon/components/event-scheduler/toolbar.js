@@ -16,18 +16,18 @@ export default Component.extend({
 
   actions: {
     updateDateAndRefresh(newDate) {
-      this.get('calendarInst').refreshCalendar(newDate);
+      this.calendarInst.refreshCalendar(newDate);
       this.onCalendarRefresh();
     },
     updateDuration(newView) {
-      this.get('calendarInst').setDuration(newView);
+      this.calendarInst.setDuration(newView);
     },
     updateViewAndRefresh(view) {
-      this.get('calendarInst').refreshCalendar(null, view);
+      this.calendarInst.refreshCalendar(null, view);
       this.onCalendarRefresh();
     },
     updateEventsToggleState() {
-      this.get('calendarInst').toggleProperty('isExternalEventsExpanded');
+      this.calendarInst.toggleProperty('isExternalEventsExpanded');
     }
   },
 

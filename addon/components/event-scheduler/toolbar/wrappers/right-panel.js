@@ -8,7 +8,7 @@ export default Component.extend({
   intl: service(),
   layout,
   viewsList: computed(function() {
-    return Object.keys(this.get('views'));
+    return Object.keys(this.views);
   }),
 
   classNames: ['es-toolbar__panel', 'align-items--center'],

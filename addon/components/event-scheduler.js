@@ -15,7 +15,7 @@ export default Component.extend({
 
   init() {
     this._super(...arguments);
-    this.get('intl').setLocale(['en-us']);
+    this.intl.setLocale(['en-us']);
     let { config, selectedDate, selectedView, selectedDuration, isExternalEventsExpanded, moment }
       = this.getProperties(['config', 'selectedDate', 'selectedView',
       'selectedDuration', 'isExternalEventsExpanded', 'moment']);
@@ -28,14 +28,14 @@ export default Component.extend({
       isExternalEventsExpanded,
       moment
     });
-    this.set('calendarInst', schedulerInst.get('calendar'));
-    this.set('externalEventsInst', schedulerInst.get('externalEvents'));
+    this.set('calendarInst', schedulerInst.calendar);
+    this.set('externalEventsInst', schedulerInst.externalEvents);
     this.onSchedulerLoad(schedulerInst);
   },
 
   actions: {
     updateExternalEventAndBubble(updatedEvent) {
-      this.get('externalEventsInst').updateEvent(updatedEvent);
+      this.externalEventsInst.updateEvent(updatedEvent);
       this.onEventDrop(updatedEvent);
     }
   }

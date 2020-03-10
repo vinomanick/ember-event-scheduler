@@ -5,14 +5,14 @@ import { computed, } from '@ember/object';
 export default Component.extend({
   layout,
   selectedTime: computed(function() {
-    return this.get('timeFieldChoices')[0];
+    return this.timeFieldChoices[0];
   }),
   actions: {
     changeTime(time) {
       this.set('selectedTime', time);
     },
     onUpdate() {
-      this.onStartTimeUpdate(this.get('selectedTime'));
+      this.onStartTimeUpdate(this.selectedTime);
     },
     onCancel() {
       this.onClose();

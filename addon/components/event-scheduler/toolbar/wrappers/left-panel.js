@@ -10,17 +10,17 @@ export default Component.extend({
   classNames: ['es-toolbar__panel'],
   throttleTime: 800,
   today: computed(function() {
-    return this.get('moment').moment().startOf('day');
+    return this.moment.moment().startOf('day');
   }),
   actions: {
     navigate(event) {
-      let _currentDate = this.get('selectedDate').clone();
-      let _viewType = this.get('viewType');
+      let _currentDate = this.selectedDate.clone();
+      let _viewType = this.viewType;
       let newDate = event === 'next' ? _currentDate.add(1, _viewType) : _currentDate.subtract(1, _viewType);
       this.onDateChange(newDate);
     },
     selectToday() {
-      this.onDateChange(this.get('today').clone());
+      this.onDateChange(this.today.clone());
     },
     triggerExternalEventsToggle() {
       this.onExternalEventsToggle();
