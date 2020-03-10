@@ -51,7 +51,7 @@ export default EmberObject.extend({
 
   getGridPosition(time) {
     let { selectedDate, viewType, slotInterval: { format, value } }
-      = this.calendarInst.getProperties(['selectedDate', 'viewType', 'slotInterval'])
+      = this.calendarInst;
     let _selectedDate = selectedDate.clone().startOf(viewType);
     let timeDifference = this.moment.moment(time).diff(_selectedDate);
     let timeDuration = moment.duration(timeDifference).as(format);

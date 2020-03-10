@@ -36,7 +36,7 @@ export default Component.extend({
     }
   }),
   timeFieldChoices: computed(function() {
-    let { selectedDate, timePickerConfig } = this.getProperties(['selectedDate', 'timePickerConfig']);
+    let { selectedDate, timePickerConfig } = this;
     return getTimeDropdownChoices(selectedDate, timePickerConfig);
   }),
 
@@ -87,8 +87,7 @@ export default Component.extend({
   },
 
   triggerDropAction(eventData, startTimeOffset) {
-    let { selectedDate, slotInterval, viewType, moment }
-      = this.calendarInst.getProperties(['selectedDate', 'slotInterval', 'viewType', 'moment']);
+    let { selectedDate, slotInterval, viewType, moment } = this.calendarInst;
     let { id, startTime: prevStartTime, endTime: prevEndTime, title } = eventData;
 
     let resourceId = getResourceId(eventData.resourceElement);

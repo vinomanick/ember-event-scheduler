@@ -12,9 +12,9 @@ export default Component.extend({
   'data-event-id': reads('event.id'),
 
   dragStart(event) {
-    if (get(this, 'draggable')) {
+    if (this.draggable) {
       let offset = 4;
-      let schedulerEvent = get(this, 'event');
+      let schedulerEvent = this.event;
       let { id, startTime, endTime, title } = getProperties(schedulerEvent, ['id', 'startTime', 'endTime', 'title']);
       let data = { id, startTime, endTime, offset, title };
       set(this, 'dragState', 'dragged');

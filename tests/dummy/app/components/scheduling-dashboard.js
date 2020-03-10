@@ -87,8 +87,8 @@ export default Component.extend({
   actions: {
     loadScheduler(scheduler){
       this.set('schedulerInst', scheduler);
-      this.set('calendarInst', scheduler.get('calendar'));
-      this.set('externalEventsInst', scheduler.get('externalEvents'));
+      this.set('calendarInst', scheduler.calendar);
+      this.set('externalEventsInst', scheduler.externalEvents);
       this.addData();
     },
 

@@ -30,7 +30,7 @@ export default EmberObject.extend({
   removeEvent(event) {
     let _events = this.events;
     let eventId = getCustomEventId(event.id);
-    if (_events.get(eventId)) {
+    if (_events.eventId) {
       _events.set(eventId, undefined);
     }
   },
@@ -38,7 +38,7 @@ export default EmberObject.extend({
   findEvent(id) {
     let _events = this.events;
     let eventId = getCustomEventId(id);
-    return _events.get(eventId);
+    return _events.eventId;
   },
 
   deleteAllEvents() {

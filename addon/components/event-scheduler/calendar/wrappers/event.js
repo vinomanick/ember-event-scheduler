@@ -22,8 +22,8 @@ export default Component.extend({
     return this.resource && this.event.isValidEvent;
   }),
   appointmentDuration: computed('event.{startTime,endTime}', function() {
-    let { viewType, moment } = this.getProperties(['viewType', 'moment']);
-    let { startTime, endTime } = this.event.getProperties('startTime', 'endTime');
+    let { viewType, moment } = this;
+    let { startTime, endTime } = this.event;
     return viewType === VIEWS.DAY
       ? getEventPeriodDayView(startTime, endTime, moment)
       : getEventPeriodCompact(startTime, endTime, moment);

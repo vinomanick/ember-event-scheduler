@@ -49,8 +49,7 @@ export default EmberObject.extend({
   }),
 
   init() {
-    let { config, selectedDate, selectedView, selectedDuration, moment }
-      = this.getProperties(['config', 'selectedDate', 'selectedView', 'selectedDuration', 'moment']);
+    let { config, selectedDate, selectedView, selectedDuration, moment } = this;
 
     assert('config is required', isPresent(config));
     assert('selected date is required', isPresent(selectedDate));
@@ -86,8 +85,7 @@ export default EmberObject.extend({
 
   // Events manipulation
   addEvents(events = []) {
-    let { events: _events, moment }
-      = this.getProperties(['events', 'moment']);
+    let { events: _events, moment } = this;
     events.forEach((event) => {
       let eventObj = buildCalendarEvent(event, this, moment)
       _events.set(getCustomEventId(event.id), eventObj);
@@ -97,7 +95,7 @@ export default EmberObject.extend({
   updateEvent(event) {
     let _events = this.events;
     let eventId = getCustomEventId(event.id);
-    let eventObj = _events.get(eventId);
+    let eventObj = _events.eventId;
     if (eventObj) {
       let { startTime, endTime, resourceId } = event;
       eventObj.setProperties({ startTime, endTime, resourceId });
@@ -111,7 +109,7 @@ export default EmberObject.extend({
   findEvent(id) {
     let _events = this.events;
     let eventId = getCustomEventId(id);
-    return _events.get(eventId);
+    return _events.eventId;
   },
 
   removeEvent(id) {

@@ -17,8 +17,7 @@ export default Component.extend({
     return _maxDate && this.selectedDate.isSameOrAfter(_maxDate, 'day');
   }),
   currentPeriod: computed('selectedDate', 'viewType', function() {
-    let { selectedDate, dateFormat, slotConfig }
-      = this.getProperties(['selectedDate', 'dateFormat', 'slotConfig']);
+    let { selectedDate, dateFormat, slotConfig } = this;
     return getCalendarPeriod(selectedDate, dateFormat, slotConfig);
   }),
   actions: {

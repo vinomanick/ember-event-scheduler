@@ -17,8 +17,7 @@ export default Component.extend({
     this._super(...arguments);
     this.intl.setLocale(['en-us']);
     let { config, selectedDate, selectedView, selectedDuration, isExternalEventsExpanded, moment }
-      = this.getProperties(['config', 'selectedDate', 'selectedView',
-      'selectedDuration', 'isExternalEventsExpanded', 'moment']);
+      = this;
 
     let schedulerInst = EventScheduler.create({
       config,
