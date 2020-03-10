@@ -8,18 +8,18 @@
 {{/if}}
 
 <section class="main-content">
-  <div class="es-container" data-test-es='es-container'>
-    {{yield (hash toolbar = (component 'event-scheduler/toolbar'
+  <div class="es-container" data-test-es="es-container">
+    {{yield (hash toolbar = (component "event-scheduler/toolbar"
       calendarInst=calendarInst
       onCalendarRefresh=onCalendarRefresh
     ))}}
     <div class="es-calendar-container">
-    {{yield (hash
-      calendar=(component "event-scheduler/calendar"
-        calendarInst=calendarInst
-        onEventDrop=(action "updateExternalEventAndBubble")
-        onCalendarRefresh=onCalendarRefresh
-        ))}}
+      {{yield (hash
+        calendar=(component "event-scheduler/calendar"
+          calendarInst=calendarInst
+          onEventDrop=(action "updateExternalEventAndBubble")
+          onCalendarRefresh=onCalendarRefresh
+          ))}}
     </div>
   </div>
 </section>

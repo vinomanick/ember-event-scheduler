@@ -1,25 +1,25 @@
-{{yield (hash left = (component 'event-scheduler/toolbar/wrappers/left-panel'
+{{yield (hash left = (component "event-scheduler/toolbar/wrappers/left-panel"
   selectedDate=selectedDate
   viewType=viewType
   showExternalEventsToggle=toolbarConfig.showExternalEventsToggle
   isExternalEventsExpanded=calendarInst.isExternalEventsExpanded
-  onDateChange=(action 'updateDateAndRefresh')
-  onExternalEventsToggle=(action 'updateEventsToggleState')
+  onDateChange=(action "updateDateAndRefresh")
+  onExternalEventsToggle=(action "updateEventsToggleState")
   ))}}
 
-{{yield (hash center = (component 'event-scheduler/toolbar/wrappers/center-panel'
+{{yield (hash center = (component "event-scheduler/toolbar/wrappers/center-panel"
   selectedDate=selectedDate
   viewType=viewType
   slotConfig=calendarInst.slotConfig
   dateFormat=toolbarConfig.dateFormat
-  onDateChange=(action 'updateDateAndRefresh')
+  onDateChange=(action "updateDateAndRefresh")
   ))}}
 
-{{yield (hash right = (component 'event-scheduler/toolbar/wrappers/right-panel'
+{{yield (hash right = (component "event-scheduler/toolbar/wrappers/right-panel"
   selectedDuration=selectedDuration
   selectedView=selectedView
   durationConfig=toolbarConfig.duration
   views=calendarInst.config.views
-  onDurationChange=(action 'updateDuration')
-  onViewChange=(action 'updateViewAndRefresh')
+  onDurationChange=(action "updateDuration")
+  onViewChange=(action "updateViewAndRefresh")
   ))}}

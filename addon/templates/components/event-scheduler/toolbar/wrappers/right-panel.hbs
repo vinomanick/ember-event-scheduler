@@ -2,14 +2,14 @@
   {{yield}}
 {{else}}
   <div class="event-duration" data-test-es="event-duration">
-    <div class="muted mr-8">{{t 'duration'}}</div>
+    <div class="muted mr-8">{{t "duration"}}</div>
     {{#power-select
       searchEnabled=false
       selected=selectedDuration
       options=durationConfig.options
       onchange=(action "changeEventDuration")
       as |duration| }}
-      {{t (concat 'time.' duration.format) count=duration.value }}
+      {{t (concat "time." duration.format) count=duration.value }}
     {{/power-select}}
   </div>
   {{#if (gt viewsList.length 1)}}
@@ -20,7 +20,7 @@
         options=viewsList
         onchange=(action "changeView")
         as |view| }}
-        {{t (get (get views view) 'label')}}
+        {{t (get (get views view) "label")}}
       {{/power-select}}
     </div>
   {{/if}}

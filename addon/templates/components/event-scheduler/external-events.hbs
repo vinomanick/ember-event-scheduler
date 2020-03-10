@@ -1,5 +1,5 @@
-{{yield (hash header = (component 'event-scheduler/external-events/wrappers/header'))}}
-<div class="external-events__content"
+{{yield (hash header = (component "event-scheduler/external-events/wrappers/header"))}}
+<div class="external-events__content" role="rowgroup"
   ondragStart={{action "dragStarted"}}
   ondragEnd={{action "dragEnded"}}>
   {{#each-in events as |eventId eventObj| }}
@@ -8,8 +8,8 @@
     {{/if}}
   {{else}}
     {{#unless externalEventsInst.isLoading}}
-      {{yield (hash empty = (component 'event-scheduler/external-events/wrappers/empty'
-        message='No events to display'))}}
+      {{yield (hash empty = (component "event-scheduler/external-events/wrappers/empty"
+        message="No events to display"))}}
     {{/unless}}
   {{/each-in}}
   {{#if externalEventsInst.isLoading}}
@@ -17,7 +17,7 @@
   {{/if}}
   {{#if externalEventsInst.isAllLoaded}}
     <div class="end-of-list">
-      {{t 'all_loaded' type='events'}}
+      {{t "all_loaded" type="events"}}
     </div>
   {{/if}}
 </div>

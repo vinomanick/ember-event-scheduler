@@ -3,19 +3,20 @@
   selectedDuration=selectedDuration
   selectedDate=selectedDate
   isExternalEventsExpanded=true
-  onSchedulerLoad=(action 'loadScheduler')
-  onEventDrop=(action 'updateEventTicket')
-  onCalendarRefresh=(action 'updateCalendar')
+  onSchedulerLoad=(action "loadScheduler")
+  onEventDrop=(action "updateEventTicket")
+  onCalendarRefresh=(action "updateCalendar")
   as |scheduler|}}
 
   {{#scheduler.toolbar as |toolbar|}}
-      {{toolbar.left}}
-      {{toolbar.right}}
-      {{toolbar.center}}
+    {{toolbar.left}}
+    {{toolbar.right}}
+    {{toolbar.center}}
   {{/scheduler.toolbar}}
+
   {{#scheduler.calendar
     as |calendar|}}
-    {{calendar.resourceHeader name='Field technicians'}}
+    {{calendar.resourceHeader name="Field technicians"}}
     {{calendar.gridHeader}}
 
     {{calendar.empty}}

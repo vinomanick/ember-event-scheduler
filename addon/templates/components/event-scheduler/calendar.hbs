@@ -1,16 +1,16 @@
 <div class="calendar__header">
   <div class="calendar__row">
-    {{yield (hash resourceHeader = (component 'event-scheduler/calendar/wrappers/resource-header'))}}
-    {{yield (hash gridHeader = (component 'event-scheduler/calendar/wrappers/grid-header'
+    {{yield (hash resourceHeader = (component "event-scheduler/calendar/wrappers/resource-header"))}}
+    {{yield (hash gridHeader = (component "event-scheduler/calendar/wrappers/grid-header"
       slots=calendarInst.slots
       viewType=viewType
       selectedDate=selectedDate
       slotFormat=calendarInst.slotFormat
-      onDateViewChange=(action 'changeDateView')
+      onDateViewChange=(action "changeDateView")
       ))}}
   </div>
 </div>
-<div class="calendar__content"
+<div class="calendar__content" role="rowgroup"
   ondrop={{action "droppedEvent"}}
   ondragOver={{action "draggedOver"}}
   ondragLeave={{action "draggedAway"}}>
@@ -23,7 +23,7 @@
   {{else}}
     {{#unless calendarInst.isLoading}}
       {{yield (hash empty = (component "event-scheduler/calendar/wrappers/empty"
-        message='No resources to display'))}}
+        message="No resources to display"))}}
     {{/unless}}
   {{/each}}
   {{#if calendarInst.isLoading}}
@@ -36,13 +36,13 @@
       event=eventObj
       viewType=viewType
       draggable=calendarInst.isEventsDraggable}}
-    {{/if}}
+  {{/if}}
 {{/each-in}}
 
 {{#if displayTimeFieldDialog}}
   {{event-scheduler/calendar/time-field-dialog
     timeFieldChoices=timeFieldChoices
-    onStartTimeUpdate=(action 'updateStartTime' displayTimeFieldDialog)
+    onStartTimeUpdate=(action "updateStartTime" displayTimeFieldDialog)
     onClose=(action (mut displayTimeFieldDialog false))
     }}
 {{/if}}

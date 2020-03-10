@@ -15,13 +15,13 @@
   {{else}}
     {{#each slots as |slot columnIndex|}}
       <div class="calendar__row__slot" style={{grid-position 1 0 1 columnIndex 1 1}}>
-        <div class="text--semi-bold">{{moment-format slot 'dddd'}}</div>
+        <div class="text--semi-bold">{{moment-format slot "dddd"}}</div>
         <button {{action "navigate" slot}}
-          data-test-es={{moment-format slot 'DD-MM-YYYY'}}
+          data-test-es={{moment-format slot "DD-MM-YYYY"}}
           class="btn es-day-number
-          {{if (is-same slot today precision='day') 'es-day-number--today'}}
-          {{if (is-same slot selectedDate precision='day') 'es-day-number--selected'}}">
-          {{moment-format slot 'DD'}}
+          {{if (is-same slot today precision="day") "es-day-number--today"}}
+          {{if (is-same slot selectedDate precision="day") "es-day-number--selected"}}">
+          {{moment-format slot "DD"}}
         </button>
       </div>
     {{/each}}

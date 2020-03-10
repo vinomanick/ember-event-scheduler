@@ -1,6 +1,6 @@
 {{#event-scheduler/ui-components/modal-dialog as |dialog|}}
   {{#dialog.header}}
-    <h4 class="form-dialog mb-10">Set appointment start time</h4>
+    <h4 class="form-dialog mb-10">{{t "time_field_dialog.title"}}</h4>
   {{/dialog.header}}
   {{#dialog.body}}
     {{#power-select
@@ -14,11 +14,11 @@
   {{/dialog.body}}
   {{#dialog.footer}}
     <div class="text--align-right">
-      <button aria-label="cancel" class="btn btn--secondary" data-test-id="cancel-start-time" {{action "onCancel"}}>
-        Cancel
+      <button aria-label={{t "cancel"}} class="btn btn--secondary" data-test-id="cancel-start-time" {{action "onCancel"}}>
+        {{t "cancel"}}
       </button>
-      <button aria-label="continue" class="btn btn--primary" data-test-id="update-start-time" {{action "onUpdate"}}>
-        Continue
+      <button aria-label={{t "continue"}} class="btn btn--primary" data-test-id="update-start-time" {{action "onUpdate"}}>
+        {{t "continue"}}
       </button>
     </div>
   {{/dialog.footer}}
