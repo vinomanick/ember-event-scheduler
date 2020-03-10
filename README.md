@@ -1,21 +1,24 @@
-<<<<<<< HEAD
 # ember-event-scheduler
-=======
-my-addon
-==============================================================================
->>>>>>> d21a913... v2.18.2...v3.0.4
 
 [Short description of the addon.]
+
+
+Compatibility
+------------------------------------------------------------------------------
+
+* Ember.js v3.4 or above
+* Ember CLI v2.13 or above
+* Node.js v8 or above
+
 
 Installation
 ------------------------------------------------------------------------------
 
-<<<<<<< HEAD
 * `git clone <repository-url>` this repository
 * `cd ember-event-scheduler`
-=======
+
 ```
-ember install my-addon
+ember install ember-event-scheduler
 ```
 
 
@@ -32,7 +35,6 @@ Contributing
 
 * `git clone <repository-url>`
 * `cd my-addon`
->>>>>>> d21a913... v2.18.2...v3.0.4
 * `npm install`
 
 ### Linting
@@ -51,7 +53,7 @@ Contributing
 * `ember serve`
 * Visit the dummy application at [http://localhost:4200](http://localhost:4200).
 
-For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
+See the [Contributing](CONTRIBUTING.md) guide for details.
 
 License
 ------------------------------------------------------------------------------
