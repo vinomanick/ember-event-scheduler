@@ -2,7 +2,10 @@ import Component from '@ember/component';
 import layout from '../../../../templates/components/event-scheduler/calendar/wrappers/event';
 import { computed } from '@ember/object';
 import { VIEWS } from '../../../../constants/event-scheduler';
-import { getEventPeriodDayView, getEventPeriodCompact } from '../../../../utils/event-scheduler';
+import {
+  getEventPeriodDayView,
+  getEventPeriodCompact
+} from '../../../../utils/event-scheduler';
 import { inject as service } from '@ember/service';
 
 export default Component.extend({

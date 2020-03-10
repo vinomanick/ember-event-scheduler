@@ -11,7 +11,10 @@ import {
   buildEventTime,
   getResourceId
 } from '../../utils/event-drop';
-import { getDurationInFormat, getTimeDropdownChoices } from '../../utils/date-util';
+import {
+  getDurationInFormat,
+  getTimeDropdownChoices
+} from '../../utils/date-util';
 
 export default Component.extend({
   moment: service(),

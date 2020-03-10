@@ -1,5 +1,9 @@
 import { VIEWS } from '../constants/event-scheduler';
-import { getDurationInFormat, addDuration, overrideTime } from './date-util';
+import {
+  getDurationInFormat,
+  addDuration,
+  overrideTime
+} from './date-util';
 
 const _getSlotInfo = (resourceElement) => {
   if (resourceElement) {

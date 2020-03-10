@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import layout from '../../../../templates/components/event-scheduler/toolbar/wrappers/center-panel';
-import {  computed } from '@ember/object';
+import { computed } from '@ember/object';
 import { getCalendarPeriod } from '../../../../utils/event-scheduler';
 import { inject as service } from '@ember/service';
 

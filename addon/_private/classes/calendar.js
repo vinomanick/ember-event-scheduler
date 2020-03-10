@@ -4,7 +4,11 @@ import { assert } from '@ember/debug';
 import { isPresent } from '@ember/utils';
 import { run } from '@ember/runloop';
 import { VIEWS } from '../../constants/event-scheduler';
-import { getSlots, getCustomEventId, buildCalendarEvent } from '../../utils/event-scheduler';
+import {
+  getSlots,
+  getCustomEventId,
+  buildCalendarEvent
+} from '../../utils/event-scheduler';
 import { A } from '@ember/array';
 // import { inject as service } from '@ember/service';
 

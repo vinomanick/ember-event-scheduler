@@ -1,4 +1,7 @@
-import EmberObject, { computed, setProperties } from '@ember/object';
+import EmberObject, {
+  computed,
+  setProperties
+} from '@ember/object';
 import { getCustomEventId } from '../../utils/event-scheduler';
 
 export default EmberObject.extend({
