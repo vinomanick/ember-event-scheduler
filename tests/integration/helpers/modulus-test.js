@@ -12,6 +12,6 @@ module('helper:modulus', function(hooks) {
 
     await render(hbs`{{modulus inputValue}}`);
 
-    assert.equal(find('*').textContent.trim(), '1234');
+    assert.dom('*').hasText('1234');
   });
 });

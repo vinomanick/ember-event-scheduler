@@ -12,7 +12,7 @@ module('Integration | Component | event scheduler/toolbar/wrappers/left panel', 
 
     await render(hbs`{{event-scheduler/toolbar/wrappers/left-panel}}`);
 
-    assert.equal(find('*').textContent.trim(), '');
+    assert.dom('*').hasText('');
 
     // Template block usage:
     await render(hbs`
@@ -21,6 +21,6 @@ module('Integration | Component | event scheduler/toolbar/wrappers/left panel', 
       {{/event-scheduler/toolbar/wrappers/left-panel}}
     `);
 
-    assert.equal(find('*').textContent.trim(), 'template block text');
+    assert.dom('*').hasText('template block text');
   });
 });

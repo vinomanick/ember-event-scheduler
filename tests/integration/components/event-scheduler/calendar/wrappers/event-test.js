@@ -12,7 +12,7 @@ module('Integration | Component | event scheduler/calendar/wrappers/event', func
 
     await render(hbs`{{event-scheduler/calendar/wrappers/event}}`);
 
-    assert.equal(find('*').textContent.trim(), '');
+    assert.dom('*').hasText('');
 
     // Template block usage:
     await render(hbs`
@@ -21,6 +21,6 @@ module('Integration | Component | event scheduler/calendar/wrappers/event', func
       {{/event-scheduler/calendar/wrappers/event}}
     `);
 
-    assert.equal(find('*').textContent.trim(), 'template block text');
+    assert.dom('*').hasText('template block text');
   });
 });

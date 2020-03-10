@@ -12,7 +12,7 @@ module('Integration | Component | event scheduler/ui components/blank template',
 
     await render(hbs`{{event-scheduler/ui-components/blank-template}}`);
 
-    assert.equal(find('*').textContent.trim(), '');
+    assert.dom('*').hasText('');
 
     // Template block usage:
     await render(hbs`
@@ -21,6 +21,6 @@ module('Integration | Component | event scheduler/ui components/blank template',
       {{/event-scheduler/ui-components/blank-template}}
     `);
 
-    assert.equal(find('*').textContent.trim(), 'template block text');
+    assert.dom('*').hasText('template block text');
   });
 });

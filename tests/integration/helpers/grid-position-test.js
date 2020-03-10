@@ -12,6 +12,6 @@ module('helper:grid-position', function(hooks) {
 
     await render(hbs`{{grid-position inputValue}}`);
 
-    assert.equal(find('*').textContent.trim(), '1234');
+    assert.dom('*').hasText('1234');
   });
 });
