@@ -95,7 +95,7 @@ export default EmberObject.extend({
   updateEvent(event) {
     let _events = this.events;
     let eventId = getCustomEventId(event.id);
-    let eventObj = _events.eventId;
+    let eventObj = _events[eventId];
     if (eventObj) {
       let { startTime, endTime, resourceId } = event;
       eventObj.setProperties({ startTime, endTime, resourceId });
@@ -109,7 +109,7 @@ export default EmberObject.extend({
   findEvent(id) {
     let _events = this.events;
     let eventId = getCustomEventId(id);
-    return _events.eventId;
+    return _events[eventId];
   },
 
   removeEvent(id) {
