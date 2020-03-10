@@ -20,7 +20,7 @@ export default Component.extend({
       = this.getProperties(['config', 'selectedDate', 'selectedView',
       'selectedDuration', 'isExternalEventsExpanded', 'moment']);
 
-    let schedulerInst = new EventScheduler({
+    let schedulerInst = EventScheduler.create({
       config,
       selectedDate,
       selectedView,
