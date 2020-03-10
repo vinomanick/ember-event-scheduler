@@ -1,7 +1,6 @@
 import Component from '@ember/component';
 import layout from '../../../../../templates/components/event-scheduler/calendar/wrappers/event/event-card';
 import { reads } from '@ember/object/computed';
-import { get, set, getProperties } from '@ember/object';
 
 export default Component.extend({
   layout,
@@ -15,15 +14,15 @@ export default Component.extend({
     if (this.draggable) {
       let offset = 4;
       let schedulerEvent = this.event;
-      let { id, startTime, endTime, title } = getProperties(schedulerEvent, ['id', 'startTime', 'endTime', 'title']);
+      let { id, startTime, endTime, title } = schedulerEvent;
       let data = { id, startTime, endTime, offset, title };
-      set(this, 'dragState', 'dragged');
+      this.dragState = 'dragged';
       event.dataTransfer.setData('text/data', JSON.stringify(data));
       event.dataTransfer.effectAllowed = 'move';
       event.dataTransfer.setDragImage(event.target, offset, offset);
     }
   },
   dragEnd() {
-    set(this, 'dragState', undefined);
+    this.dragState = null;
   }
 });

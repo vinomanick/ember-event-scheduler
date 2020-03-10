@@ -9,10 +9,8 @@ duration: 'Duration'
 day: 'Day'
 week: 'Week'
 month: 'Month'
-
 time_field_dialog:
-  title": "Set appointment start time"
-
+  title: 'Set appointment start time'
 all_loaded: 'No more {type} to load'
 time:
   minute: '{count, plural, =1 {1 minute} other {# minutes}}'

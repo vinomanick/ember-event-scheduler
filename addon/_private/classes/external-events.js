@@ -38,7 +38,7 @@ export default EmberObject.extend({
   findEvent(id) {
     let _events = this.events;
     let eventId = getCustomEventId(id);
-    return _events.eventId;
+    return _events[eventId];
   },
 
   deleteAllEvents() {
