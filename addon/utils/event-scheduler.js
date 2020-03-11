@@ -10,6 +10,11 @@ const getCustomEventId = (id) => {
   return `event_${id}`;
 };
 
+const getEventMandates = (event) => {
+  let { startTime, endTime, resourceId } = event;
+  return { startTime, endTime, resourceId }
+};
+
 const buildCalendarEvent = (event, calendarInst, moment) => {
   let { id, startTime, endTime, resourceId, title } = event;
   let eventObj = CalendarEvent.create({
@@ -114,5 +119,6 @@ const getTimerPos = (durationInMins, slotConfig) => {
 };
 
 export { getSlots, buildCalendarEvent, getTimerPos,
+  getEventMandates,
   getCalendarPeriod, getExternalEventPeriod, getEventPeriodDayView, getEventPeriodCompact,
   getCustomResourceId, getCustomEventId };

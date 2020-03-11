@@ -5,6 +5,7 @@ import { isPresent } from '@ember/utils';
 // import { inject as service } from '@ember/service';
 import moment from 'moment';
 import { htmlSafe } from '@ember/template';
+import { getEventMandates } from '../../utils/event-scheduler';
 
 export default EmberObject.extend({
   // moment: service(),
@@ -56,5 +57,20 @@ export default EmberObject.extend({
     let timeDifference = this.moment.moment(time).diff(_selectedDate);
     let timeDuration = moment.duration(timeDifference).as(format);
     return (timeDuration / value) + 1;
+  },
+
+  updateEvent({ startTime, endTime, resourceId }) {
+    let _prevData = getEventMandates(this);
+    this.setProperties({ startTime, endTime, resourceId, _prevData });
+  },
+
+  revertEvent() {
+    let _prevData = this._prevData;
+    if (_prevData) {
+      let { startTime, endTime, resourceId } = _prevData;
+      this.setProperties({ startTime, endTime, resourceId, _prevData: null });
+      return true;
+    }
+    return false;
   }
 });

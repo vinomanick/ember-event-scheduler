@@ -93,38 +93,48 @@ export default EmberObject.extend({
   },
 
   updateEvent(event) {
-    let _events = this.events;
-    let eventId = getCustomEventId(event.id);
-    let eventObj = _events[eventId];
+    let eventObj = this.findEvent(event.id);
     if (eventObj) {
-      let { startTime, endTime, resourceId } = event;
-      eventObj.setProperties({ startTime, endTime, resourceId });
-      _events.set(eventId, undefined);
-      run.next(() => _events.set(eventId, eventObj))
+      eventObj.updateEvent(event);
+      this._updateEventsObj(eventObj)
     } else {
       this.addEvents([event]);
     }
   },
 
-  findEvent(id) {
+  revertEventUpdate(id) {
+    let event = this.findEvent(id);
+    if (event) {
+      event.revertEvent() ? this._updateEventsObj(event) : this.removeEvent(id);
+    }
+  },
+
+  // Doing this so that the previous wormhole is destroyed and recreated
+  _updateEventsObj(event) {
+    let eventId = getCustomEventId(event.id);
     let _events = this.events;
+    _events.set(eventId, undefined);
+    run.next(() => _events.set(eventId, event))
+  },
+
+  findEvent(id) {
     let eventId = getCustomEventId(id);
-    return _events[eventId];
+    return this.events.get(eventId);
   },
 
   removeEvent(id) {
-    let _events = this.events;
-    let eventId = getCustomEventId(id);
-    let eventObj = _events[eventId];
-    if (eventObj) {
-      eventObj.destroy();
-      _events.set(eventId, undefined);
+    let event = this.findEvent(id);
+    if (event) {
+      let eventId = getCustomEventId(id);
+      event.destroy();
+      this.events.set(eventId, undefined); // This will trigger the observers/computed properties
+      delete this.events[eventId]; // This will delete the property from the object
     }
   },
 
   deleteAllEvents() {
     let _events = this.events;
-    Object.values(_events).forEach((eventObj) => eventObj.destroy());
+    Object.values(_events).forEach((eventObj) => eventObj && eventObj.destroy());
     this.set('events', EmberObject.create());
   },
 
