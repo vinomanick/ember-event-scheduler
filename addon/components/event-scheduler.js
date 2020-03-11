@@ -16,6 +16,8 @@ export default Component.extend({
   init() {
     this._super(...arguments);
     this.intl.setLocale(['en-us']);
+    this.moment.setTimeZone('America/Santiago');
+
     let { config, selectedDate, selectedView, selectedDuration, isExternalEventsExpanded, moment }
       = this;
 

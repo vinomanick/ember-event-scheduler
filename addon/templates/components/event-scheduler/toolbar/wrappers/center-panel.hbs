@@ -12,6 +12,8 @@
         {{#power-calendar
             class="es-calendar-picker"
             selected=selectedDate
+            center=center
+            onCenterChange=(action (mut center) value="date")
             onSelect=(action "selectDate" dropdown) as |calendar|}}
           {{calendar.nav}}
           {{calendar.days}}
