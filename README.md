@@ -1,6 +1,6 @@
 # ember-event-scheduler
 
-[Short description of the addon.]
+Easily drag and drop events to assign it to an resource on a calendar
 
 
 Compatibility
