@@ -1,5 +1,16 @@
+@import "ember-power-select";
+@import "ember-power-calendar";
+
+.es-calendar-picker {
+  @include ember-power-calendar($cell-size: 30px);
+}
+
 :root {
   --brand-primary: #424379;
+}
+
+svg {
+  display: inline;
 }
 
 .hero-image {

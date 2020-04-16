@@ -7,8 +7,12 @@ const Router = AddonDocsRouter.extend({
 });
 
 Router.map(function() {
+  this.route('demo');
   docsRoute(this, function() {
     this.route('usage');
+    this.route("components", function() {
+      this.route("event-scheduler");
+    });
   });
   this.route('not-found', { path: '/*path' });
 });

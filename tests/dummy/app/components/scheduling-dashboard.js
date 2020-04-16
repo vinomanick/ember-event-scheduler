@@ -95,8 +95,8 @@ export default Component.extend({
     updateEventTicket(updatedEvent) {
       // eslint-disable-next-line no-console
       console.log('Update event called', updatedEvent);
-      let calendar = this.calendarInst;
-      run.later(() => calendar.revertEventUpdate(updatedEvent.id), 2000);
+      // let calendar = this.calendarInst;
+      // run.later(() => calendar.revertEventUpdate(updatedEvent.id), 2000);
     },
 
     updateCalendar() {
