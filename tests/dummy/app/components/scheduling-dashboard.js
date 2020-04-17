@@ -4,21 +4,70 @@ import { config } from '../constants/scheduling-dashboard';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { run } from '@ember/runloop';
-import { buildResources, buildEvents } from '../utils/entity-builder';
 
-// const externalEventsData = [
-//   { id: '11', resourceId: '103', title: 'Second service task for Sengo', startTime: null, endTime: null },
-//   { id: '12', resourceId: '101', title: 'Fifth service task for Puneet', startTime: null, endTime: null },
-//   { id: '13', resourceId: '101', title: 'Sixth service task for Puneet', startTime: null, endTime: null },
-//   { id: '4', resourceId: '102', title: 'First service task for Balaji',  startTime: "2020-03-03T12:00:00+05:30", endTime: "2020-03-03T13:00:00+05:30" },
-//   { id: '5', resourceId: '102', title: 'Second service task for Balaji',  startTime: "2020-03-06T15:00:00+05:30", endTime: "2020-03-06T18:00:00+05:30" },
-//   { id: '6', resourceId: '103', title: 'First service task for Sengo', startTime: "2020-03-06T12:00:00+05:30", endTime: "2020-03-06T13:00:00+05:30" },
-//   { id: '7', resourceId: '104', title: 'First service task for Deepak', startTime: "2020-03-06T10:00:00+05:30", endTime: "2020-03-06T10:30:00+05:30" },
-//   { id: '8', resourceId: '106', title: 'First service task for Supraja', startTime: "2020-03-06T10:30:00+05:30", endTime: "2020-03-06T12:00:00+05:30"  },
-//   { id: '9', resourceId: '101', title: 'Fourth service task for Puneet', startTime: "2020-03-06T08:00:00+05:30", endTime: "2020-03-06T08:30:00+05:30" },
-//   { id: '10', resourceId: '101', title: 'Fifth service task for Puneet', startTime: "2020-03-06T09:00:00+05:30", endTime: "2020-03-06T09:30:00+05:30" },
-//   { id: '3', resourceId: '101', title: 'Third service task for Puneet', startTime: "2020-03-06T15:00:00+05:30", endTime: "2020-03-06T16:00:00+05:30" },
-// ];
+// const resources = {
+//   100: { id: 100, name: 'vino'},
+//   101: { id: 101, name: 'Ram'},
+//   102: { id: 102, name: 'Sri'},
+//   103: { id: 103, name: 'Dinesh'},
+//   104: { id: 104, name: 'Preeti'},
+//   105: { id: 105, name: 'Swathi'},
+//   106: { id: 106, name: 'Chira'},
+//   107: { id: 107, name: 'Ramya'},
+//   108: { id: 108, name: 'Selvi'},
+//   109: { id: 109, name: 'Manickam'},
+//   110: { id: 110, name: 'Venki'},
+//   111: { id: 111, name: 'Puneet'},
+//   112: { id: 112, name: 'Sengo'},
+//   113: { id: 113, name: 'Vignesh'},
+//   114: { id: 114, name: 'Deepak'},
+//   115: { id: 115, name: 'Harish'}
+// };
+
+const resources = [
+  { id: 100, name: 'vino'},
+  { id: 101, name: 'Ram'},
+  { id: 102, name: 'Sri'},
+  { id: 103, name: 'Dinesh'},
+  { id: 104, name: 'Preeti'},
+  { id: 105, name: 'Swathi'},
+  { id: 106, name: 'Chira'},
+  { id: 107, name: 'Ramya'},
+  { id: 108, name: 'Selvi'},
+  { id: 109, name: 'Manickam'},
+  { id: 110, name: 'Venki'},
+  { id: 111, name: 'Puneet'},
+  { id: 112, name: 'Sengo'},
+  { id: 113, name: 'Vignesh'},
+  { id: 114, name: 'Deepak'},
+  { id: 115, name: 'Harish'}
+];
+
+const events = [
+  { id: '1', resourceId: '101', title: 'First service task for Puneet', startTime: "2020-03-06T10:00:00+05:30", endTime: "2020-03-06T11:00:00+05:30" },
+  { id: '2', resourceId: '101', title: 'Second service task for Puneet', startTime: "2020-03-05T10:30:00+05:30", endTime: "2020-03-05T12:00:00+05:30"  },
+  { id: '4', resourceId: '102', title: 'First service task for Balaji',  startTime: "2020-03-03T12:00:00+05:30", endTime: "2020-03-03T13:00:00+05:30" },
+  { id: '5', resourceId: '102', title: 'Second service task for Balaji',  startTime: "2020-03-06T15:00:00+05:30", endTime: "2020-03-06T18:00:00+05:30" },
+  { id: '6', resourceId: '103', title: 'First service task for Sengo', startTime: "2020-03-06T12:00:00+05:30", endTime: "2020-03-06T13:00:00+05:30" },
+  { id: '7', resourceId: '104', title: 'First service task for Deepak', startTime: "2020-03-06T10:00:00+05:30", endTime: "2020-03-06T10:30:00+05:30" },
+  { id: '8', resourceId: '106', title: 'First service task for Supraja', startTime: "2020-03-06T10:30:00+05:30", endTime: "2020-03-06T12:00:00+05:30"  },
+  { id: '9', resourceId: '101', title: 'Fourth service task for Puneet', startTime: "2020-03-06T08:00:00+05:30", endTime: "2020-03-06T08:30:00+05:30" },
+  { id: '10', resourceId: '101', title: 'Fifth service task for Puneet', startTime: "2020-03-06T09:00:00+05:30", endTime: "2020-03-06T09:30:00+05:30" },
+];
+
+const externalEventsData = [
+  { id: '11', resourceId: '103', title: 'Second service task for Sengo', startTime: null, endTime: null },
+  { id: '12', resourceId: '101', title: 'Fifth service task for Puneet', startTime: null, endTime: null },
+  { id: '13', resourceId: '101', title: 'Sixth service task for Puneet', startTime: null, endTime: null },
+  { id: '4', resourceId: '102', title: 'First service task for Balaji',  startTime: "2020-03-03T12:00:00+05:30", endTime: "2020-03-03T13:00:00+05:30" },
+  { id: '5', resourceId: '102', title: 'Second service task for Balaji',  startTime: "2020-03-06T15:00:00+05:30", endTime: "2020-03-06T18:00:00+05:30" },
+  { id: '6', resourceId: '103', title: 'First service task for Sengo', startTime: "2020-03-06T12:00:00+05:30", endTime: "2020-03-06T13:00:00+05:30" },
+  { id: '7', resourceId: '104', title: 'First service task for Deepak', startTime: "2020-03-06T10:00:00+05:30", endTime: "2020-03-06T10:30:00+05:30" },
+  { id: '8', resourceId: '106', title: 'First service task for Supraja', startTime: "2020-03-06T10:30:00+05:30", endTime: "2020-03-06T12:00:00+05:30"  },
+  { id: '9', resourceId: '101', title: 'Fourth service task for Puneet', startTime: "2020-03-06T08:00:00+05:30", endTime: "2020-03-06T08:30:00+05:30" },
+  { id: '10', resourceId: '101', title: 'Fifth service task for Puneet', startTime: "2020-03-06T09:00:00+05:30", endTime: "2020-03-06T09:30:00+05:30" },
+  { id: '3', resourceId: '101', title: 'Third service task for Puneet', startTime: "2020-03-06T15:00:00+05:30", endTime: "2020-03-06T16:00:00+05:30" },
+];
 
 export default Component.extend({
   moment: service(),
@@ -34,14 +83,6 @@ export default Component.extend({
   selectedDuration: computed(function() {
     return { value: 90, format: 'minute' };
   }),
-
-  init() {
-    this._super(...arguments);
-    this.resources = buildResources(10);
-    this.events = buildEvents(10);
-    this.externalEventsData = [...this.events.slice(0, 5), ...buildEvents(5, 11, false)];
-    console.log(this.externalEventsData);
-  },
 
   actions: {
     loadScheduler(scheduler){
@@ -62,8 +103,8 @@ export default Component.extend({
       let calendar = this.calendarInst;
       run.later(() => {
         calendar.set('isLoading', false);
-        calendar.addResources(this.resources);
-        calendar.addEvents(this.events);
+        calendar.addResources(resources);
+        calendar.addEvents(events);
       }, 1000);
 
     }
@@ -74,10 +115,10 @@ export default Component.extend({
     let externalEvents = this.externalEventsInst;
     run.later(() => {
       calendar.set('isLoading', false);
-      calendar.addResources(this.resources);
-      calendar.addEvents(this.events);
+      calendar.addResources(resources);
+      calendar.addEvents(events);
       externalEvents.set('isLoading', false);
-      externalEvents.addEvents(this.externalEventsData);
+      externalEvents.addEvents(externalEventsData);
       externalEvents.set('isAllLoaded', true);
     }, 1000);
   }
