@@ -1,6 +1,7 @@
 .event-scheduler {
   display: flex;
   background: $bg-app;
+  min-width: 900px;
 
   .es-app-overlays {
     .modal-wrapper {
@@ -40,6 +41,9 @@
     position: relative;
     flex: 1;
     border-right: solid 1px $border-primary;
+    margin: 0;
+    padding: 0;
+    background: inherit;
   }
 
   .main-content {
