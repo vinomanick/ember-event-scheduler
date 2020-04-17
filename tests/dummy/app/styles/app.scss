@@ -20,6 +20,8 @@ svg {
   padding: 2rem;
 }
 
-.scheduling-dashboard {
-  overflow: scroll;
+.overflow {
+  &--scroll {
+    overflow: scroll;
+  }
 }

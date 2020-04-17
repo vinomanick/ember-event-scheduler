@@ -6,4 +6,4 @@ It makes use of all the latest technologies and ember plugins like CSS Grid, emb
 
 ## Usage
 
-{{scheduling-dashboard}}
+{{demo-1}}

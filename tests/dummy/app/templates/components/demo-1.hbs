@@ -1,13 +1,7 @@
-{{#event-scheduler options=config
-  selectedView=selectedView
-  selectedDuration=selectedDuration
-  selectedDate=selectedDate
-  isExternalEventsExpanded=true
-  onSchedulerLoad=(action "loadScheduler")
-  onEventDrop=(action "updateEventTicket")
-  onCalendarRefresh=(action "updateCalendar")
+{{#event-scheduler options=options
+  onSchedulerLoad=(action "onSchedulerLoad")
+  onCalendarRefresh=(action "onCalendarRefresh")
   as |scheduler|}}
-
   {{#scheduler.toolbar as |toolbar|}}
     {{toolbar.left}}
     {{toolbar.right}}
@@ -16,16 +10,14 @@
 
   {{#scheduler.calendar
     as |calendar|}}
-    {{calendar.resourceHeader name="Field technicians"}}
+    {{calendar.resourceHeader name="Resources"}}
     {{calendar.gridHeader}}
 
     {{calendar.empty}}
-
   {{/scheduler.calendar}}
 
-
   {{#scheduler.externalEvents as |externalEvents|}}
-    {{externalEvents.header name="Service tasks"}}
+    {{externalEvents.header name="Events"}}
 
     {{externalEvents.empty}}
   {{/scheduler.externalEvents}}
