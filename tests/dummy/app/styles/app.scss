@@ -25,3 +25,13 @@ svg {
     overflow: scroll;
   }
 }
+
+.hide-container {
+  .es-calendar-container {
+    display: none;
+  }
+}
+
+.text-color--salmon {
+  color: salmon;
+}

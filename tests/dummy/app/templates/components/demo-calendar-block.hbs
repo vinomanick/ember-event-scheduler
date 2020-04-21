@@ -1,0 +1,44 @@
+{{#docs-demo as |demo|}}
+  {{#demo.example name='docs-demo-calendar-block.hbs' class="overflow--scroll"}}
+    {{#event-scheduler options=options
+      selectedView='week'
+      onSchedulerLoad=(action "onSchedulerLoad")
+      onCalendarRefresh=(action "onCalendarRefresh")
+      as |scheduler|}}
+
+      {{#scheduler.toolbar as |toolbar|}}
+        {{toolbar.left}}
+        {{toolbar.right}}
+        {{toolbar.center}}
+      {{/scheduler.toolbar}}
+
+      {{#scheduler.calendar as |calendar|}}
+        {{#calendar.resourceHeader}}
+          <h4 class="text-color--salmon ">Custom Resource Name</h4>
+        {{/calendar.resourceHeader}}
+        {{#if (eq viewType 'day')}}
+          {{calendar.gridHeader}}
+        {{else}}
+          {{#calendar.gridHeader}}
+            {{#each slots as |slot columnIndex|}}
+              <div class="calendar__row__slot" style={{grid-position 1 0 1 columnIndex 1 1}}>
+                <div class="text--semi-bold">{{moment-format slot "dddd"}}</div>
+                <div class="text--semi-bold">{{moment-format slot "DD"}}</div>
+              </div>
+            {{/each}}
+          {{/calendar.gridHeader}}
+        {{/if}}
+        {{#calendar.empty}}
+          <div class="docs-p-4">
+            <div class="text-color--salmon">My custom resources are empty.</div>
+            <a href="#" class="docs-text-sm docs-italic">Add more resources</a>
+          </div>
+        {{/calendar.empty}}
+      {{/scheduler.calendar}}
+
+    {{/event-scheduler}}
+  {{/demo.example}}
+
+  {{demo.snippet 'docs-demo-calendar-block.hbs'}}
+  {{demo.snippet 'demo-calendar-block.js' label='component.js'}}
+{{/docs-demo}}

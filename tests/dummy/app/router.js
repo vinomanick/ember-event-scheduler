@@ -10,8 +10,14 @@ Router.map(function() {
   this.route('demo');
   docsRoute(this, function() {
     this.route('usage');
-    this.route("components", function() {
-      this.route("event-scheduler");
+    this.route('event-scheduler');
+    this.route('components', function() {
+      this.route('toolbar');
+      this.route('calendar');
+      this.route('external-events', function() {
+        this.route('header');
+        this.route('empty');
+      });
     });
   });
   this.route('not-found', { path: '/*path' });

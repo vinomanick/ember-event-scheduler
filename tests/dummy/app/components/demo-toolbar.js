@@ -1,3 +1,4 @@
+// BEGIN-SNIPPET demo-toolbar.js
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 
@@ -14,6 +15,9 @@ export default Component.extend({
     },
     onCalendarRefresh() {
       this.scheduler.calendar.set('isLoading', false);
+      let { selectedDate, selectedView } = this.scheduler.calendar;
+      alert(`Selected date - ${selectedDate.format('DD MMM YYYY')} Selected view - ${selectedView}`);
     }
   },
 });
+// END-SNIPPET

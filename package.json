@@ -1,7 +1,7 @@
 {
   "name": "ember-event-scheduler",
   "version": "0.0.0",
-  "description": "Powerful event scheduling calendar to view/manage appointments for multiple resources (people, projects, etc.)",
+  "description": "Powerful scheduler to view and manage the events for your resources",
   "keywords": [
     "ember-addon"
   ],

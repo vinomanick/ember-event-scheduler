@@ -1,0 +1,30 @@
+{{#docs-demo as |demo|}}
+  {{#demo.example name='docs-demo-event-scheduler.hbs' class="overflow--scroll"}}
+    {{#event-scheduler options=options
+      onSchedulerLoad=(action "onSchedulerLoad")
+      onCalendarRefresh=(action "onCalendarRefresh")
+      as |scheduler|}}
+
+      {{#scheduler.toolbar as |toolbar|}}
+        {{toolbar.left}}
+        {{toolbar.right}}
+        {{toolbar.center}}
+      {{/scheduler.toolbar}}
+
+      {{#scheduler.calendar as |calendar|}}
+        {{calendar.resourceHeader name="Resources"}}
+        {{calendar.gridHeader}}
+        {{calendar.empty}}
+      {{/scheduler.calendar}}
+
+      {{#scheduler.externalEvents as |externalEvents|}}
+        {{externalEvents.header name="Events"}}
+        {{externalEvents.empty}}
+      {{/scheduler.externalEvents}}
+
+    {{/event-scheduler}}
+  {{/demo.example}}
+
+  {{demo.snippet 'docs-demo-event-scheduler.hbs'}}
+  {{demo.snippet 'demo-event-scheduler.js' label='component.js'}}
+{{/docs-demo}}

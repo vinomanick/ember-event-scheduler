@@ -50,6 +50,7 @@ export default Component.extend({
   },
 
   onSchedulerLoad() {},
+  onCalendarRefresh() {},
   onEventDrop() {},
 
   actions: {

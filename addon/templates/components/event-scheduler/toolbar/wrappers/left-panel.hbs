@@ -9,34 +9,30 @@
   </button>
 {{/if}}
 
-{{#if hasBlock}}
-  {{yield}}
-{{else}}
-  {{#event-scheduler/ui-components/button-throttle data-test-id="today-btn" type="button"
-    onclick=(action "selectToday")
-    throttleSpeed=throttleTime
-    class="btn btn--secondary mr-8"
-    disabled=(is-same selectedDate today precision="day")
-    aria-label=(t "today")
-    }}
-    {{t "today"}}
-  {{/event-scheduler/ui-components/button-throttle}}
+{{#event-scheduler/ui-components/button-throttle data-test-id="today-btn" type="button"
+  onclick=(action "selectToday")
+  throttleSpeed=throttleTime
+  class="btn btn--secondary mr-8"
+  disabled=(is-same selectedDate today precision="day")
+  aria-label=(t "today")
+  }}
+  {{t "today"}}
+{{/event-scheduler/ui-components/button-throttle}}
 
-  {{#event-scheduler/ui-components/button-throttle data-test-id="previous-btn" type="button"
-    onclick=(action "navigate" "previous")
-    throttleSpeed=throttleTime
-    class="btn-icon navigation navigation--left"
-    disabled=disablePrevious
-    aria-label=(t "previous")}}
-    {{svg-jar "left-arrow" class="app-icon"}}
-  {{/event-scheduler/ui-components/button-throttle}}
+{{#event-scheduler/ui-components/button-throttle data-test-id="previous-btn" type="button"
+  onclick=(action "navigate" "previous")
+  throttleSpeed=throttleTime
+  class="btn-icon navigation navigation--left"
+  disabled=disablePrevious
+  aria-label=(t "previous")}}
+  {{svg-jar "left-arrow" class="app-icon"}}
+{{/event-scheduler/ui-components/button-throttle}}
 
-  {{#event-scheduler/ui-components/button-throttle data-test-id="next-btn" type="button"
-    onclick=(action "navigate" "next")
-    throttleSpeed=throttleTime
-    class="btn-icon navigation navigation--right"
-    disabled=disableNext
-    aria-label=(t "next")}}
-    {{svg-jar "right-arrow" class="app-icon"}}
-  {{/event-scheduler/ui-components/button-throttle}}
-{{/if}}
+{{#event-scheduler/ui-components/button-throttle data-test-id="next-btn" type="button"
+  onclick=(action "navigate" "next")
+  throttleSpeed=throttleTime
+  class="btn-icon navigation navigation--right"
+  disabled=disableNext
+  aria-label=(t "next")}}
+  {{svg-jar "right-arrow" class="app-icon"}}
+{{/event-scheduler/ui-components/button-throttle}}
