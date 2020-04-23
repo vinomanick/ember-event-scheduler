@@ -1,15 +1,22 @@
+import EmberObject from '@ember/object';
 import Component from '@ember/component';
 import layout from '../../templates/components/event-scheduler/external-events';
 import { getEventElement, getEventId } from '../../utils/event-drag';
 import { getCustomEventId } from '../../utils/event-scheduler';
-import { reads } from '@ember/object/computed';
+import externalEventsData from 'ember-event-scheduler/mixins/external-events-data';
 
-export default Component.extend({
+export default Component.extend(externalEventsData, {
   layout,
   classNames: ['es-external-events'],
   attributeBindings: ['data-test-es'],
   'data-test-es': 'es-external-events',
-  events: reads('externalEventsInst.events'),
+  isLoading: true,
+  isAllLoaded: false,
+
+  init() {
+    this._super(...arguments);
+    this.set('events', EmberObject.create());
+  },
 
   actions: {
     dragStarted(event) {

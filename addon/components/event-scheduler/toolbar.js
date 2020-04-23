@@ -7,12 +7,8 @@ export default Component.extend({
   classNames: ['es-toolbar'],
   attributeBindings: ['data-test-es'],
   'data-test-es': 'es-toolbar',
-
-  selectedDate: reads('calendarInst.selectedDate'),
-  selectedDuration: reads('calendarInst.selectedDuration'),
-  selectedView: reads('calendarInst.selectedView'),
-  viewType: reads('calendarInst.viewType'),
-  toolbarConfig: reads('calendarInst.config.toolbar'),
+  viewType: reads('viewConfig.type'),
+  toolbarConfig: reads('config.toolbar'),
 
   actions: {
     updateDateAndRefresh(newDate) {

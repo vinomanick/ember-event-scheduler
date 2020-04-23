@@ -1,32 +1,50 @@
 import Component from '@ember/component';
-import layout from '../../templates/components/event-scheduler/calendar';
+import layout from 'ember-event-scheduler/templates/components/event-scheduler/calendar';
 import { inject as service } from '@ember/service';
-import { computed } from '@ember/object';
+import EmberObject, { computed } from '@ember/object';
 import { reads } from '@ember/object/computed';
-import { VIEWS } from '../../constants/event-scheduler';
+import { A } from '@ember/array';
+import { VIEWS } from 'ember-event-scheduler/constants/event-scheduler';
 import {
   getResourceElement,
   getColumnStart,
   getStartTimeOffset,
   buildEventTime,
   getResourceId
-} from '../../utils/event-drop';
+} from 'ember-event-scheduler/utils/event-drop';
+import {
+  getSlots
+} from 'ember-event-scheduler/utils/event-scheduler';
 import {
   getDurationInFormat,
   getTimeDropdownChoices
-} from '../../utils/date-util';
+} from 'ember-event-scheduler/utils/date-util';
+import calendarData from 'ember-event-scheduler/mixins/calendar-data';
 
-export default Component.extend({
+
+export default Component.extend(calendarData, {
   moment: service(),
   layout,
   classNames: ['es-calendar'],
   classNameBindings: ['viewClass', 'monthViewClass'],
   attributeBindings: ['data-test-es'],
   'data-test-es': 'es-calendar',
-  selectedDate: reads('calendarInst.selectedDate'),
-  selectedDuration: reads('calendarInst.selectedDuration'),
-  viewType: reads('calendarInst.viewType'),
-  timePickerConfig: reads('calendarInst.timePickerConfig'),
+  isLoading: true,
+  isEventsDraggable: reads('config.events.draggable'),
+  viewType: reads('viewConfig.type'),
+  timePickerConfig: reads('config.timePicker'),
+  slotInterval: reads('slotConfig.interval'),
+  slotsLength: reads('slots.length'),
+
+  slots: computed('viewType', 'selectedDate', function() {
+    let _viewType = this.viewType;
+    return _viewType === VIEWS.DAY
+      ? this.daySlots
+      : getSlots(this.selectedDate, this.slotConfig);
+  }),
+  daySlots: computed(function() {
+    return getSlots(this.moment.moment(), this.slotConfig);
+  }),
   viewClass: computed('viewType', function() {
     return `${this.viewType}-view`;
   }),
@@ -39,6 +57,11 @@ export default Component.extend({
     let { selectedDate, timePickerConfig } = this;
     return getTimeDropdownChoices(selectedDate, timePickerConfig);
   }),
+
+  init() {
+    this._super(...arguments);
+    this.setProperties( { events: EmberObject.create(), resources: A() });
+  },
 
   actions: {
     draggedOver(event) {

@@ -1,7 +1,7 @@
 {
   "name": "ember-event-scheduler",
   "version": "0.0.0",
-  "description": "Powerful scheduler to view and manage the events for your resources",
+  "description": "Powerful scheduler to view and manage the resource's events",
   "keywords": [
     "ember-addon"
   ],

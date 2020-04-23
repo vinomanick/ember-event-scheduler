@@ -7,15 +7,15 @@
       {{event-scheduler/external-events/wrappers/event event=eventObj draggable=config.draggable}}
     {{/if}}
   {{else}}
-    {{#unless externalEventsInst.isLoading}}
+    {{#unless isLoading}}
       {{yield (hash empty = (component "event-scheduler/external-events/wrappers/empty"
         message="No events to display"))}}
     {{/unless}}
   {{/each-in}}
-  {{#if externalEventsInst.isLoading}}
+  {{#if isLoading}}
     {{event-scheduler/external-events/placeholders/event}}
   {{/if}}
-  {{#if externalEventsInst.isAllLoaded}}
+  {{#if isAllLoaded}}
     <div class="end-of-list">
       {{t "all_loaded" type="events"}}
     </div>

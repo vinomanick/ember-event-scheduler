@@ -2,7 +2,7 @@
   selectedDate=selectedDate
   viewType=viewType
   showExternalEventsToggle=toolbarConfig.showExternalEventsToggle
-  isExternalEventsExpanded=calendarInst.isExternalEventsExpanded
+  isExternalEventsExpanded=config.isExternalEventsExpanded
   onDateChange=(action "updateDateAndRefresh")
   onExternalEventsToggle=(action "updateEventsToggleState")
   ))}}
@@ -10,7 +10,7 @@
 {{yield (hash center = (component "event-scheduler/toolbar/wrappers/center-panel"
   selectedDate=selectedDate
   viewType=viewType
-  slotConfig=calendarInst.slotConfig
+  slotConfig=slotConfig
   dateFormat=toolbarConfig.dateFormat
   onDateChange=(action "updateDateAndRefresh")
   ))}}
@@ -19,7 +19,7 @@
   selectedDuration=selectedDuration
   selectedView=selectedView
   durationConfig=toolbarConfig.duration
-  views=calendarInst.config.views
+  views=config.views
   onDurationChange=(action "updateDuration")
   onViewChange=(action "updateViewAndRefresh")
   ))}}

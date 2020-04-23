@@ -25,6 +25,7 @@ export default EmberObject.extend({
   slotInterval: reads('slotConfig.interval'),
   slotFormat: reads('slotConfig.format'),
   slotsLength: reads('slots.length'),
+
   viewConfig: computed('selectedView', function() {
     let _selectedView = this.selectedView;
     let _views = this.config.views;
@@ -49,16 +50,21 @@ export default EmberObject.extend({
   }),
 
   init() {
-    let { config, selectedDate, selectedView, selectedDuration, moment } = this;
-
+    let { config, moment } = this;
     assert('config is required', isPresent(config));
-    assert('selected date is required', isPresent(selectedDate));
-    assert('selected view is required', isPresent(selectedView));
-    assert('selected duration is required', isPresent(selectedDuration));
     assert('moment  is required', isPresent(moment));
 
-    this.set('events', EmberObject.create());
-    this.set('resources', A());
+    if(!this.selectedDate) {
+      this.selectedDate = this.moment.moment();
+    }
+    if(!this.selectedView) {
+      this.selectedView = config.defaultView;
+    }
+    if(!this.selectedDuration) {
+      this.selectedDuration = config.toolbar.duration.default;
+    }
+
+    this.setProperties( { events: EmberObject.create(), resources: A() });
   },
 
   getMonthSlots() {
@@ -85,10 +91,10 @@ export default EmberObject.extend({
 
   // Events manipulation
   addEvents(events = []) {
-    let { events: _events, moment } = this;
+    let { events: calendarEvents, moment } = this;
     events.forEach((event) => {
       let eventObj = buildCalendarEvent(event, this, moment)
-      _events.set(getCustomEventId(event.id), eventObj);
+      calendarEvents.set(getCustomEventId(event.id), eventObj);
     });
   },
 
@@ -145,5 +151,4 @@ export default EmberObject.extend({
     this.deleteAllEvents();
     this.deleteAllResources();
   }
-
 });
