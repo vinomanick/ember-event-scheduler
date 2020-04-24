@@ -2,9 +2,12 @@
 {{#if canShowExternalEvents}}
   <aside class="sidebar">
     {{yield (hash externalEvents=(component "event-scheduler/external-events"
+      config=config.externalEvents
+      isLoading=isExternalEventsLoading
+      isAllLoaded=isExternalEventsLoadedAll
       publicAPI=publicAPI
-      externalEvents=externalEvents
-      config=config.externalEvents))}}
+      events=externalEvents
+      ))}}
   </aside>
 {{/if}}
 
@@ -32,6 +35,7 @@
           selectedView=selectedView
           selectedDuration=selectedDuration
           selectedDate=selectedDate
+          isLoading=isCalendarLoading
           publicAPI=publicAPI
           events=events
           resources=resources

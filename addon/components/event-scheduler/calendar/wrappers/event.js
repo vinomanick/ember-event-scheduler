@@ -24,10 +24,10 @@ export default Component.extend({
       && (this.startPosition <= this.slotsLength && this.endPosition > 1);
   }),
   startPosition: computed('event.startTime', function() {
-    return Math.floor(this.getGridPosition(this.startTime));
+    return Math.floor(this.getGridPosition(this.event.startTime));
   }),
   endPosition: computed('event.endTime', function() {
-    return Math.ceil(this.getGridPosition(this.endTime));
+    return Math.ceil(this.getGridPosition(this.event.endTime));
   }),
   appointmentDuration: computed('event.{startTime,endTime}', function() {
     let { viewType, moment } = this;

@@ -3,15 +3,12 @@ import Component from '@ember/component';
 import layout from '../../templates/components/event-scheduler/external-events';
 import { getEventElement, getEventId } from '../../utils/event-drag';
 import { getCustomEventId } from '../../utils/event-scheduler';
-import externalEventsData from 'ember-event-scheduler/mixins/external-events-data';
 
-export default Component.extend(externalEventsData, {
+export default Component.extend({
   layout,
   classNames: ['es-external-events'],
   attributeBindings: ['data-test-es'],
   'data-test-es': 'es-external-events',
-  isLoading: true,
-  isAllLoaded: false,
 
   init() {
     this._super(...arguments);

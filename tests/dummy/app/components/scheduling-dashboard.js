@@ -44,7 +44,7 @@ const resources = [
 ];
 
 const events = [
-  { id: '1', resourceId: '101', title: 'First service task for Puneet', startTime: "2020-03-06T10:00:00+05:30", endTime: "2020-03-06T11:00:00+05:30" },
+  { id: '1', resourceId: '101', title: 'First service task for Puneet', startTime: "2020-04-24T10:00:00+05:30", endTime: "2020-04-24T11:00:00+05:30" },
   { id: '2', resourceId: '101', title: 'Second service task for Puneet', startTime: "2020-03-05T10:30:00+05:30", endTime: "2020-03-05T12:00:00+05:30"  },
   { id: '4', resourceId: '102', title: 'First service task for Balaji',  startTime: "2020-03-03T12:00:00+05:30", endTime: "2020-03-03T13:00:00+05:30" },
   { id: '5', resourceId: '102', title: 'Second service task for Balaji',  startTime: "2020-03-06T15:00:00+05:30", endTime: "2020-03-06T18:00:00+05:30" },
@@ -76,6 +76,9 @@ export default Component.extend({
   classNames: ['scheduling-dashboard'],
   attributeBindings: ['data-test-id'],
   'data-test-id': 'scheduling-dashboard',
+  isCalendarLoading: true,
+  isExternalEventsLoading: true,
+  isExternalEventsLoadedAll: false,
   selectedView: 'day',
   selectedDate: computed(function() {
     return this.moment.moment().startOf('day');
@@ -87,6 +90,17 @@ export default Component.extend({
   actions: {
     loadScheduler(publicApi){
       console.log(publicApi);
+      run.next(() => {
+        this.setProperties({
+          isCalendarLoading: false,
+          isExternalEventsLoading: false
+        });
+        publicApi.actions.add('resources', resources);
+        publicApi.actions.add('events', events);
+        publicApi.actions.add('externalEvents', externalEventsData);
+      });
+
+
       // this.set('schedulerInst', scheduler);
       // this.set('calendarInst', scheduler.calendar);
       // this.set('externalEventsInst', scheduler.externalEvents);
