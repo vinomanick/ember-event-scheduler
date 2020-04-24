@@ -89,7 +89,7 @@ export default Component.extend({
   },
 
   triggerDropAction(eventData, startTimeOffset) {
-    let { selectedDate, slotInterval, viewType, moment } = this.calendarInst;
+    let { selectedDate, slotInterval, viewType, moment } = this;
     let { id, startTime: prevStartTime, endTime: prevEndTime, title } = eventData;
 
     let resourceId = getResourceId(eventData.resourceElement);
@@ -99,7 +99,7 @@ export default Component.extend({
 
     let { startTime, endTime } = buildEventTime(viewType, selectedDate, columnStart, slotInterval, _startTimeOffset, eventDuration);
     let updatedEvent = { id, resourceId, startTime, endTime, title };
-    this.calendarInst.updateEvent(updatedEvent);
+    this.publicAPI.actions.update('event', updatedEvent);
     this.onEventDrop(updatedEvent);
   },
 

@@ -7,7 +7,7 @@ import { and, reads } from '@ember/object/computed';
 import { DEFAULT_CONFIG } from '../constants/event-scheduler';
 import { assign } from '@ember/polyfills';
 import { VIEWS } from 'ember-event-scheduler/constants/event-scheduler';
-import schedulerData from 'ember-event-scheduler/mixins/calendar-data';
+import schedulerData from 'ember-event-scheduler/mixins/scheduler-data';
 import { getSlots } from 'ember-event-scheduler/utils/event-scheduler';
 
 const schedulerAPI = {

@@ -38,11 +38,10 @@ export default Component.extend({
   }),
   getGridPosition(time) {
     let { selectedDate, viewType, slotInterval: { format, value } }
-      = this.calendarInst;
+      = this;
     let _selectedDate = selectedDate.clone().startOf(viewType);
     let timeDifference = this.moment.moment(time).diff(_selectedDate);
     let timeDuration = moment.duration(timeDifference).as(format);
     return (timeDuration / value) + 1;
   },
 });
-
