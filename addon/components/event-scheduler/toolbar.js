@@ -10,11 +10,6 @@ export default Component.extend({
   toolbarConfig: reads('config.toolbar'),
 
   actions: {
-    triggerChange(property, value) {
-      let response = {};
-      response[property] = value;
-      this.onChange(response, property !== 'selectedDuration');
-    },
     updateEventsToggleState() {
       this.calendarInst.toggleProperty('isExternalEventsExpanded');
     }

@@ -29,28 +29,35 @@ export default Mixin.create({
   },
 
   update(type, item) {
-    let _data = this.get(type);
-    let { id } = item;
-    let _item = _data.get(id);
-    if (_item) {
-      if (type === TYPES.EVENT) {
+    if (type === TYPES.EVENT) {
+      this._updateEvent(item);
+      this._updateExternalEvent(item);
+    } else if (type === TYPES.EXTERNAL_EVENT) {
+      this._updateExternalEvent(item);
+    }
+  },
 
-        // This will be helpful during event revert
-        item._prevData = getEventMandates(_item);
-
-        // Doing this so that the previous wormhole is destroyed and recreated
-        _data.set(id, undefined);
-        run.next(() => _data.set(id, item));
-        this.update(TYPES.EXTERNAL_EVENT, item);
-      } else if (type === TYPES.EXTERNAL_EVENT) {
-        let { startTime, endTime, resourceId } = item;
-        setProperties(_item, { startTime, endTime, resourceId });
-      } else {
-        _data.set(id, _item);
-      }
+  _updateEvent(event) {
+    let _events = this.events;
+    let { id } = event;
+    let _event = _events[event.id];
+    if (_event) {
+      _event._prevData = getEventMandates(_event);
+      let { startTime, endTime, resourceId } = event;
+      setProperties(_event, { startTime, endTime, resourceId });
+      _events.set(id, undefined);
+      run.next(() => _events.set(id, _event))
     } else {
-      type === TYPES.EVENT && this.update(TYPES.EXTERNAL_EVENT, item);
-      this.add(type, [item]);
+      this.add(TYPES.EVENT, [event]);
+    }
+  },
+
+  _updateExternalEvent(event) {
+    let _events = this.externalEvents;
+    let _event = _events[event.id];
+    if (_event) {
+      let { startTime, endTime, resourceId } = event;
+      setProperties(_event, { startTime, endTime, resourceId });
     }
   },
 
@@ -59,6 +66,7 @@ export default Mixin.create({
     let event = _events.get(id);
     if (event) {
       this._revertEvent(event) ? this.update(TYPES.EVENT, event) : this.delete(TYPES.EVENT, id);
+      this.update(TYPES.EXTERNAL_EVENT, event)
     }
   },
 

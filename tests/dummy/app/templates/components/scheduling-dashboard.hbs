@@ -8,10 +8,13 @@
   isExternalEventsLoadedAll=isExternalEventsLoadedAll
   onSchedulerLoad=(action "loadScheduler")
   onEventDrop=(action "updateEventTicket")
-  onChange=(action "updateCalendar")
   as |scheduler|}}
 
-  {{#scheduler.toolbar as |toolbar|}}
+  {{#scheduler.toolbar
+    onViewChange=(action 'changeView')
+    onDateChange=(action 'changeDate')
+    onDurationChange=(action 'changeDuration')
+    as |toolbar|}}
     {{toolbar.left}}
     {{toolbar.right}}
     {{toolbar.center}}
@@ -20,7 +23,7 @@
   {{#scheduler.calendar
     as |calendar|}}
     {{calendar.resourceHeader name="Field technicians"}}
-    {{calendar.gridHeader}}
+    {{calendar.gridHeader onDateViewChange=(action 'changeDateView')}}
 
     {{calendar.empty}}
 

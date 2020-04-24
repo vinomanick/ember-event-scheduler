@@ -87,14 +87,4 @@ export default Component.extend(schedulerData, {
 
   onSchedulerLoad() {},
   onEventDrop() {},
-  onChange() {},
-
-  actions: {
-    triggerChange(properties, clearCalendar = true) {
-      if (clearCalendar) {
-        this.deleteAll(['events', 'resources']);
-      }
-      this.onChange(properties);
-    }
-  }
 });

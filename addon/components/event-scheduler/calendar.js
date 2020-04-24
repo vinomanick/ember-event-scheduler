@@ -80,10 +80,6 @@ export default Component.extend({
       this.set('displayTimeFieldDialog', false);
       let startTimeOffset = { value: selectedTime, format: this.timePickerConfig.format };
       this.triggerDropAction(eventData, startTimeOffset);
-    },
-
-    triggerChange(selectedDate) {
-      this.onChange({ selectedDate, selectedView: VIEWS.DAY });
     }
   },
 
