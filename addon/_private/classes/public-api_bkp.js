@@ -1,5 +1,4 @@
-/* eslint-disable object-shorthand */
-
+import EmberObject from '@ember/object';
 import { get } from '@ember/object';
 
 // Private properties
@@ -19,15 +18,15 @@ let proxy = new WeakMap();
  * strings that map to properties on the proxy.
  *
  * @class PublicAPI
- * @module ember-google-maps/utils/public-api
+ * @module ember-event-scheduler/_private/classes/public-api
  * @namespace Utils
  */
-export default class PublicAPI {
-  constructor(instance, schema) {
-    proxy.set(this, instance);
+export default EmberObject.extend({
+  init() {
+    proxy.set(this, this.instance);
 
-    this.defineProxyProperties(schema);
-  }
+    this.defineProxyProperties(this.schema);
+  },
 
   get(prop) {
     let target = proxy.get(this);
@@ -41,7 +40,7 @@ export default class PublicAPI {
     }
 
     return get(target, prop);
-  }
+  },
 
   defineProxyProperties(schema, target = this) {
     Object.keys(schema).forEach((prop) => {
@@ -60,14 +59,14 @@ export default class PublicAPI {
 
       Object.defineProperty(target, prop, descriptor);
     });
-  }
+  },
 
   remove() {
     proxy.set(this, null);
-  }
+  },
 
   reopen(schema) {
     this.defineProxyProperties(schema);
     return this;
   }
-}
+});

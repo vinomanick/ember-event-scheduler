@@ -3,22 +3,25 @@ import layout from '../templates/components/event-scheduler';
 import PublicAPI from '../_private/classes/public-api';
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
-import { and } from '@ember/object/computed';
+import { and, reads } from '@ember/object/computed';
 import { DEFAULT_CONFIG } from '../constants/event-scheduler';
 import { assign } from '@ember/polyfills';
 import { VIEWS } from 'ember-event-scheduler/constants/event-scheduler';
+import schedulerData from 'ember-event-scheduler/mixins/calendar-data';
+import { getSlots } from 'ember-event-scheduler/utils/event-scheduler';
 
 const schedulerAPI = {
-  id: 'mapId',
-  map: 'map',
-  components: 'components',
+  slots: 'slots',
   actions: {
-    update: '_updateMap',
-    trigger: '_trigger',
+    add: 'add',
+    update: 'update',
+    revertEvent: 'revertEvent',
+    delete: 'delete',
+    deleteAll: 'deleteAll'
   }
 };
 
-export default Component.extend({
+export default Component.extend(schedulerData, {
   intl: service(),
   moment: service(),
   layout,
@@ -26,6 +29,7 @@ export default Component.extend({
   attributeBindings: ['data-test-es'],
   'data-test-es': 'event-scheduler',
   canShowExternalEvents: and('config.hasExternalEvents', 'isExternalEventsExpanded'),
+  viewType: reads('viewConfig.type'),
   defaultConfig: computed(function() {
     return DEFAULT_CONFIG();
   }),
@@ -48,15 +52,23 @@ export default Component.extend({
     return this.viewConfig.slot;
   }),
 
+  slots: computed('viewType', 'selectedDate', function() {
+    let _viewType = this.viewType;
+    return _viewType === VIEWS.DAY
+      ? this.daySlots
+      : getSlots(this.selectedDate, this.slotConfig);
+  }),
+
+  daySlots: computed(function() {
+    return getSlots(this.moment.moment(), this.slotConfig);
+  }),
+
   init() {
     this._super(...arguments);
     this.intl.setLocale(['en-us']);
     this.moment.setTimeZone('America/Santiago');
 
-    this.publicAPI = PublicAPI.create({
-      instance: this,
-      schema: schedulerAPI
-    });
+    this.publicAPI = new PublicAPI(this, schedulerAPI);
 
     if(!this.selectedDate) {
       this.selectedDate = this.moment.moment();
@@ -68,7 +80,7 @@ export default Component.extend({
       this.selectedDuration = this.config.toolbar.duration.default;
     }
 
-    // this.onSchedulerLoad(schedulerInst);
+    this.onSchedulerLoad(this.publicAPI);
   },
 
   onSchedulerLoad() {},

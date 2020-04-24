@@ -1,9 +1,8 @@
 import Component from '@ember/component';
 import layout from 'ember-event-scheduler/templates/components/event-scheduler/calendar';
 import { inject as service } from '@ember/service';
-import EmberObject, { computed } from '@ember/object';
+import { computed } from '@ember/object';
 import { reads } from '@ember/object/computed';
-import { A } from '@ember/array';
 import { VIEWS } from 'ember-event-scheduler/constants/event-scheduler';
 import {
   getResourceElement,
@@ -13,16 +12,11 @@ import {
   getResourceId
 } from 'ember-event-scheduler/utils/event-drop';
 import {
-  getSlots
-} from 'ember-event-scheduler/utils/event-scheduler';
-import {
   getDurationInFormat,
   getTimeDropdownChoices
 } from 'ember-event-scheduler/utils/date-util';
-import calendarData from 'ember-event-scheduler/mixins/calendar-data';
 
-
-export default Component.extend(calendarData, {
+export default Component.extend({
   moment: service(),
   layout,
   classNames: ['es-calendar'],
@@ -31,20 +25,10 @@ export default Component.extend(calendarData, {
   'data-test-es': 'es-calendar',
   isLoading: true,
   isEventsDraggable: reads('config.events.draggable'),
-  viewType: reads('viewConfig.type'),
   timePickerConfig: reads('config.timePicker'),
   slotInterval: reads('slotConfig.interval'),
   slotsLength: reads('slots.length'),
 
-  slots: computed('viewType', 'selectedDate', function() {
-    let _viewType = this.viewType;
-    return _viewType === VIEWS.DAY
-      ? this.daySlots
-      : getSlots(this.selectedDate, this.slotConfig);
-  }),
-  daySlots: computed(function() {
-    return getSlots(this.moment.moment(), this.slotConfig);
-  }),
   viewClass: computed('viewType', function() {
     return `${this.viewType}-view`;
   }),
@@ -57,11 +41,6 @@ export default Component.extend(calendarData, {
     let { selectedDate, timePickerConfig } = this;
     return getTimeDropdownChoices(selectedDate, timePickerConfig);
   }),
-
-  init() {
-    this._super(...arguments);
-    this.setProperties( { events: EmberObject.create(), resources: A() });
-  },
 
   actions: {
     draggedOver(event) {

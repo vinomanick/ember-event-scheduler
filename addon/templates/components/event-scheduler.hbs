@@ -2,6 +2,8 @@
 {{#if canShowExternalEvents}}
   <aside class="sidebar">
     {{yield (hash externalEvents=(component "event-scheduler/external-events"
+      publicAPI=publicAPI
+      externalEvents=externalEvents
       config=config.externalEvents))}}
   </aside>
 {{/if}}
@@ -9,23 +11,30 @@
 <section class="main-content">
   <div class="es-container" data-test-es="es-container">
     {{yield (hash toolbar = (component "event-scheduler/toolbar"
-      selectedView=selectedView
-      selectedDuration=selectedDuration
-      selectedDate=selectedDate
       config=config
       viewConfig=viewConfig
       slotConfig=slotConfig
+      viewType=viewType
+      selectedView=selectedView
+      selectedDuration=selectedDuration
+      selectedDate=selectedDate
+      publicAPI=publicAPI
       onCalendarRefresh=onCalendarRefresh
     ))}}
     <div class="es-calendar-container">
       {{yield (hash
         calendar=(component "event-scheduler/calendar"
-          selectedView=selectedView
-          selectedDuration=selectedDuration
-          selectedDate=selectedDate
           config=config
           viewConfig=viewConfig
           slotConfig=slotConfig
+          viewType=viewType
+          slots=slots
+          selectedView=selectedView
+          selectedDuration=selectedDuration
+          selectedDate=selectedDate
+          publicAPI=publicAPI
+          events=events
+          resources=resources
           onEventDrop=(action "updateExternalEventAndBubble")
           onCalendarRefresh=onCalendarRefresh
           ))}}

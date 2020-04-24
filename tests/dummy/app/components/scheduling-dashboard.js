@@ -85,11 +85,12 @@ export default Component.extend({
   }),
 
   actions: {
-    loadScheduler(scheduler){
-      this.set('schedulerInst', scheduler);
-      this.set('calendarInst', scheduler.calendar);
-      this.set('externalEventsInst', scheduler.externalEvents);
-      this.addData();
+    loadScheduler(publicApi){
+      console.log(publicApi);
+      // this.set('schedulerInst', scheduler);
+      // this.set('calendarInst', scheduler.calendar);
+      // this.set('externalEventsInst', scheduler.externalEvents);
+      // this.addData();
     },
 
     updateEventTicket(updatedEvent) {

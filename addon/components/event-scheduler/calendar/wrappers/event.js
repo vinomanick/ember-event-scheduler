@@ -7,6 +7,7 @@ import {
   getEventPeriodCompact
 } from '../../../../utils/event-scheduler';
 import { inject as service } from '@ember/service';
+import moment from 'moment';
 
 export default Component.extend({
   moment: service(),
@@ -18,8 +19,15 @@ export default Component.extend({
     let _resourceId = this.event.resourceId;
     return document.querySelector(`[data-resource-id="${_resourceId}"]`);
   }),
-  canDisplayEvent: computed('resource', 'event.isValidEvent', function() {
-    return this.resource && this.event.isValidEvent;
+  canDisplayEvent: computed('resource', function() {
+    return this.resource
+      && (this.startPosition <= this.slotsLength && this.endPosition > 1);
+  }),
+  startPosition: computed('event.startTime', function() {
+    return Math.floor(this.getGridPosition(this.startTime));
+  }),
+  endPosition: computed('event.endTime', function() {
+    return Math.ceil(this.getGridPosition(this.endTime));
   }),
   appointmentDuration: computed('event.{startTime,endTime}', function() {
     let { viewType, moment } = this;
@@ -27,6 +35,14 @@ export default Component.extend({
     return viewType === VIEWS.DAY
       ? getEventPeriodDayView(startTime, endTime, moment)
       : getEventPeriodCompact(startTime, endTime, moment);
-  })
+  }),
+  getGridPosition(time) {
+    let { selectedDate, viewType, slotInterval: { format, value } }
+      = this.calendarInst;
+    let _selectedDate = selectedDate.clone().startOf(viewType);
+    let timeDifference = this.moment.moment(time).diff(_selectedDate);
+    let timeDuration = moment.duration(timeDifference).as(format);
+    return (timeDuration / value) + 1;
+  },
 });
 

@@ -4,7 +4,6 @@ import { assert } from '@ember/debug';
 import { isPresent } from '@ember/utils';
 // import { inject as service } from '@ember/service';
 import moment from 'moment';
-import { htmlSafe } from '@ember/template';
 import { getEventMandates } from '../../utils/event-scheduler';
 
 export default EmberObject.extend({
@@ -24,20 +23,6 @@ export default EmberObject.extend({
   }),
   endPosition: computed('endTime', function() {
     return Math.ceil(this.getGridPosition(this.endTime));
-  }),
-
-  isExtendedLeft: computed('startPosition', function() {
-    return this.startPosition < 1;
-  }),
-
-  isExtendedRight: computed('endPosition', function() {
-    return this.endPosition > this.slotsLength + 1;
-  }),
-
-  style: computed('startPosition', 'endPosition', function() {
-    let _columnStart = this.isExtendedLeft ? 1 : this.startPosition;
-    let _columnEnd = this.isExtendedRight ? this.slotsLength + 1 : this.endPosition;
-    return htmlSafe(`grid-column-start:${_columnStart}; grid-column-end:${_columnEnd}`);
   }),
 
   init() {

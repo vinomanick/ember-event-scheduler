@@ -7,7 +7,6 @@ export default Component.extend({
   classNames: ['es-toolbar'],
   attributeBindings: ['data-test-es'],
   'data-test-es': 'es-toolbar',
-  viewType: reads('viewConfig.type'),
   toolbarConfig: reads('config.toolbar'),
 
   actions: {

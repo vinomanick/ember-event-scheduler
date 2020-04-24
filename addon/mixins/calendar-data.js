@@ -1,10 +1,10 @@
 import Mixin from '@ember/object/mixin';
 import {
   getCustomEventId,
-  buildCalendarEvent
+  getEventMandates
 } from 'ember-event-scheduler/utils/event-scheduler';
 import { run } from '@ember/runloop';
-import EmberObject from '@ember/object';
+import EmberObject, { setProperties } from '@ember/object';
 
 export default Mixin.create({
   // Resources manipulation
@@ -21,27 +21,19 @@ export default Mixin.create({
 
   // Events manipulation
   addEvents(events = []) {
-    let { events: calendarEvents, moment } = this;
+    let { events: calendarEvents } = this;
     events.forEach((event) => {
-      let eventObj = buildCalendarEvent(event, this, moment)
-      calendarEvents.set(getCustomEventId(event.id), eventObj);
+      calendarEvents.set(getCustomEventId(event.id), event);
     });
   },
 
   updateEvent(event) {
     let eventObj = this.findEvent(event.id);
     if (eventObj) {
-      eventObj.updateEvent(event);
+      eventObj._prevData = getEventMandates(eventObj);
       this._updateEventsObj(eventObj)
     } else {
       this.addEvents([event]);
-    }
-  },
-
-  revertEventUpdate(id) {
-    let event = this.findEvent(id);
-    if (event) {
-      event.revertEvent() ? this._updateEventsObj(event) : this.removeEvent(id);
     }
   },
 
@@ -51,6 +43,23 @@ export default Mixin.create({
     let _events = this.events;
     _events.set(eventId, undefined);
     run.next(() => _events.set(eventId, event))
+  },
+
+  revertEventUpdate(id) {
+    let event = this.findEvent(id);
+    if (event) {
+      this._revertEvent(event) ? this._updateEventsObj(event) : this.removeEvent(id);
+    }
+  },
+
+  _revertEvent(event) {
+    let _prevData = event._prevData;
+    if (_prevData) {
+      let { startTime, endTime, resourceId } = _prevData;
+      setProperties(event, { startTime, endTime, resourceId, _prevData: null });
+      return true;
+    }
+    return false;
   },
 
   findEvent(id) {

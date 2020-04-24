@@ -18,14 +18,14 @@
     <div class="calendar__row__name"></div>
     <div class="calendar__row__grid"></div>
   </div>
-  {{#each resources as |resource| }}
-    {{event-scheduler/calendar/wrappers/resource resource=resource}}
+  {{#each-in resources as |resourceId resourceObj| }}
+    {{event-scheduler/calendar/wrappers/resource resource=resourceObj}}
   {{else}}
     {{#unless isLoading}}
       {{yield (hash empty = (component "event-scheduler/calendar/wrappers/empty"
         message="No resources to display"))}}
     {{/unless}}
-  {{/each}}
+  {{/each-in}}
   {{#if isLoading}}
     {{event-scheduler/calendar/placeholders/resource}}
   {{/if}}
@@ -35,6 +35,7 @@
     {{event-scheduler/calendar/wrappers/event
       event=eventObj
       viewType=viewType
+      slotsLength=slotsLength
       draggable=isEventsDraggable}}
   {{/if}}
 {{/each-in}}
