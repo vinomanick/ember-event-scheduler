@@ -9,6 +9,7 @@ import { assign } from '@ember/polyfills';
 import { VIEWS } from 'ember-event-scheduler/constants/event-scheduler';
 import schedulerData from 'ember-event-scheduler/mixins/scheduler-data';
 import { getSlots } from 'ember-event-scheduler/utils/event-scheduler';
+import { run } from '@ember/runloop';
 
 const schedulerAPI = {
   slots: 'slots',
@@ -80,17 +81,20 @@ export default Component.extend(schedulerData, {
       this.selectedDuration = this.config.toolbar.duration.default;
     }
 
-    this.onSchedulerLoad(this.publicAPI);
+    run.next(() => this.onSchedulerLoad(this.publicAPI))
+
   },
 
   onSchedulerLoad() {},
-  onCalendarRefresh() {},
   onEventDrop() {},
+  onChange() {},
 
   actions: {
-    updateExternalEventAndBubble(updatedEvent) {
-      this.externalEventsInst.updateEvent(updatedEvent);
-      this.onEventDrop(updatedEvent);
+    triggerChange(properties, clearCalendar = true) {
+      if (clearCalendar) {
+        this.deleteAll(['events', 'resources']);
+      }
+      this.onChange(properties);
     }
   }
 });

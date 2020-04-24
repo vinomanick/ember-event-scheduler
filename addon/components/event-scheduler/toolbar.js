@@ -10,21 +10,14 @@ export default Component.extend({
   toolbarConfig: reads('config.toolbar'),
 
   actions: {
-    updateDateAndRefresh(newDate) {
-      this.calendarInst.refreshCalendar(newDate);
-      this.onCalendarRefresh();
-    },
-    updateDuration(newView) {
-      this.calendarInst.setDuration(newView);
-    },
-    updateViewAndRefresh(view) {
-      this.calendarInst.refreshCalendar(null, view);
-      this.onCalendarRefresh();
+    triggerChange(property, value) {
+      let response = {};
+      response[property] = value;
+      this.onChange(response, property !== 'selectedDuration');
     },
     updateEventsToggleState() {
       this.calendarInst.toggleProperty('isExternalEventsExpanded');
     }
   },
-
 
 });

@@ -22,7 +22,7 @@
       selectedDuration=selectedDuration
       selectedDate=selectedDate
       publicAPI=publicAPI
-      onCalendarRefresh=onCalendarRefresh
+      onChange=(action 'triggerChange')
     ))}}
     <div class="es-calendar-container">
       {{yield (hash
@@ -39,8 +39,8 @@
           publicAPI=publicAPI
           events=events
           resources=resources
-          onEventDrop=(action "updateExternalEventAndBubble")
-          onCalendarRefresh=onCalendarRefresh
+          onEventDrop=onEventDrop
+          onChange=(action 'triggerChange')
           ))}}
     </div>
   </div>

@@ -6,9 +6,9 @@ import { run } from '@ember/runloop';
 import EmberObject, { setProperties } from '@ember/object';
 
 const TYPES = {
-  EVENT: 'event',
-  EXTERNAL_EVENT: 'external_event',
-  RESOURCE: 'resource'
+  EVENT: 'events',
+  EXTERNAL_EVENT: 'externalEvents',
+  RESOURCE: 'resources'
 };
 
 export default Mixin.create({
@@ -35,17 +35,21 @@ export default Mixin.create({
     if (_item) {
       if (type === TYPES.EVENT) {
 
-        // This will be help during event revert
-        _item._prevData = getEventMandates(_item);
+        // This will be helpful during event revert
+        item._prevData = getEventMandates(_item);
 
         // Doing this so that the previous wormhole is destroyed and recreated
         _data.set(id, undefined);
-        run.next(() => _data.set(id, _item));
-
+        run.next(() => _data.set(id, item));
+        this.update(TYPES.EXTERNAL_EVENT, item);
+      } else if (type === TYPES.EXTERNAL_EVENT) {
+        let { startTime, endTime, resourceId } = item;
+        setProperties(_item, { startTime, endTime, resourceId });
       } else {
         _data.set(id, _item);
       }
     } else {
+      type === TYPES.EVENT && this.update(TYPES.EXTERNAL_EVENT, item);
       this.add(type, [item]);
     }
   },

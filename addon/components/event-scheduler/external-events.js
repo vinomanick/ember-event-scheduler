@@ -1,8 +1,6 @@
-import EmberObject from '@ember/object';
 import Component from '@ember/component';
 import layout from '../../templates/components/event-scheduler/external-events';
 import { getEventElement, getEventId } from '../../utils/event-drag';
-import { getCustomEventId } from '../../utils/event-scheduler';
 
 export default Component.extend({
   layout,
@@ -10,18 +8,13 @@ export default Component.extend({
   attributeBindings: ['data-test-es'],
   'data-test-es': 'es-external-events',
 
-  init() {
-    this._super(...arguments);
-    this.set('events', EmberObject.create());
-  },
-
   actions: {
     dragStarted(event) {
       let eventElement = getEventElement(event.target);
       if(eventElement) {
         let offset = 4;
         let eventId = getEventId(eventElement);
-        let externalEvent = this.events[getCustomEventId(eventId)];
+        let externalEvent = this.events[eventId];
         let { id, startTime, endTime, title } = externalEvent;
         let data = { id, startTime, endTime, title, offset };
         eventElement.classList.add('dragged');

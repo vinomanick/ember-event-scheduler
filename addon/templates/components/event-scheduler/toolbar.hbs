@@ -3,7 +3,7 @@
   viewType=viewType
   showExternalEventsToggle=toolbarConfig.showExternalEventsToggle
   isExternalEventsExpanded=config.isExternalEventsExpanded
-  onDateChange=(action "updateDateAndRefresh")
+  onDateChange=(action "triggerChange" "selectedDate")
   onExternalEventsToggle=(action "updateEventsToggleState")
   ))}}
 
@@ -12,7 +12,7 @@
   viewType=viewType
   slotConfig=slotConfig
   dateFormat=toolbarConfig.dateFormat
-  onDateChange=(action "updateDateAndRefresh")
+  onDateChange=(action "triggerChange" "selectedDate")
   ))}}
 
 {{yield (hash right = (component "event-scheduler/toolbar/wrappers/right-panel"
@@ -20,6 +20,6 @@
   selectedView=selectedView
   durationConfig=toolbarConfig.duration
   views=config.views
-  onDurationChange=(action "updateDuration")
-  onViewChange=(action "updateViewAndRefresh")
+  onDurationChange=(action "triggerChange" "selectedDuration")
+  onViewChange=(action "triggerChange" "selectedView")
   ))}}

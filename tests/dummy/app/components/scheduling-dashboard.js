@@ -79,32 +79,24 @@ export default Component.extend({
   isCalendarLoading: true,
   isExternalEventsLoading: true,
   isExternalEventsLoadedAll: false,
-  selectedView: 'day',
-  selectedDate: computed(function() {
-    return this.moment.moment().startOf('day');
-  }),
-  selectedDuration: computed(function() {
-    return { value: 90, format: 'minute' };
-  }),
+
+  init() {
+    this._super(...arguments);
+    this.setProperties({
+      selectedView: 'day',
+      selectedDate: this.moment.moment().startOf('day'),
+      selectedDuration: { value: 90, format: 'minute' }
+    });
+  },
 
   actions: {
     loadScheduler(publicApi){
-      console.log(publicApi);
-      run.next(() => {
-        this.setProperties({
-          isCalendarLoading: false,
-          isExternalEventsLoading: false
-        });
-        publicApi.actions.add('resources', resources);
-        publicApi.actions.add('events', events);
-        publicApi.actions.add('externalEvents', externalEventsData);
+      this.setProperties({
+        isCalendarLoading: false,
+        isExternalEventsLoading: false
       });
-
-
-      // this.set('schedulerInst', scheduler);
-      // this.set('calendarInst', scheduler.calendar);
-      // this.set('externalEventsInst', scheduler.externalEvents);
-      // this.addData();
+      this.publicApi = publicApi;
+      this.addData();
     },
 
     updateEventTicket(updatedEvent) {
@@ -114,27 +106,21 @@ export default Component.extend({
       // run.later(() => calendar.revertEventUpdate(updatedEvent.id), 2000);
     },
 
-    updateCalendar() {
-      let calendar = this.calendarInst;
+    updateCalendar(properties) {
+      this.setProperties(properties);
+      this.set('isCalendarLoading', true);
+
       run.later(() => {
-        calendar.set('isLoading', false);
-        calendar.addResources(resources);
-        calendar.addEvents(events);
+        this.set('isCalendarLoading', false);
+        this.addData();
       }, 1000);
 
     }
   },
 
   addData() {
-    let calendar = this.calendarInst;
-    let externalEvents = this.externalEventsInst;
-    run.later(() => {
-      calendar.set('isLoading', false);
-      calendar.addResources(resources);
-      calendar.addEvents(events);
-      externalEvents.set('isLoading', false);
-      externalEvents.addEvents(externalEventsData);
-      externalEvents.set('isAllLoaded', true);
-    }, 1000);
+    this.publicApi.actions.add('resources', resources);
+    this.publicApi.actions.add('events', events);
+    this.publicApi.actions.add('externalEvents', externalEventsData);
   }
 });

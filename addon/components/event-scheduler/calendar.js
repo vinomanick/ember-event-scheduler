@@ -82,9 +82,8 @@ export default Component.extend({
       this.triggerDropAction(eventData, startTimeOffset);
     },
 
-    changeDateView(selectedDate) {
-      this.calendarInst.refreshCalendar(selectedDate, VIEWS.DAY);
-      this.onCalendarRefresh();
+    triggerChange(selectedDate) {
+      this.onChange({ selectedDate, selectedView: VIEWS.DAY });
     }
   },
 
@@ -99,7 +98,7 @@ export default Component.extend({
 
     let { startTime, endTime } = buildEventTime(viewType, selectedDate, columnStart, slotInterval, _startTimeOffset, eventDuration);
     let updatedEvent = { id, resourceId, startTime, endTime, title };
-    this.publicAPI.actions.update('event', updatedEvent);
+    this.publicAPI.actions.update('events', updatedEvent);
     this.onEventDrop(updatedEvent);
   },
 
