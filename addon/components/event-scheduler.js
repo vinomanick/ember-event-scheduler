@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import layout from '../templates/components/event-scheduler';
-import PublicAPI from '../_private/classes/public-api';
+import PublicAPI from 'ember-event-scheduler/utils/public-api';
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
 import { and, reads } from '@ember/object/computed';

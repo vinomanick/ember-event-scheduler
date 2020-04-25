@@ -7,12 +7,5 @@ export default Component.extend({
   classNames: ['es-toolbar'],
   attributeBindings: ['data-test-es'],
   'data-test-es': 'es-toolbar',
-  toolbarConfig: reads('config.toolbar'),
-
-  actions: {
-    updateEventsToggleState() {
-      this.calendarInst.toggleProperty('isExternalEventsExpanded');
-    }
-  },
-
+  toolbarConfig: reads('config.toolbar')
 });

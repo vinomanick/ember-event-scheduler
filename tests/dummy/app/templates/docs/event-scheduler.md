@@ -12,9 +12,6 @@ The users can easily yield these placeholders with custom components by calling 
 The onSchedulerLoad hook will return the scheduler instance based on the options provided.
 You can use this instance to manage your scheduler state and manage your events/resources.
 
-### onCalendarRefresh
-You can use onCalendarRefresh hook to update your events/resources.
-The onCalendarRefresh will be triggered whenever there is a change in the calendar date/view.
 
 ### onEventDrop
 The onEventDrop hook will return the updated event data whenever an event is dropped inside the calendar.

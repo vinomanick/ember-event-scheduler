@@ -56,6 +56,7 @@ export default Component.extend({
   classNames: ['scheduling-dashboard'],
   attributeBindings: ['data-test-id'],
   'data-test-id': 'scheduling-dashboard',
+  isExternalEventsExpanded: true,
   isCalendarLoading: true,
   isExternalEventsLoading: true,
   isExternalEventsLoadedAll: false,
@@ -100,6 +101,9 @@ export default Component.extend({
     },
     changeDuration(selectedDuration) {
       this.set('selectedDuration', selectedDuration);
+    },
+    toggleExternalEvent() {
+      this.toggleProperty('isExternalEventsExpanded');
     }
   },
 

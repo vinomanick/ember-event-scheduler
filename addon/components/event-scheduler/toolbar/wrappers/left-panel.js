@@ -21,9 +21,6 @@ export default Component.extend({
     },
     selectToday() {
       this.onDateChange(this.today.clone());
-    },
-    triggerExternalEventsToggle() {
-      this.onExternalEventsToggle();
     }
   }
 });

@@ -1,32 +1,9 @@
 import moment from 'moment';
 import { getTimeRange, getDurationAs } from './date-util';
-import CalendarEvent from '../_private/classes/calendar-event';
-
-const getCustomResourceId = (id) => {
-  return `resource_${id}`;
-};
-
-const getCustomEventId = (id) => {
-  return `event_${id}`;
-};
 
 const getEventMandates = (event) => {
   let { startTime, endTime, resourceId } = event;
   return { startTime, endTime, resourceId }
-};
-
-const buildCalendarEvent = (event, calendarInst, moment) => {
-  let { id, startTime, endTime, resourceId, title } = event;
-  let eventObj = CalendarEvent.create({
-    id,
-    title,
-    startTime,
-    endTime,
-    resourceId,
-    calendarInst,
-    moment
-  });
-  return eventObj;
 };
 
 const getSlots = (selectedDate, options) => {
@@ -118,7 +95,6 @@ const getTimerPos = (durationInMins, slotConfig) => {
   return (durationInMins * width) / intervalInMins;
 };
 
-export { getSlots, buildCalendarEvent, getTimerPos,
+export { getSlots, getTimerPos,
   getEventMandates,
-  getCalendarPeriod, getExternalEventPeriod, getEventPeriodDayView, getEventPeriodCompact,
-  getCustomResourceId, getCustomEventId };
+  getCalendarPeriod, getExternalEventPeriod, getEventPeriodDayView, getEventPeriodCompact };
