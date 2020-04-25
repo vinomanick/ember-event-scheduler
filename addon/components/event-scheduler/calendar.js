@@ -93,9 +93,7 @@ export default Component.extend({
     let eventDuration = getDurationInFormat(prevStartTime, prevEndTime) || this.selectedDuration;
 
     let { startTime, endTime } = buildEventTime(viewType, selectedDate, columnStart, slotInterval, _startTimeOffset, eventDuration);
-    let updatedEvent = { id, resourceId, startTime, endTime, title };
-    this.publicAPI.actions.update('events', updatedEvent);
-    this.onEventDrop(updatedEvent);
+    this.onEventUpdate({ id, resourceId, startTime, endTime, title });
   },
 
   _getColumnStart(eventData) {

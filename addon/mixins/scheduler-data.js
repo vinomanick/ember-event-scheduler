@@ -31,7 +31,6 @@ export default Mixin.create({
   update(type, item) {
     if (type === TYPES.EVENT) {
       this._updateEvent(item);
-      this._updateExternalEvent(item);
     } else if (type === TYPES.EXTERNAL_EVENT) {
       this._updateExternalEvent(item);
     }

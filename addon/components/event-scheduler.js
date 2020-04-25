@@ -87,4 +87,12 @@ export default Component.extend(schedulerData, {
 
   onSchedulerLoad() {},
   onEventDrop() {},
+
+  actions: {
+    triggerEventDrop(updatedEvent) {
+      this._updateEvent(updatedEvent);
+      this._updateExternalEvent(updatedEvent);
+      this.onEventDrop(updatedEvent);
+    }
+  }
 });
