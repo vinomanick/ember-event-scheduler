@@ -14,10 +14,7 @@ Router.map(function() {
     this.route('components', function() {
       this.route('toolbar');
       this.route('calendar');
-      this.route('external-events', function() {
-        this.route('header');
-        this.route('empty');
-      });
+      this.route('external-events');
     });
   });
   this.route('not-found', { path: '/*path' });

@@ -14,10 +14,10 @@ export default Component.extend({
   classNames: ['es-toolbar__panel', 'align-items--center'],
   actions: {
     changeEventDuration(newDuration) {
-      this.onDurationChange(newDuration);
+      this.onDurationChange && this.onDurationChange(newDuration);
     },
     changeView(view) {
-      this.onViewChange(view);
+      this.onViewChange &&  this.onViewChange(view);
     }
   }
 });

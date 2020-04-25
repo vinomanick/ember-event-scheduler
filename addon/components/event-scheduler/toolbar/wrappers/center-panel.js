@@ -40,7 +40,7 @@ export default Component.extend({
         month: selectedDate.getMonth(),
         year: selectedDate.getFullYear()
       }).startOf('day');
-      this.onDateChange(newDate);
+      this.onDateChange && this.onDateChange(newDate);
     }
   },
   close(dropdown) {

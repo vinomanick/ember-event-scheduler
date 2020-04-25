@@ -1,11 +1,19 @@
 {{#docs-demo as |demo|}}
   {{#demo.example name='docs-demo-toolbar.hbs' class="hide-container overflow--scroll"}}
     {{#event-scheduler options=options
-      onSchedulerLoad=(action "onSchedulerLoad")
-      onCalendarRefresh=(action "onCalendarRefresh")
+      selectedView=selectedView
+      selectedDuration=selectedDuration
+      selectedDate=selectedDate
+      isExternalEventsExpanded=isExternalEventsExpanded
+      onSchedulerLoad=(action "loadScheduler")
       as |scheduler|}}
 
-      {{#scheduler.toolbar as |toolbar|}}
+      {{#scheduler.toolbar
+        onViewChange=(action 'changeView')
+        onDateChange=(action 'changeDate')
+        onDurationChange=(action 'changeDuration')
+        onExternalEventToggle = (action 'toggleExternalEvent')
+        as |toolbar|}}
         {{toolbar.left}}
         {{toolbar.right}}
         {{toolbar.center}}

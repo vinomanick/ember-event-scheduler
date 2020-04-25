@@ -1,24 +1,63 @@
 // BEGIN-SNIPPET demo-calendar-block.js
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import { reads } from '@ember/object/computed';
+import { inject as service } from '@ember/service';
 
 export default Component.extend({
+  moment: service(),
   classNames: ['overflow--scroll'],
+  isCalendarLoading: true,
   options: computed(function() {
-    return {};
+    return {
+      hasExternalEvents: false,
+      toolbar: {
+        showExternalEventsToggle: false,
+        duration: {
+          default: { value: 60, format: 'minute' },
+          options: [
+            { value: 30, format: 'minute' },
+            { value: 60, format: 'minute' },
+            { value: 90, format: 'minute' },
+            { value: 120, format: 'minute' }
+          ]
+        },
+        dateFormat: 'DD MMMM YYYY'
+      },
+    };
   }),
-  viewType: reads('scheduler.calendar.viewType'),
-  slots: reads('scheduler.calendar.slots'),
-  actions: {
-    onSchedulerLoad(scheduler){
-      this.scheduler = scheduler;
-      this.scheduler.calendar.set('isLoading', false);
-      this.scheduler.externalEvents.set('isLoading', false);
-    },
-    onCalendarRefresh() {
-      this.scheduler.calendar.set('isLoading', false);
-    }
+
+  init() {
+    this._super(...arguments);
+    this.setProperties({
+      selectedView: 'week',
+      selectedDate: this.moment.moment().startOf('day'),
+      selectedDuration: { value: 90, format: 'minute' }
+    });
   },
+
+  actions: {
+    loadScheduler(publicAPI) {
+      this.setProperties({
+        isCalendarLoading: false,
+        isExternalEventsLoading: false
+      });
+      this.set('slots', publicAPI.slots);
+    },
+    changeDateView(selectedDate, selectedView) {
+      this.setProperties({ selectedDate, selectedView});
+    },
+    changeView(selectedView) {
+      this.set('selectedView', selectedView);
+    },
+    changeDate(selectedDate) {
+      this.set('selectedDate', selectedDate);
+    },
+    changeDuration(selectedDuration) {
+      this.set('selectedDuration', selectedDuration);
+    },
+    toggleExternalEvent() {
+      this.toggleProperty('isExternalEventsExpanded');
+    }
+  }
 });
 // END-SNIPPET

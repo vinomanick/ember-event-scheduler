@@ -17,10 +17,13 @@ export default Component.extend({
       let _currentDate = this.selectedDate.clone();
       let _viewType = this.viewType;
       let newDate = event === 'next' ? _currentDate.add(1, _viewType) : _currentDate.subtract(1, _viewType);
-      this.onDateChange(newDate);
+      this.onDateChange && this.onDateChange(newDate);
     },
     selectToday() {
-      this.onDateChange(this.today.clone());
+      this.onDateChange && this.onDateChange(this.today.clone());
+    },
+    toggleExternalEvent() {
+      this.onExternalEventToggle && this.onExternalEventToggle();
     }
   }
 });

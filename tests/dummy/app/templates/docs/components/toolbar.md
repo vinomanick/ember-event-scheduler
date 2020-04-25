@@ -15,10 +15,8 @@ const options = {
   }
 };
 ```
-- The today button, previous and next icons performs the following steps on click,
-#### 1. Navigates to the respective date
-#### 2. Clears the scheduler's events and resources
-#### 3. Set the calendar to loading state and trigger onCalendarRefresh hook with the newly selected date.
+- The today button, previous and next icons triggers the onDateChange action with the selected date.
+
 
 ## Toolbar-Center
 - Displays the selected date and on clicking it opens a calendar picker to navigate to any given date.
@@ -58,10 +56,7 @@ const options = {
 ```
 
 ### View
-- The view dropdown lists all the views provided in the calendar options hash and performs the following steps on change,
-#### 1. Change the calendar to the respective view
-#### 2. Clears the scheduler's events and resources
-#### 3. Set the calendar to loading state and trigger onCalendarRefresh hook with the newly selected view.
+- The view dropdown lists all the views provided in the calendar options hash and triggers the onViewChange action with the selected view.
 
 ```javascript
 const options = {
@@ -100,6 +95,20 @@ const options = {
   }
 };
 ```
+
+## Actions
+
+### onDateChange
+The onDateChange hook will return the newly selected date
+
+### onViewChange
+The onDateChange hook will return the newly selected view
+
+### onDurationChange
+The onDurationChange hook will return the newly selected duration as value, format object.
+
+### onExternalEventToggle
+The onDurationChange hook is fired when the toggle button is clicked.
 
 ## Usage
 

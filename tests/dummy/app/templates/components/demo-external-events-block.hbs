@@ -1,0 +1,27 @@
+{{#docs-demo as |demo|}}
+  {{#demo.example name='docs-demo-external-events-block.hbs' class="overflow--scroll"}}
+    {{#event-scheduler options=options
+      isExternalEventsExpanded=true
+      onSchedulerLoad=(action "loadScheduler")
+      as |scheduler|}}
+
+      {{#scheduler.externalEvents
+        isLoading=isExternalEventsLoading
+        isLoadedAll=isExternalEventsLoadedAll
+        as |externalEvents|}}
+        {{#externalEvents.header}}
+          <h4 class="text-color--salmon ">Custom Events title</h4>
+        {{/externalEvents.header}}
+        {{#externalEvents.empty}}
+          <div class="docs-p-4">
+            <div class="text-color--salmon">My custom events are empty.</div>
+            <a href="#" class="docs-text-sm docs-italic">Add more events</a>
+          </div>
+        {{/externalEvents.empty}}
+      {{/scheduler.externalEvents}}
+    {{/event-scheduler}}
+  {{/demo.example}}
+
+  {{demo.snippet 'docs-demo-external-events-block.hbs'}}
+  {{demo.snippet 'demo-external-events-block.js' label='component.js'}}
+{{/docs-demo}}

@@ -4,6 +4,8 @@ The calendar component renders the actual calendar.
 
 This is a block component and yields the resource header, grid header and empty resource message component that can be called as inline component or block component based on the need. This will give the user with full control on the content rendered in the respective placeholder.
 
+The only required argument for this component is **isLoading**. It will render the shimmer loader row whenever this is set to true, there by making it flexible to show the loader during the lazyloading of resources and events.
+
 ### Resource Header
 Wrapper for displaying the resource heading on the first cell of the calendar.
 
@@ -26,10 +28,7 @@ It will display the text that is given in the name property. This text is both v
 
 For day view: Displays the odd slots spanning 2 columns formatted based on the selected view slot format provided in the options except for the first and last slot in a single row.
 
-For week/month view: Displays each slot interval with day and date as individual elements in a single row. The date is displayed as icon button and on clicking it,
-#### 1. Navigates to the respective date in day view
-#### 2. Clears the scheduler's events and resources
-#### 3. Set the calendar to loading state and trigger onCalendarRefresh hook with the newly selected date.
+For week/month view: Displays each slot interval with day and date as individual elements in a single row. The date is displayed as icon button and on clicking it, will trigger the **onDateView** hook with the selectedDate as the clicked date button and selectedView as day view.
 
 ### Empty
 

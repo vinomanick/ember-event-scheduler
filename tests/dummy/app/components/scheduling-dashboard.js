@@ -86,17 +86,18 @@ export default Component.extend({
       // run.later(() => this.publicApi.actions.revertEvent(updatedEvent.id), 2000);
     },
 
+    changeDateView(selectedDate, selectedView) {
+      this.set('selectedDate', selectedDate);
+      this.set('selectedView', selectedView);
+      this.fetchData();
+    },
+
     changeView(selectedView) {
       this.set('selectedView', selectedView);
       this.fetchData();
     },
     changeDate(selectedDate) {
       this.set('selectedDate', selectedDate);
-      this.fetchData();
-    },
-    changeDateView(selectedDate, selectedView) {
-      this.set('selectedDate', selectedDate);
-      this.set('selectedView', selectedView);
       this.fetchData();
     },
     changeDuration(selectedDuration) {

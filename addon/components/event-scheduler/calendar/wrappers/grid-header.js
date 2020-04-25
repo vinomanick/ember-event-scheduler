@@ -16,7 +16,7 @@ export default Component.extend({
   }),
   actions: {
     navigate(selectedDate) {
-      this.onDateViewChange(selectedDate, VIEWS.DAY);
+      this.onDateViewChange && this.onDateViewChange(selectedDate, VIEWS.DAY);
     }
   }
 });
