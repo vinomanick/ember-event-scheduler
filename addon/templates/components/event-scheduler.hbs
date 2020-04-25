@@ -1,10 +1,8 @@
 <div id="es-app-overlays" class="es-app-overlays"></div>
-{{#if canShowExternalEvents}}
-  <aside class="sidebar">
+{{#if config.hasExternalEvents}}
+  <aside class="sidebar {{if isExternalEventsExpanded "show" "hide"}}">
     {{yield (hash externalEvents=(component "event-scheduler/external-events"
       config=config.externalEvents
-      isLoading=isExternalEventsLoading
-      isAllLoaded=isExternalEventsLoadedAll
       events=externalEvents
       ))}}
   </aside>
@@ -17,6 +15,7 @@
       viewConfig=viewConfig
       slotConfig=slotConfig
       viewType=viewType
+      isExternalEventsExpanded=isExternalEventsExpanded
       selectedView=selectedView
       selectedDuration=selectedDuration
       selectedDate=selectedDate
@@ -32,8 +31,6 @@
           selectedView=selectedView
           selectedDuration=selectedDuration
           selectedDate=selectedDate
-          isLoading=isCalendarLoading
-          publicAPI=publicAPI
           events=events
           resources=resources
           onEventUpdate=(action 'triggerEventDrop')

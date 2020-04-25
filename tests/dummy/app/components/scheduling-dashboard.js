@@ -109,7 +109,7 @@ export default Component.extend({
 
   fetchData() {
     this.set('isCalendarLoading', true);
-    this.publicApi.actions.deleteAll(['events', 'resources']);
+    this.publicApi.actions.resetCalendar();
     run.later(() => {
       this.set('isCalendarLoading', false);
       this.publicApi.actions.add('resources', resources);

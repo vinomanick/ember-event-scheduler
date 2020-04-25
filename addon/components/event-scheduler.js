@@ -3,7 +3,7 @@ import layout from '../templates/components/event-scheduler';
 import PublicAPI from 'ember-event-scheduler/utils/public-api';
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
-import { and, reads } from '@ember/object/computed';
+import { reads } from '@ember/object/computed';
 import { DEFAULT_CONFIG } from '../constants/event-scheduler';
 import { assign } from '@ember/polyfills';
 import { VIEWS } from 'ember-event-scheduler/constants/event-scheduler';
@@ -18,7 +18,9 @@ const schedulerAPI = {
     update: 'update',
     revertEvent: 'revertEvent',
     delete: 'delete',
-    deleteAll: 'deleteAll'
+    deleteAll: 'deleteAll',
+    resetCalendar: 'resetCalendar',
+    resetExternalEvents: 'resetExternalEvents',
   }
 };
 
@@ -29,7 +31,6 @@ export default Component.extend(schedulerData, {
   classNames: ['event-scheduler'],
   attributeBindings: ['data-test-es'],
   'data-test-es': 'event-scheduler',
-  canShowExternalEvents: and('config.hasExternalEvents', 'isExternalEventsExpanded'),
   viewType: reads('viewConfig.type'),
   defaultConfig: computed(function() {
     return DEFAULT_CONFIG();

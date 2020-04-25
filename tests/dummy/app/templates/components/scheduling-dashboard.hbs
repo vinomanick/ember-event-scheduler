@@ -3,9 +3,6 @@
   selectedDuration=selectedDuration
   selectedDate=selectedDate
   isExternalEventsExpanded=isExternalEventsExpanded
-  isCalendarLoading=isCalendarLoading
-  isExternalEventsLoading=isExternalEventsLoading
-  isExternalEventsLoadedAll=isExternalEventsLoadedAll
   onSchedulerLoad=(action "loadScheduler")
   onEventDrop=(action "updateEventTicket")
   as |scheduler|}}
@@ -22,6 +19,7 @@
   {{/scheduler.toolbar}}
 
   {{#scheduler.calendar
+    isLoading=isCalendarLoading
     as |calendar|}}
     {{calendar.resourceHeader name="Field technicians"}}
     {{calendar.gridHeader onDateViewChange=(action 'changeDateView')}}
@@ -31,7 +29,10 @@
   {{/scheduler.calendar}}
 
 
-  {{#scheduler.externalEvents as |externalEvents|}}
+  {{#scheduler.externalEvents
+    isLoading=isExternalEventsLoading
+    isLoadedAll=isExternalEventsLoadedAll
+    as |externalEvents|}}
     {{externalEvents.header name="Service tasks"}}
 
     {{externalEvents.empty}}

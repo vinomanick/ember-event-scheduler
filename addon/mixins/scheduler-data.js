@@ -90,5 +90,13 @@ export default Mixin.create({
 
   deleteAll(types) {
     types.forEach((type) => this.set(type, EmberObject.create()));
+  },
+
+  resetCalendar() {
+    this.deleteAll(['events', 'resources']);
+  },
+
+  resetExternalEvents() {
+    this.deleteAll(['externalEvents']);
   }
 });
