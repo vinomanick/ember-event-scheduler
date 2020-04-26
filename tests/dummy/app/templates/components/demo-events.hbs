@@ -1,0 +1,49 @@
+{{#docs-demo as |demo|}}
+  {{#demo.example name='docs-demo-events.hbs' class="overflow--scroll"}}
+    {{#event-scheduler options=config
+      selectedView=selectedView
+      selectedDuration=selectedDuration
+      selectedDate=selectedDate
+      isExternalEventsExpanded=isExternalEventsExpanded
+      onSchedulerLoad=(action "loadScheduler")
+      onEventDrop=(action "updateEventTicket")
+      as |scheduler|}}
+
+      {{#scheduler.toolbar
+        onViewChange=(action 'changeView')
+        onDateChange=(action 'changeDate')
+        onDurationChange=(action 'changeDuration')
+        onExternalEventToggle = (action 'toggleExternalEvent')
+        as |toolbar|}}
+        {{toolbar.left}}
+        {{toolbar.right}}
+        {{toolbar.center}}
+      {{/scheduler.toolbar}}
+
+      {{#scheduler.calendar
+        isLoading=isCalendarLoading
+        as |calendar|}}
+        {{calendar.resourceHeader name="Resources"}}
+        {{calendar.gridHeader onDateViewChange=(action 'changeDateView')}}
+
+        {{calendar.empty}}
+
+      {{/scheduler.calendar}}
+
+      {{#scheduler.externalEvents
+        isLoading=isExternalEventsLoading
+        isLoadedAll=isExternalEventsLoadedAll
+        as |externalEvents|}}
+        {{externalEvents.header name="Events"}}
+
+        {{externalEvents.empty}}
+      {{/scheduler.externalEvents}}
+
+    {{/event-scheduler}}
+  {{/demo.example}}
+
+  {{demo.snippet 'docs-demo-events.hbs'}}
+  {{demo.snippet 'demo-events.js' label='component.js'}}
+  {{demo.snippet 'demo-events-options.js' label='options.js'}}
+  {{demo.snippet 'entity-builder.js' label='entity-builder.js'}}
+{{/docs-demo}}

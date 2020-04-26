@@ -24,6 +24,8 @@ export default Component.extend({
   attributeBindings: ['data-test-es'],
   'data-test-es': 'es-calendar',
   isLoading: true,
+  resourceCustomComponent: reads('config.resources.customComponent'),
+  eventCustomComponent: reads('config.events.customComponent'),
   isEventsDraggable: reads('config.events.draggable'),
   timePickerConfig: reads('config.timePicker'),
   slotInterval: reads('slotConfig.interval'),

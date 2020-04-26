@@ -7,8 +7,8 @@
       draggable=draggable
     }}
       <div class="event card" data-name="event">
-        {{#if hasBlock}}
-          {{yield}}
+        {{#if eventCustomComponent}}
+          {{component eventCustomComponent event=event}}
         {{else}}
           <div class="card__header ellipsis">
             {{#if (eq viewType VIEWS.DAY)}}

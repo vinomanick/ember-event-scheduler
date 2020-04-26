@@ -1,3 +1,4 @@
+// BEGIN-SNIPPET entity-builder.js
 import faker from 'faker';
 
 const buildResources = (count) => {
@@ -36,3 +37,4 @@ const buildEvents = (selectedDate, viewType, count, idStart = 1, hasAppointment 
 };
 
 export { buildResources, buildEvents };
+// END-SNIPPET

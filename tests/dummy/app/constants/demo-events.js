@@ -1,3 +1,4 @@
+// BEGIN-SNIPPET demo-events-options.js
 const config = {
   defaultView: 'day',
   showCurrentTime: true,
@@ -70,3 +71,4 @@ const config = {
 };
 
 export { config };
+// END-SNIPPET

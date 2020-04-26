@@ -116,4 +116,8 @@ The event and the corresponding event in the external events list is updated aut
 
 ## Usage
 
+### Scheduler with events and resources
+{{demo-events}}
+
+### Empty scheduler
 {{demo-event-scheduler}}
