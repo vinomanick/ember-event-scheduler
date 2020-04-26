@@ -8,10 +8,10 @@
   as |scheduler|}}
 
   {{#scheduler.toolbar
-    onViewChange=(action 'changeView')
-    onDateChange=(action 'changeDate')
-    onDurationChange=(action 'changeDuration')
-    onExternalEventToggle = (action 'toggleExternalEvent')
+    onViewChange=(action "changeView")
+    onDateChange=(action "changeDate")
+    onDurationChange=(action "changeDuration")
+    onExternalEventToggle = (action "toggleExternalEvent")
     as |toolbar|}}
     {{toolbar.left}}
     {{toolbar.right}}
@@ -22,7 +22,7 @@
     isLoading=isCalendarLoading
     as |calendar|}}
     {{calendar.resourceHeader name="Field technicians"}}
-    {{calendar.gridHeader onDateViewChange=(action 'changeDateView')}}
+    {{calendar.gridHeader onDateViewChange=(action "changeDateView")}}
 
     {{calendar.empty}}
 

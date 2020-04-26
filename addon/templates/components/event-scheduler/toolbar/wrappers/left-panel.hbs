@@ -1,7 +1,7 @@
 {{#if showExternalEventsToggle}}
   <button data-test-id="external-events-toggle-btn"
     aria-label={{t (if isExternalEventsExpanded "hide" "show")}}
-    onclick={{action 'toggleExternalEvent'}}
+    onclick={{action "toggleExternalEvent"}}
     class="btn btn-icon mr-8 {{if isExternalEventsExpanded "btn-icon--active"}}">
     <span class="btn-toggle {{if isExternalEventsExpanded "btn-toggle--expanded"}}">
       {{svg-jar "collapse" class="app-icon"}}

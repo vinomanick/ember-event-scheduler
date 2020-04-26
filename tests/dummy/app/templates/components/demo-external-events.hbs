@@ -1,5 +1,5 @@
 {{#docs-demo as |demo|}}
-  {{#demo.example name='docs-demo-external-events.hbs' class="overflow--scroll"}}
+  {{#demo.example name="docs-demo-external-events.hbs" class="overflow--scroll"}}
     {{#event-scheduler options=options
       isExternalEventsExpanded=true
       onSchedulerLoad=(action "loadScheduler")
@@ -15,6 +15,6 @@
     {{/event-scheduler}}
   {{/demo.example}}
 
-  {{demo.snippet 'docs-demo-external-events.hbs'}}
-  {{demo.snippet 'demo-external-events.js' label='component.js'}}
+  {{demo.snippet "docs-demo-external-events.hbs"}}
+  {{demo.snippet "demo-external-events.js" label="component.js"}}
 {{/docs-demo}}

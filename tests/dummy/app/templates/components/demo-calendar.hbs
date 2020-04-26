@@ -1,5 +1,5 @@
 {{#docs-demo as |demo|}}
-  {{#demo.example name='docs-demo-calendar.hbs' class="overflow--scroll"}}
+  {{#demo.example name="docs-demo-calendar.hbs" class="overflow--scroll"}}
     {{#event-scheduler options=options
       selectedView=selectedView
       selectedDuration=selectedDuration
@@ -9,10 +9,10 @@
       as |scheduler|}}
 
       {{#scheduler.toolbar
-        onViewChange=(action 'changeView')
-        onDateChange=(action 'changeDate')
-        onDurationChange=(action 'changeDuration')
-        onExternalEventToggle = (action 'toggleExternalEvent')
+        onViewChange=(action "changeView")
+        onDateChange=(action "changeDate")
+        onDurationChange=(action "changeDuration")
+        onExternalEventToggle = (action "toggleExternalEvent")
         as |toolbar|}}
         {{toolbar.left}}
         {{toolbar.right}}
@@ -23,13 +23,13 @@
         isLoading=isCalendarLoading
         as |calendar|}}
         {{calendar.resourceHeader name="Resources"}}
-        {{calendar.gridHeader onDateViewChange=(action 'changeDateView')}}
+        {{calendar.gridHeader onDateViewChange=(action "changeDateView")}}
         {{calendar.empty}}
       {{/scheduler.calendar}}
 
     {{/event-scheduler}}
   {{/demo.example}}
 
-  {{demo.snippet 'docs-demo-calendar.hbs'}}
-  {{demo.snippet 'demo-calendar.js' label='component.js'}}
+  {{demo.snippet "docs-demo-calendar.hbs"}}
+  {{demo.snippet "demo-calendar.js" label="component.js"}}
 {{/docs-demo}}

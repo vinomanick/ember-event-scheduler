@@ -1,5 +1,5 @@
 {{#docs-demo as |demo|}}
-  {{#demo.example name='docs-demo-toolbar.hbs' class="hide-container overflow--scroll"}}
+  {{#demo.example name="docs-demo-toolbar.hbs" class="hide-container overflow--scroll"}}
     {{#event-scheduler options=options
       selectedView=selectedView
       selectedDuration=selectedDuration
@@ -9,10 +9,10 @@
       as |scheduler|}}
 
       {{#scheduler.toolbar
-        onViewChange=(action 'changeView')
-        onDateChange=(action 'changeDate')
-        onDurationChange=(action 'changeDuration')
-        onExternalEventToggle = (action 'toggleExternalEvent')
+        onViewChange=(action "changeView")
+        onDateChange=(action "changeDate")
+        onDurationChange=(action "changeDuration")
+        onExternalEventToggle = (action "toggleExternalEvent")
         as |toolbar|}}
         {{toolbar.left}}
         {{toolbar.right}}
@@ -22,6 +22,6 @@
     {{/event-scheduler}}
   {{/demo.example}}
 
-  {{demo.snippet 'docs-demo-toolbar.hbs'}}
-  {{demo.snippet 'demo-toolbar.js' label='component.js'}}
+  {{demo.snippet "docs-demo-toolbar.hbs"}}
+  {{demo.snippet "demo-toolbar.js" label="component.js"}}
 {{/docs-demo}}
