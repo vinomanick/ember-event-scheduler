@@ -56,7 +56,7 @@ const options = {
 ```
 
 ### View
-- The view dropdown lists all the views provided in the calendar options hash and triggers the onViewChange action with the selected view.
+- The view dropdown lists all the views provided in the calendar options hash and triggers the onViewChange action with the selected view and the corresponding view type.
 
 ```javascript
 const options = {

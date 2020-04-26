@@ -45,8 +45,7 @@ export default Component.extend({
     },
 
     changeDateView(selectedDate, selectedView) {
-      this.set('selectedDate', selectedDate);
-      this.set('selectedView', selectedView);
+      this.setProperties({ selectedDate, selectedView});
       this.updateCalendarData();
     },
 

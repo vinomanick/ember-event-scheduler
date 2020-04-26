@@ -28,9 +28,9 @@ export default Component.extend({
         isExternalEventsLoading: false
       });
     },
-    changeView(selectedView) {
-      this.set('selectedView', selectedView);
-      alert(`Newly selected view - ${selectedView}`);
+    changeView(selectedView, viewType) {
+      this.setProperties({ selectedView, viewType });
+      alert(`Newly selected view - ${selectedView}, viewType - ${viewType}`);
     },
     changeDate(selectedDate) {
       this.set('selectedDate', selectedDate);
