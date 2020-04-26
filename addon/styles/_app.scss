@@ -1,46 +1,48 @@
-button {
-  cursor: pointer;
-}
-
-.btn {
-  padding: 4px 15px 5px;
-  background: $bg-light;
-  border: solid 1px $border-primary;
-  font-size: 14px;
-  border-radius: 4px;
-  min-width: 80px;
-
-  &--primary {
-    background: $btn-primary;
-    color: $text-light;
+.event-scheduler {
+  button {
+    cursor: pointer;
   }
-}
 
-.btn-icon {
-  padding: 0;
-  min-width: 32px;
+  .btn {
+    padding: 4px 15px 5px;
+    background: $bg-light;
+    border: solid 1px $border-primary;
+    font-size: 14px;
+    border-radius: 4px;
+    min-width: 80px;
 
-  &--active {
-    border: 1px solid $btn-active-border;
-    box-shadow: inset 0 0 4px 0 rgba(39,49,58,.26);
+    &--primary {
+      background: $btn-primary;
+      color: $text-light;
+    }
   }
-}
 
-.btn-toggle {
-  transition: transform .1s linear;
-  display: inline-block;
+  .btn-icon {
+    padding: 0;
+    min-width: 32px;
 
-  &--expanded {
-    transform: scaleX(-1);
+    &--active {
+      border: 1px solid $btn-active-border;
+      box-shadow: inset 0 0 4px 0 rgba(39,49,58,.26);
+    }
   }
-}
 
-.app-icon {
-  width: 14px;
-  height: 14px;
+  .btn-toggle {
+    transition: transform .1s linear;
+    display: inline-block;
 
-  &--small {
-    width: 13px;
-    height: 13px;
+    &--expanded {
+      transform: scaleX(-1);
+    }
+  }
+
+  .app-icon {
+    width: 14px;
+    height: 14px;
+
+    &--small {
+      width: 13px;
+      height: 13px;
+    }
   }
 }

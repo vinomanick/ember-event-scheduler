@@ -1,13 +1,14 @@
-.external-events__header {
-  position: sticky;
-  top: 0;
-  padding: 10px;
-  background-color: $bg-app;
+.es-external-events {
+  .external-events__header {
+    position: sticky;
+    top: 0;
+    padding: 10px;
+    background-color: $bg-app;
 
-  &--title {
-    margin: 12px 0;
-    font-size: $font-size-large;
-    font-weight: $font-weight-semibold;
+    &--title {
+      margin: 12px 0;
+      font-size: $font-size-large;
+      font-weight: $font-weight-semibold;
+    }
   }
-
 }

@@ -29,11 +29,16 @@ export default Component.extend(schedulerData, {
   moment: service(),
   layout,
   classNames: ['event-scheduler'],
+  classNameBindings: ['theme'],
   attributeBindings: ['data-test-es'],
   'data-test-es': 'event-scheduler',
   viewType: reads('viewConfig.type'),
   defaultConfig: computed(function() {
     return DEFAULT_CONFIG();
+  }),
+  theme: computed('config.theme', function() {
+    let theme = this.config.theme;
+    return theme ? `theme--${theme}` : null;
   }),
 
   config: computed('options', function() {

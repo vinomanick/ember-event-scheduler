@@ -1,5 +1,6 @@
 @import "ember-power-select";
 @import "ember-power-calendar";
+@import "ember-event-scheduler-colorful-theme";
 
 .es-calendar-picker {
   @include ember-power-calendar($cell-size: 30px);

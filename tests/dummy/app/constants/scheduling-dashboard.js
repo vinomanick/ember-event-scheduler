@@ -1,4 +1,5 @@
 const config = {
+  theme: 'colorful',
   defaultView: 'day',
   showCurrentTime: true,
   hasExternalEvents: true,
