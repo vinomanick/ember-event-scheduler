@@ -2,8 +2,8 @@
 
 ## Installation
 
-* `git clone <repository-url>`
-* `cd my-addon`
+* `git clone https://github.com/vinomanick/ember-event-scheduler.git`
+* `cd ember-event-scheduler`
 * `npm install`
 
 ## Linting
