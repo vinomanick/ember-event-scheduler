@@ -1,6 +1,6 @@
 # ember-event-scheduler
 
-[Short description of the addon.]
+Event scheduler is a powerful scheduling calendar that helps you to manage your events for multiple resources(people, projects, etc.,) in a much simpler and elegant way.
 
 
 Compatibility
@@ -14,7 +14,7 @@ Compatibility
 Installation
 ------------------------------------------------------------------------------
 
-* `git clone <repository-url>` this repository
+* `git clone https://github.com/vinomanick/ember-event-scheduler.git` this repository
 * `cd ember-event-scheduler`
 
 ```
@@ -25,7 +25,7 @@ ember install ember-event-scheduler
 Usage
 ------------------------------------------------------------------------------
 
-[Longer description of how to use the addon in apps.]
+https://vinomanick.github.io/ember-event-scheduler/
 
 
 Contributing
@@ -33,8 +33,8 @@ Contributing
 
 ### Installation
 
-* `git clone <repository-url>`
-* `cd my-addon`
+* `git clone https://github.com/vinomanick/ember-event-scheduler.git`
+* `cd ember-event-scheduler`
 * `npm install`
 
 ### Linting

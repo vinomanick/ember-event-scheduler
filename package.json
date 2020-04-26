@@ -5,9 +5,12 @@
   "keywords": [
     "ember-addon"
   ],
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vinomanick/ember-event-scheduler.git"
+  },
   "license": "MIT",
-  "author": "",
+  "author": "Vinodh Kumar <vino1393@gmail.com>",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -16,7 +19,7 @@
     "build": "ember build",
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
-    "start": "ember serve --port 4300",
+    "start": "ember serve",
     "test": "ember test",
     "test:all": "ember try:each"
   },
