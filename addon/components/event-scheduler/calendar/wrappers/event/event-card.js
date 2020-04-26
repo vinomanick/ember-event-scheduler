@@ -31,13 +31,13 @@ export default Component.extend({
       let schedulerEvent = this.event;
       let { id, startTime, endTime, title } = schedulerEvent;
       let data = { id, startTime, endTime, offset, title };
-      this.dragState = 'dragged';
+      this.set('dragState', 'dragged');
       event.dataTransfer.setData('text/data', JSON.stringify(data));
       event.dataTransfer.effectAllowed = 'move';
       event.dataTransfer.setDragImage(event.target, offset, offset);
     }
   },
   dragEnd() {
-    this.dragState = null;
+    this.set('dragState', null);
   }
 });
