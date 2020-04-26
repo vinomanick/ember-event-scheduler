@@ -81,14 +81,6 @@ const getEventPeriodCompact = (startTime, endTime, _moment) => {
   }
 };
 
-/**
- *
- * @param {Number} durationInMins
- * Duration value should be in minutes
- * @param {Object} slotConfig
- * should contain slot width in number and slot interval as object like below
- * { width: 50, interval: { value: 30, format: 'minute' } }
- */
 const getTimerPos = (durationInMins, slotConfig) => {
   let { width, interval } = slotConfig;
   let intervalInMins = moment.duration(interval.value, interval.format).asMinutes();
