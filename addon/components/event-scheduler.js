@@ -13,7 +13,6 @@ import { run } from '@ember/runloop';
 
 const schedulerAPI = {
   slots: 'slots',
-  viewType: 'viewType',
   actions: {
     add: 'add',
     update: 'update',
