@@ -77,7 +77,8 @@
     "node": "8.* || >= 10.*"
   },
   "ember-addon": {
-    "configPath": "tests/dummy/config"
+    "configPath": "tests/dummy/config",
+    "demoURL": "https://vinomanick.github.io/ember-event-scheduler"
   },
   "homepage": "https://vinomanick.github.io/ember-event-scheduler"
 }
