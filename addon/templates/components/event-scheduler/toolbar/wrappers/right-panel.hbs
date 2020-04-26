@@ -2,8 +2,8 @@
   <div class="muted mr-8">{{t "duration"}}</div>
   {{#power-select
     searchEnabled=false
-    selected=selectedDuration
-    options=durationConfig.options
+    selected=durationSelected
+    options=durationOptions
     onchange=(action "changeEventDuration")
     as |duration| }}
     {{t (concat "time." duration.format) count=duration.value }}
