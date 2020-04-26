@@ -12,15 +12,6 @@ const TYPES = {
 };
 
 export default Mixin.create({
-  init() {
-    this._super(...arguments);
-    this.setProperties( {
-      events: EmberObject.create(),
-      externalEvents: EmberObject.create(),
-      resources: EmberObject.create()
-    });
-  },
-
   add(type, data = []) {
     let _data = this.get(type);
     data.forEach((item) => {

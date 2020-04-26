@@ -1,5 +1,4 @@
 import faker from 'faker';
-import moment from 'moment';
 
 const buildResources = (count) => {
   let resources = [];
@@ -12,17 +11,22 @@ const buildResources = (count) => {
   return resources;
 };
 
-const buildEvents = (count, idStart = 0, hasAppointment = true) => {
+const buildEvents = (selectedDate, viewType, count, idStart = 1, hasAppointment = true) => {
   let events = [];
   let startTime, endTime;
   for(let i=0; i<count; i++) {
     if(hasAppointment) {
-      startTime = moment().startOf('day').add(faker.random.number({ min:0, max:2 }), 'd').add(faker.random.number({ min:0, max:5 }), 'h');
+      startTime = selectedDate.clone().startOf(viewType).add(faker.random.number({ min:0, max:5 }), 'h');
+      if (viewType === 'week') {
+        startTime.add(faker.random.number({ min:0, max:7 }), 'd');
+      } else if ( viewType === 'month') {
+        startTime.add(faker.random.number({ min:0, max:25 }), 'd');
+      }
       endTime = startTime.clone().add(faker.random.number({ min:1, max:4 }), 'h');
     }
     events.push({
-      id: idStart+1,
-      resourceId: faker.random.number({ min:101, max:110 }),
+      id: idStart + i,
+      resourceId: faker.random.number({ min:101, max:120 }),
       title: faker.lorem.sentence(),
       startTime: startTime ? startTime.toISOString() : null,
       endTime: endTime ? endTime.toISOString() : null

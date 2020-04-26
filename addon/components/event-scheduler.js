@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import layout from '../templates/components/event-scheduler';
 import PublicAPI from 'ember-event-scheduler/utils/public-api';
 import { inject as service } from '@ember/service';
-import { computed } from '@ember/object';
+import EmberObject, { computed } from '@ember/object';
 import { reads } from '@ember/object/computed';
 import { DEFAULT_CONFIG } from '../constants/event-scheduler';
 import { assign } from '@ember/polyfills';
@@ -13,6 +13,7 @@ import { run } from '@ember/runloop';
 
 const schedulerAPI = {
   slots: 'slots',
+  viewType: 'viewType',
   actions: {
     add: 'add',
     update: 'update',
@@ -81,6 +82,12 @@ export default Component.extend(schedulerData, {
     if(!this.selectedDuration) {
       this.selectedDuration = this.config.toolbar.duration.default;
     }
+
+    this.setProperties( {
+      events: EmberObject.create(),
+      externalEvents: EmberObject.create(),
+      resources: EmberObject.create()
+    });
 
     run.next(() => this.onSchedulerLoad(this.publicAPI))
 

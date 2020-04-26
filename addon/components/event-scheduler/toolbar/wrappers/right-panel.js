@@ -17,7 +17,8 @@ export default Component.extend({
       this.onDurationChange && this.onDurationChange(newDuration);
     },
     changeView(view) {
-      this.onViewChange &&  this.onViewChange(view);
+      let { type } = this.views[view];
+      this.onViewChange &&  this.onViewChange(view, type);
     }
   }
 });
