@@ -2,7 +2,7 @@
   &.theme--colorful {
     .es-calendar {
       .calendar__content {
-        $colors: #fceee2, #e2f9fc, #d4d3ff, #ffd6d6, #dff0ff, #fdf;
+        $colors: #e0f7fa, #ffebee, #fff3e0, #e1f5fe, #e3f2fd, #f3e5f5;
 
         @for $i from 1 through length($colors) {
           $bg_color:  nth($colors, $i);

@@ -6,7 +6,7 @@ module.exports = function(defaults) {
   let app = new EmberAddon(defaults, {
     // Add options here
     'ember-faker': {
-      enabled: EmberAddon.env() === 'production'
+      enabled: true
     }
   });
 
