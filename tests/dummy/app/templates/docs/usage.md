@@ -3,6 +3,10 @@
 ## Requirements
 * `node` 10 and above
 * `ember-cli & ember-source` **2.18** and above
+* `ember-moment` v8.0.0 or above
+* `ember-power-select` v2.3.5 or above
+* `ember-power-calendar` v0.13.3
+* `ember-intl` v4.2.4 or above
 
 ## Installation
 ### Installing Homebrew on Mac
@@ -26,7 +30,7 @@ npm install -g ember-cli
 To use event scheduler in your projects, you need to install the addons via ember install:
 
 ```sh
-ember install ember-intl ember-power-calendar-moment ember-power-calendar@0.13.3 ember-power-select@^2.3.5  ember-event-scheduler
+ember install ember-intl ember-moment ember-power-calendar-moment ember-power-calendar@0.13.3 ember-power-select@^2.3.5  ember-event-scheduler
 ```
 
 We are dependent on ember-power-select and ember-power-calendar for the toolbar actions to work. So

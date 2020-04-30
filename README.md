@@ -9,6 +9,10 @@ Compatibility
 * Ember.js v3.4 or above
 * Ember CLI v2.13 or above
 * Node.js v8 or above
+* Ember moment v8.0.0 or above
+* Ember power select v2.3.5 or above
+* Ember power calendar v0.13.3
+* Ember intl v4.2.4 or above
 
 
 Installation
@@ -18,7 +22,7 @@ Installation
 * `cd ember-event-scheduler`
 
 ```
-ember install ember-intl ember-power-calendar-moment ember-power-calendar@0.13.3 ember-power-select@^2.3.5  ember-event-scheduler
+ember install ember-intl ember-moment ember-power-calendar-moment ember-power-calendar@0.13.3 ember-power-select@^2.3.5  ember-event-scheduler
 ```
 We are dependent on ember-power-select and ember-power-calendar for the toolbar actions to work. So
 we need to follow the steps mentioned in their respective site.
