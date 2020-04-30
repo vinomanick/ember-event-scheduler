@@ -72,7 +72,9 @@ export default Component.extend(schedulerData, {
 
   init() {
     this._super(...arguments);
-    this.intl.setLocale(['en-us']);
+    if(!this.intl.get('locale')) {
+      this.intl.setLocale(['en-us']);
+    }
     this.moment.setTimeZone('America/Santiago');
 
     this.publicAPI = new PublicAPI(this, schedulerAPI);

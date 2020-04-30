@@ -18,9 +18,13 @@ Installation
 * `cd ember-event-scheduler`
 
 ```
-ember install ember-event-scheduler
+ember install ember-intl ember-power-calendar-moment ember-power-calendar@0.13.3 ember-power-select@^2.3.5  ember-event-scheduler
 ```
+We are dependent on ember-power-select and ember-power-calendar for the toolbar actions to work. So
+we need to follow the steps mentioned in their respective site.
 
+For ember-power-select: [Installation steps](https://2-x.ember-power-select.com/docs/installation/)
+For ember-power-calendar: [Installation steps](https://ember-power-calendar.com/docs/installation)
 
 Usage
 ------------------------------------------------------------------------------
