@@ -1,26 +1,28 @@
-import { module, test } from 'qunit';
+import { module, test, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | event scheduler/calendar/wrappers/resource', function(hooks) {
+const resource = { id: 1, name: 'Resource 1' };
+
+module('Integration | Component | event-scheduler/calendar/wrappers/resource', function(hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.on('myAction', function(val) { ... });
+  test('renders', async function(assert) {
+    this.set('resource', resource);
+    await render(hbs`{{event-scheduler/calendar/wrappers/resource resource=resource}}`);
 
-    await render(hbs`{{event-scheduler/calendar/wrappers/resource}}`);
+    assert.dom('[data-test-es="resource-grid"]').exists();
+    assert.dom('[data-test-es="resource-name"]').hasText(resource.name);
+  });
 
-    assert.dom('*').hasText('');
+  // TODO: Figure out a way to test custom component rendition
+  skip('renders custom component', async function(assert) {
+    this.setProperties({ resource, customComponent: '' });
+    await render(hbs`{{event-scheduler/calendar/wrappers/resource
+      resource=resource customComponent=customComponent}}`);
 
-    // Template block usage:
-    await render(hbs`
-      {{#event-scheduler/calendar/wrappers/resource}}
-        template block text
-      {{/event-scheduler/calendar/wrappers/resource}}
-    `);
-
-    assert.dom('*').hasText('template block text');
+    assert.dom('[data-test-es="resource-grid"]').exists();
+    assert.dom('[data-test-es="resource-name"]').doesNotExist();
   });
 });

@@ -1,8 +1,8 @@
 <div class="calendar__row__name" data-test-es="resource">
-  {{#if resourceCustomComponent}}
-    {{component resourceCustomComponent resource=resource}}
+  {{#if customComponent}}
+    {{component customComponent resource=resource}}
   {{else}}
-    <div class="resource-name">{{resource.name}}</div>
+    <div class="resource-name" data-test-es="resource-name">{{resource.name}}</div>
   {{/if}}
 </div>
 <div class="calendar__row__grid" data-name="resource" data-test-es= "resource-grid" data-resource-id={{resource.id}}>

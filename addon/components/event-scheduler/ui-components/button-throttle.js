@@ -6,7 +6,7 @@ export default Component.extend({
   layout,
   tagName: 'button',
   classNames: ['btn'],
-  attributeBindings: ['type', 'data-test-id', 'aria-label', 'disabled'],
+  attributeBindings: ['type', 'data-test-es', 'aria-label', 'disabled'],
   type: 'button',
   click() {
     run.throttle(this, this._click, this.throttleSpeed || 500);

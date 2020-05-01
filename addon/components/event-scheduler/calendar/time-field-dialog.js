@@ -13,11 +13,11 @@ export default Component.extend({
     changeTime(time) {
       this.set('selectedTime', time);
     },
-    onUpdate() {
-      this.onStartTimeUpdate(this.selectedTime);
+    onContinue() {
+      this.onSubmit && this.onSubmit(this.selectedTime);
     },
     onCancel() {
-      this.onClose();
+      this.onClose && this.onClose();
     }
   }
 });

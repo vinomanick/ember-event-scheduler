@@ -1,5 +1,5 @@
 {{#if showExternalEventsToggle}}
-  <button data-test-id="external-events-toggle-btn"
+  <button data-test-es="external-events-toggle-btn"
     aria-label={{t (if isExternalEventsExpanded "hide" "show")}}
     onclick={{action "toggleExternalEvent"}}
     class="btn btn-icon mr-8 {{if isExternalEventsExpanded "btn-icon--active"}}">
@@ -9,7 +9,7 @@
   </button>
 {{/if}}
 
-{{#event-scheduler/ui-components/button-throttle data-test-id="today-btn" type="button"
+{{#event-scheduler/ui-components/button-throttle data-test-es="today-btn" type="button"
   onclick=(action "selectToday")
   throttleSpeed=throttleTime
   class="btn btn--secondary mr-8"
@@ -19,7 +19,7 @@
   {{t "today"}}
 {{/event-scheduler/ui-components/button-throttle}}
 
-{{#event-scheduler/ui-components/button-throttle data-test-id="previous-btn" type="button"
+{{#event-scheduler/ui-components/button-throttle data-test-es="previous-btn" type="button"
   onclick=(action "navigate" "previous")
   throttleSpeed=throttleTime
   class="btn-icon navigation navigation--left"
@@ -28,7 +28,7 @@
   {{svg-jar "left-arrow" class="app-icon"}}
 {{/event-scheduler/ui-components/button-throttle}}
 
-{{#event-scheduler/ui-components/button-throttle data-test-id="next-btn" type="button"
+{{#event-scheduler/ui-components/button-throttle data-test-es="next-btn" type="button"
   onclick=(action "navigate" "next")
   throttleSpeed=throttleTime
   class="btn-icon navigation navigation--right"

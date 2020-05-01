@@ -3,24 +3,21 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | event scheduler/calendar/wrappers/resource header', function(hooks) {
+module('Integration | Component | event-scheduler/calendar/wrappers/resource-header', function(hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.on('myAction', function(val) { ... });
+  test('renders', async function(assert) {
+    this.set('name', 'Resources');
+    await render(hbs`{{event-scheduler/calendar/wrappers/resource-header name=name}}`);
+    assert.dom('[data-test-es="resource-header"]').hasText(this.name);
+  });
 
-    await render(hbs`{{event-scheduler/calendar/wrappers/resource-header}}`);
-
-    assert.dom('*').hasText('');
-
-    // Template block usage:
+  test('yield block content', async function(assert) {
     await render(hbs`
       {{#event-scheduler/calendar/wrappers/resource-header}}
-        template block text
+        <div class='heading'>Yielded Heading</div>
       {{/event-scheduler/calendar/wrappers/resource-header}}
     `);
-
-    assert.dom('*').hasText('template block text');
+    assert.dom('[data-test-es="resource-header"]').hasText('Yielded Heading');
   });
 });

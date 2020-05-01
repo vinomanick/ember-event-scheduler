@@ -1,23 +1,26 @@
 {{#event-scheduler/ui-components/modal-dialog as |dialog|}}
   {{#dialog.header}}
-    <h4 class="form-dialog mb-10">{{t "time_field_dialog.title"}}</h4>
+    <h4 class="form-dialog mb-10" data-test-es="time-dialog-title">{{t "time_field_dialog.title"}}</h4>
   {{/dialog.header}}
   {{#dialog.body}}
-    {{#power-select
+    <div data-test-es="start-time-field">
+      {{#power-select
         options=timeFieldChoices
         searchEnabled=false
         selected=selectedTime
         onchange=(action "changeTime")
-        as |time| }}
-      {{time}}
-    {{/power-select}}
+        as |time|
+      }}
+        {{time}}
+      {{/power-select}}
+    </div>
   {{/dialog.body}}
   {{#dialog.footer}}
     <div class="text--align-right">
-      <button aria-label={{t "cancel"}} class="btn btn--secondary" data-test-id="cancel-start-time" {{action "onCancel"}}>
+      <button aria-label={{t "cancel"}} class="btn btn--secondary" data-test-es="cancel-update-time" {{action "onCancel"}}>
         {{t "cancel"}}
       </button>
-      <button aria-label={{t "continue"}} class="btn btn--primary" data-test-id="update-start-time" {{action "onUpdate"}}>
+      <button aria-label={{t "continue"}} class="btn btn--primary" data-test-es="update-time" {{action "onContinue"}}>
         {{t "continue"}}
       </button>
     </div>

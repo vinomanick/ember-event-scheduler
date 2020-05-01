@@ -1,26 +1,65 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import { getTimeDropdownChoices } from 'ember-event-scheduler/utils/date-util';
+import { DEFAULT_CONFIG } from 'dummy/tests/constants/event-scheduler';
+import sinon from 'sinon';
+import { selectChoose } from 'ember-power-select/test-support/helpers';
+import wait from 'ember-test-helpers/wait';
 
-module('Integration | Component | event scheduler/calendar/time field dialog', function(hooks) {
+module('Integration | Component | event-scheduler/calendar/time-field-dialog', function(hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.on('myAction', function(val) { ... });
+  let currentDate;
 
-    await render(hbs`{{event-scheduler/calendar/time-field-dialog}}`);
+  hooks.beforeEach(function() {
+    let { timePicker } = DEFAULT_CONFIG();
 
-    assert.dom('*').hasText('');
+    // Inject moment service and setting the zone
+    this.moment = this.owner.lookup('service:moment');
+    this.get('moment').setTimeZone('Europe/Amsterdam');
+    currentDate = this.get('moment').moment().startOf('day');
 
-    // Template block usage:
+    this.setProperties({
+      timeFieldChoices: getTimeDropdownChoices(currentDate, timePicker),
+      onSubmitSpy: sinon.spy(),
+      onCloseSpy: sinon.spy()
+    });
+  });
+
+  // TODO: Assert with translations
+  test('renders', async function(assert) {
     await render(hbs`
-      {{#event-scheduler/calendar/time-field-dialog}}
-        template block text
-      {{/event-scheduler/calendar/time-field-dialog}}
-    `);
+    <div id="es-app-overlays" class="es-app-overlays"></div>
+    {{event-scheduler/calendar/time-field-dialog timeFieldChoices=timeFieldChoices
+      onSubmit=(action onSubmitSpy) onClose=(action onCloseSpy)}}`);
+    assert.dom('[data-test-es="time-dialog-title"]').hasText('Set appointment start time');
+  });
 
-    assert.dom('*').hasText('template block text');
+  test('should return the selected time on submit', async function(assert) {
+    await render(hbs`
+    <div id="es-app-overlays" class="es-app-overlays"></div>
+    {{event-scheduler/calendar/time-field-dialog timeFieldChoices=timeFieldChoices
+      onSubmit=(action onSubmitSpy) onClose=(action onCloseSpy)}}`);
+
+    await selectChoose('[data-test-es="start-time-field"]', '.ember-power-select-option', 2);
+    return wait().then(async() => {
+      await click('[data-test-es="update-time"]');
+      assert.equal(this.onSubmitSpy.calledWith('01:00 AM'), true);
+    });
+  });
+
+  test('should trigger the cancel action on clicking the cancel', async function(assert) {
+    await render(hbs`
+    <div id="es-app-overlays" class="es-app-overlays"></div>
+    {{event-scheduler/calendar/time-field-dialog timeFieldChoices=timeFieldChoices
+      onSubmit=(action onSubmitSpy) onClose=(action onCloseSpy)}}`);
+
+    await selectChoose('[data-test-es="start-time-field"]', '.ember-power-select-option', 2);
+    return wait().then(async() => {
+      await click('[data-test-es="cancel-update-time"]');
+      assert.equal(this.onCloseSpy.calledOnce, true);
+    });
   });
 });
