@@ -8,10 +8,8 @@ module('helper:grid-position', function(hooks) {
 
   // Replace this with your real tests.
   test('it renders', async function(assert) {
-    this.set('inputValue', '1234');
+    await render(hbs`{{grid-position 1 2 4 5 6 7}}`);
 
-    await render(hbs`{{grid-position inputValue}}`);
-
-    assert.dom('*').hasText('1234');
+    assert.dom(this.element).hasText('grid-row: 3 / span 4; grid-column: 11 / span 7');
   });
 });

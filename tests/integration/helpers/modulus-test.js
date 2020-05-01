@@ -8,10 +8,10 @@ module('helper:modulus', function(hooks) {
 
   // Replace this with your real tests.
   test('it renders', async function(assert) {
-    this.set('inputValue', '1234');
+    await render(hbs`{{modulus 5 2}}`);
+    assert.dom(this.element).hasText('1');
 
-    await render(hbs`{{modulus inputValue}}`);
-
-    assert.dom('*').hasText('1234');
+    await render(hbs`{{modulus 4 2}}`);
+    assert.dom(this.element).hasText('0');
   });
 });
