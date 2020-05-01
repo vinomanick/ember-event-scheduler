@@ -12,6 +12,14 @@ export default Component.extend({
   today: computed(function() {
     return this.moment.moment().startOf('day');
   }),
+  disablePrevious: computed('selectedDate', function() {
+    let _minDate = this.minDate;
+    return _minDate && this.selectedDate.isSameOrBefore(_minDate, 'day');
+  }),
+  disableNext: computed('selectedDate', function() {
+    let _maxDate = this.maxDate;
+    return _maxDate && this.selectedDate.isSameOrAfter(_maxDate, 'day');
+  }),
   actions: {
     navigate(event) {
       let _currentDate = this.selectedDate.clone();

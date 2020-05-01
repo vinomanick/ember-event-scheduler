@@ -1,13 +1,13 @@
 {{#ember-wormhole to="es-app-overlays"}}
   <div class="modal-wrapper transcluent">
     <div class="modal-overlay">
-      <div class="modal-overlay__header">
+      <div data-test-es="modal-overlay-header" class="modal-overlay__header">
         {{yield (hash header=(component "event-scheduler/ui-components/blank-template"))}}
       </div>
-      <div class="modal-overlay__body">
+      <div data-test-es="modal-overlay-body" class="modal-overlay__body">
         {{yield (hash body=(component "event-scheduler/ui-components/blank-template"))}}
       </div>
-      <div class="modal-overlay__footer">
+      <div data-test-es="modal-overlay-footer" class="modal-overlay__footer">
         {{yield (hash footer=(component "event-scheduler/ui-components/blank-template"))}}
       </div>
     </div>

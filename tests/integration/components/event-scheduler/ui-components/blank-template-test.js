@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | event scheduler/ui components/blank template', function(hooks) {
+module('Integration | Component | event-scheduler/ui-components/blank-template', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
@@ -12,7 +12,7 @@ module('Integration | Component | event scheduler/ui components/blank template',
 
     await render(hbs`{{event-scheduler/ui-components/blank-template}}`);
 
-    assert.dom('*').hasText('');
+    assert.dom(this.element).hasText('');
 
     // Template block usage:
     await render(hbs`
@@ -21,6 +21,6 @@ module('Integration | Component | event scheduler/ui components/blank template',
       {{/event-scheduler/ui-components/blank-template}}
     `);
 
-    assert.dom('*').hasText('template block text');
+    assert.dom(this.element).hasText('template block text');
   });
 });

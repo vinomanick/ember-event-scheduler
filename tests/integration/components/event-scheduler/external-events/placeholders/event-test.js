@@ -3,24 +3,11 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | event scheduler/external events/placeholders/event', function(hooks) {
+module('Integration | Component | event-scheduler/external-events/placeholders/event', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.on('myAction', function(val) { ... });
-
     await render(hbs`{{event-scheduler/external-events/placeholders/event}}`);
-
-    assert.dom('*').hasText('');
-
-    // Template block usage:
-    await render(hbs`
-      {{#event-scheduler/external-events/placeholders/event}}
-        template block text
-      {{/event-scheduler/external-events/placeholders/event}}
-    `);
-
-    assert.dom('*').hasText('template block text');
+    assert.dom('[data-test-es="external-event-loader"]').exists();
   });
 });

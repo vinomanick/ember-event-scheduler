@@ -3,24 +3,28 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | event scheduler/ui components/modal dialog', function(hooks) {
+module('Integration | Component | event-scheduler/ui-components/modal-dialog', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.on('myAction', function(val) { ... });
-
-    await render(hbs`{{event-scheduler/ui-components/modal-dialog}}`);
-
-    assert.dom('*').hasText('');
-
     // Template block usage:
     await render(hbs`
-      {{#event-scheduler/ui-components/modal-dialog}}
-        template block text
+      <div id="es-app-overlays" class="es-app-overlays"></div>
+      {{#event-scheduler/ui-components/modal-dialog as |dialog|}}
+        {{#dialog.header}}
+          Header text
+        {{/dialog.header}}
+        {{#dialog.body}}
+          Body text
+        {{/dialog.body}}
+        {{#dialog.footer}}
+          Footer text
+        {{/dialog.footer}}
       {{/event-scheduler/ui-components/modal-dialog}}
     `);
 
-    assert.dom('*').hasText('template block text');
+    assert.dom('[data-test-es="modal-overlay-header"]').hasText('Header text');
+    assert.dom('[data-test-es="modal-overlay-body"]').hasText('Body text');
+    assert.dom('[data-test-es="modal-overlay-footer"]').hasText('Footer text');
   });
 });

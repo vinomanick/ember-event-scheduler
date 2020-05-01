@@ -3,24 +3,21 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | event scheduler/external events/wrappers/header', function(hooks) {
+module('Integration | Component | event-scheduler/external-events/wrappers/header', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.on('myAction', function(val) { ... });
+    this.set('name', 'External events');
 
-    await render(hbs`{{event-scheduler/external-events/wrappers/header}}`);
-
-    assert.dom('*').hasText('');
+    await render(hbs`{{event-scheduler/external-events/wrappers/header name=name}}`);
+    assert.dom('[data-test-es="external-events-header"]').hasText(this.name);
 
     // Template block usage:
     await render(hbs`
       {{#event-scheduler/external-events/wrappers/header}}
-        template block text
+        <div>Yielded heading</div>
       {{/event-scheduler/external-events/wrappers/header}}
     `);
-
-    assert.dom('*').hasText('template block text');
+    assert.dom('[data-test-es="external-events-header"]').hasText('Yielded heading');
   });
 });

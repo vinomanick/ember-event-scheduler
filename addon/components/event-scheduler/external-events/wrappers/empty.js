@@ -3,5 +3,7 @@ import layout from '../../../../templates/components/event-scheduler/external-ev
 
 export default Component.extend({
   layout,
-  classNames: ['empty-message']
+  classNames: ['empty-message'],
+  attributeBindings: ['data-test-es'],
+  'data-test-es': 'external-events-empty',
 });
