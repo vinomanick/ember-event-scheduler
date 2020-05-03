@@ -9,14 +9,6 @@ export default Component.extend({
   moment: service(),
   layout,
   classNames: ['es-toolbar__panel', 'es-toolbar__panel--center'],
-  disablePrevious: computed('selectedDate', function() {
-    let _minDate = this.minDate;
-    return _minDate && this.selectedDate.isSameOrBefore(_minDate, 'day');
-  }),
-  disableNext: computed('selectedDate', function() {
-    let _maxDate = this.maxDate;
-    return _maxDate && this.selectedDate.isSameOrAfter(_maxDate, 'day');
-  }),
   currentPeriod: computed('selectedDate', 'viewType', function() {
     let { selectedDate, dateFormat, slotConfig } = this;
     return getCalendarPeriod(selectedDate, dateFormat, slotConfig);
