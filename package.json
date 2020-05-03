@@ -18,8 +18,12 @@
   "scripts": {
     "build": "ember build",
     "lint:hbs": "ember-template-lint .",
-    "lint:js": "eslint .",
+    "lint:js": "eslint . --fix",
+    "lint:style": "stylelint **/*.scss",
+    "lint": "yarn lint:js && yarn lint:style && yarn lint:hbs",
+    "lint-staged": "lint-staged",
     "start": "ember serve",
+    "deploy": "ember deploy production",
     "test": "ember test",
     "test:all": "ember try:each"
   },
@@ -48,6 +52,7 @@
     "ember-cli-inject-live-reload": "^1.8.2",
     "ember-cli-moment-shim": "^3.7.1",
     "ember-cli-sri": "^2.1.1",
+    "ember-cli-stylelint": "^4.0.0",
     "ember-cli-template-lint": "^1.0.0-beta.1",
     "ember-cli-uglify": "^2.1.0",
     "ember-css-transitions": "^1.0.0",
@@ -71,9 +76,21 @@
     "ember-wormhole": "^0.5.5",
     "eslint-plugin-ember": "^6.2.0",
     "eslint-plugin-node": "^9.0.1",
+    "lint-staged": "^10.2.2",
     "loader.js": "^4.7.0",
-    "qunit-dom": "^0.8.4"
+    "pre-commit": "^1.2.2",
+    "qunit-dom": "^0.8.4",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-order": "^4.0.0"
   },
+  "lint-staged": {
+    "*.js": "eslint . --fix",
+    "*.hbs": "ember-template-lint .",
+    "*.scss": "stylelint **/*.scss"
+  },
+  "pre-commit": [
+    "lint-staged"
+  ],
   "engines": {
     "node": "8.* || >= 10.*"
   },

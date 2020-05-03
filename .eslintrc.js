@@ -15,6 +15,7 @@ module.exports = {
     browser: true
   },
   rules: {
+    'ember/no-jquery': 'error'
   },
   overrides: [
     // node files
@@ -45,7 +46,15 @@ module.exports = {
       plugins: ['node'],
       rules: Object.assign({}, require('eslint-plugin-node').configs.recommended.rules, {
         // add your custom rules and overrides for node files here
+        'comma-dangle': ['error', 'never'],
+        'ember/order-in-components': 2,
+        'ember/order-in-controllers': 2,
+        'ember/order-in-models': 2,
+        'ember/order-in-routes': 2,
+        'ember/no-jquery': 2,
+        'ember/no-restricted-resolver-tests': 0
       })
+
     }
   ]
 };
