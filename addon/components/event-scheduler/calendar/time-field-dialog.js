@@ -1,14 +1,14 @@
 import Component from '@ember/component';
 import layout from '../../../templates/components/event-scheduler/calendar/time-field-dialog';
-import { computed, } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default Component.extend({
   intl: service(),
   layout,
-  selectedTime: computed(function() {
-    return this.timeFieldChoices[0];
-  }),
+  init() {
+    this._super(...arguments);
+    this.set('selectedTime', this.timeFieldChoices[0]);
+  },
   actions: {
     changeTime(time) {
       this.set('selectedTime', time);
