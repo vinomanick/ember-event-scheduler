@@ -31,10 +31,9 @@ jobs:
     # runs linting and tests with current locked deps
     - stage: test
       name: Tests
-      script: yarn run test
-    - stage: coverage
-      name: Coverage
-      script: bash <(curl -s https://codecov.io/bash)
+      script:
+        - yarn run test
+        - bash <(curl -s https://codecov.io/bash)
     - stage: deploy
       name: Deploy to gh-pages
       if: branch = master and tag is present
