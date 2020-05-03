@@ -18,7 +18,8 @@ module('Integration | Component | event-scheduler/calendar/time-field-dialog', f
 
     // Inject moment service and setting the zone
     this.moment = this.owner.lookup('service:moment');
-    this.get('moment').setTimeZone('Europe/Amsterdam');
+    this.moment.setTimeZone('Europe/Amsterdam');
+    this.moment.setLocale('en');
     currentDate = this.get('moment').moment().startOf('day');
 
     this.setProperties({

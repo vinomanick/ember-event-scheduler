@@ -14,7 +14,8 @@ module('Integration | Component | event-scheduler/external-events', function(hoo
   hooks.beforeEach(function() {
   // Inject moment service and setting the zone
   this.moment = this.owner.lookup('service:moment');
-  this.get('moment').setTimeZone('Europe/Amsterdam');
+  this.moment.setTimeZone('Europe/Amsterdam');
+  this.moment.setLocale('en');
   currentDate = this.get('moment').moment().startOf('day');
 
     let { externalEvents: config } = DEFAULT_CONFIG();

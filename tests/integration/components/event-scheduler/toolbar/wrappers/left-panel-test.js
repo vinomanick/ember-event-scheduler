@@ -14,7 +14,8 @@ module('Integration | Component | event-scheduler/toolbar/wrappers/left-panel', 
   hooks.beforeEach(function() {
     // Inject moment service and setting the zone
     this.moment = this.owner.lookup('service:moment');
-    this.get('moment').setTimeZone('Europe/Amsterdam');
+    this.moment.setTimeZone('Europe/Amsterdam');
+    this.moment.setLocale('en');
     currentDate = this.get('moment').moment().startOf('day');
 
     let { toolbar: { showExternalEventsToggle, dateFormat }, views: { day: { type: viewType } } } = DEFAULT_CONFIG();
