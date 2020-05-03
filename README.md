@@ -1,7 +1,8 @@
 # ember-event-scheduler
+[![Build Status](https://api.travis-ci.org/vinomanick/ember-event-scheduler.svg?branch=master)](https://travis-ci.org/github/vinomanick/ember-event-scheduler)
+[![codecov](https://codecov.io/gh/vinomanick/ember-event-scheduler/branch/master/graph/badge.svg)](https://codecov.io/gh/vinomanick/ember-event-scheduler)
 
 Event scheduler is a powerful scheduling calendar that helps you to manage your events for multiple resources(people, projects, etc.,) in a much simpler and elegant way.
-
 
 Compatibility
 ------------------------------------------------------------------------------
