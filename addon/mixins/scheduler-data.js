@@ -3,7 +3,8 @@ import {
   getEventMandates
 } from 'ember-event-scheduler/utils/event-scheduler';
 import { run } from '@ember/runloop';
-import EmberObject, { setProperties } from '@ember/object';
+import EmberObject from '@ember/object';
+import { inject as service } from '@ember/service';
 
 const TYPES = {
   EVENT: 'events',
@@ -12,75 +13,120 @@ const TYPES = {
 };
 
 export default Mixin.create({
+  store: service(),
+
   add(type, data = []) {
     let _data = this.get(type);
     data.forEach((item) => {
-      _data.set(item.id, item);
+      let record;
+      if ([TYPES.EVENT, TYPES.EXTERNAL_EVENT].includes(type)) {
+        let event = this.get(type).get(item.id);
+
+        // Event already present so ignoring it
+        if(event) {
+          return null;
+        }
+
+        record = this.store.peekRecord('event', item.id);
+        let { id, startTime, endTime, resourceId, title } = item;
+        if (record) {
+          record.setProperties({ startTime, endTime, resourceId });
+          type === TYPES.EVENT ? record.set('isCalendarEvent', true) : record.set('isExternalEvent', true);
+        } else {
+          let isCalendarEvent = type === TYPES.EVENT;
+          record = this.store.createRecord('event', {
+            id,
+            startTime,
+            endTime,
+            resourceId,
+            title,
+            isCalendarEvent,
+            isExternalEvent: !isCalendarEvent
+          });
+        }
+      } else if (type === TYPES.RESOURCE) {
+        record = this.store.peekRecord('resource', item.id);
+        let { id, name } = item;
+        if(!record) {
+          record = this.store.createRecord('resource', { id, name });
+        }
+      }
+      _data.set(item.id, record);
     });
   },
 
   update(type, item) {
-    if (type === TYPES.EVENT) {
-      this._updateEvent(item);
-    } else if (type === TYPES.EXTERNAL_EVENT) {
-      this._updateExternalEvent(item);
+    let event = this.get(type).get(item.id);
+    let record = this.store.peekRecord('event', item.id);
+    if(record) {
+      let prevData = getEventMandates(record);
+      record.set('prevData', prevData);
     }
-  },
+    if(event) {
+      let { id, startTime, endTime, resourceId } = item;
+      record.setProperties({ startTime, endTime, resourceId });
 
-  _updateEvent(event) {
-    let _events = this.events;
-    let { id } = event;
-    let _event = _events[event.id];
-    if (_event) {
-      _event._prevData = getEventMandates(_event);
-      let { startTime, endTime, resourceId } = event;
-      setProperties(_event, { startTime, endTime, resourceId });
-      _events.set(id, undefined);
-      run.next(() => _events.set(id, _event))
+      this.events.set(id, undefined);
+      run.next(() => this.events.set(id, record));
     } else {
-      this.add(TYPES.EVENT, [event]);
-    }
-  },
-
-  _updateExternalEvent(event) {
-    let _events = this.externalEvents;
-    let _event = _events[event.id];
-    if (_event) {
-      let { startTime, endTime, resourceId } = event;
-      setProperties(_event, { startTime, endTime, resourceId });
+      this.add(TYPES.EVENT, [item]);
     }
   },
 
   revertEvent(id) {
-    let _events = this.events;
-    let event = _events.get(id);
-    if (event) {
-      this._revertEvent(event) ? this.update(TYPES.EVENT, event) : this.delete(TYPES.EVENT, id);
-      this.update(TYPES.EXTERNAL_EVENT, event)
-    }
-  },
+    let event = this.events.get(id);
+    if(event) {
+      let record = this.store.peekRecord('event', id);
+      if(record.prevData) {
+        let { startTime, endTime, resourceId } = record.prevData;
+        record.setProperties({ startTime, endTime, resourceId, prevData: null });
 
-  _revertEvent(event) {
-    let _prevData = event._prevData;
-    if (_prevData) {
-      let { startTime, endTime, resourceId } = _prevData;
-      setProperties(event, { startTime, endTime, resourceId, _prevData: null });
-      return true;
+        this.events.set(id, undefined);
+        run.next(() => this.events.set(id, record));
+      } else {
+        this.delete(TYPES.EVENT, id);
+      }
     }
-    return false;
   },
 
   delete(type, id) {
     let _data = this.get(type);
     if (_data.get(id)) {
+      this.clearStore(type, id);
       _data.set(id, undefined); // This will trigger the observers/computed properties
       delete _data[id]; // This will delete the property from the object
     }
   },
 
+  clearStore(type, id) {
+    if (type === TYPES.EVENT) {
+      let record = this.store.peekRecord('event', id);
+      !record.isExternalEvent && this.store.unloadRecord(record);
+    } else if(type === TYPES.EXTERNAL_EVENT) {
+      let record = this.store.peekRecord('event', id);
+      !record.isCalendarEvent && this.store.unloadRecord(record);
+    } else if (type === TYPES.RESOURCE) {
+      let record = this.store.peekRecord('resource', id);
+      this.store.unloadRecord(record);
+    }
+  },
 
   deleteAll(types) {
-    types.forEach((type) => this.set(type, EmberObject.create()));
+    types.forEach((type) => {
+      if([TYPES.EVENT, TYPES.EXTERNAL_EVENT].includes(type)) {
+        let _data = this.get(type);
+        Object.keys(_data).forEach((id) => {
+          let event = _data.get(id);
+          if((type === TYPES.EVENT && !event.isExternalEvent)
+            || (type === TYPES.EXTERNAL_EVENT && !event.isCalendarEvent)) {
+            this.store.unloadRecord(event);
+          }
+        });
+      } else if (type === TYPES.RESOURCE) {
+        this.store.unloadAll('resource');
+      }
+      this.set(type, EmberObject.create())
+    });
   },
 
   resetCalendar() {

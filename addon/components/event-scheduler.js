@@ -97,7 +97,7 @@ export default Component.extend(schedulerData, {
       resources: EmberObject.create()
     });
 
-    run.next(() => this.onSchedulerLoad(this.publicAPI))
+    run.next(() => this.onSchedulerLoad(this.publicAPI));
 
   },
 
@@ -106,8 +106,7 @@ export default Component.extend(schedulerData, {
 
   actions: {
     triggerEventDrop(updatedEvent) {
-      this._updateEvent(updatedEvent);
-      this._updateExternalEvent(updatedEvent);
+      this.update('events', updatedEvent);
       this.onEventDrop(updatedEvent);
     }
   }

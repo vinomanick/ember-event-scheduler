@@ -70,7 +70,7 @@ module('Integration | Component | event-scheduler | Drag test', function(hooks) 
 
       return wait().then(() => {
         assert.deepEqual(JSON.parse(dragStartEvent.dataTransfer.getData('text/data')), {
-          id: 1, offset: 4, startTime, endTime, title: 'First event for Resource 1'
+          id: '1', offset: 4, startTime, endTime, title: 'First event for Resource 1'
         });
         assert.dom(element).hasClass('dragged');
       });

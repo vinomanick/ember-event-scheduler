@@ -78,7 +78,6 @@ export default Component.extend({
     let externalEventswithAppointments = buildEvents(this.selectedDate, this.viewType, 5, 21, false);
     let externalEventswithNoAppointments = buildEvents(this.selectedDate, this.viewType, 15, 26, true);
     let externalEventsData = [...externalEventswithAppointments, ...externalEventswithNoAppointments];
-    this.publicApi.actions.resetExternalEvents();
     this.publicApi.actions.add('externalEvents', externalEventsData);
   },
 

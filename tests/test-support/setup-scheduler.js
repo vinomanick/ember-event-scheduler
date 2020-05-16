@@ -10,6 +10,8 @@ const setupScheduler = (hooks) => {
     this.moment.setTimeZone('Europe/Amsterdam');
     this.moment.setLocale('en');
 
+    this.store = this.owner.lookup('service:store');
+
     let resourceId = 101;
     let resourceId2 = 102;
     let eventId = 1;
