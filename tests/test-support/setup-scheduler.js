@@ -11,6 +11,7 @@ const setupScheduler = (hooks) => {
     this.moment.setLocale('en');
 
     let resourceId = 101;
+    let eventId = 1;
     let currentDate = this.get('moment').moment().startOf('day');
 
     let config = DEFAULT_CONFIG();
@@ -20,6 +21,7 @@ const setupScheduler = (hooks) => {
       currentDate,
       config,
       resourceId,
+      eventId
     });
 
     this.setProperties({
@@ -37,7 +39,7 @@ const setupScheduler = (hooks) => {
           isExternalEventsLoading: false,
         });
         this.publicApi.actions.add('externalEvents', [{
-          id: 1,
+          id: eventId,
           resourceId,
           title: 'First event for Resource 1',
           startTime: currentDate.clone().set({ h: 2, m: 0 }),
@@ -47,7 +49,7 @@ const setupScheduler = (hooks) => {
           { id: resourceId, name: 'Resource 1' },
           { id: 102, name: 'Resource 2' }]);
         this.publicApi.actions.add('events', [{
-          id: 1,
+          id: eventId,
           resourceId,
           title: 'First event for Resource 1',
           startTime: currentDate.clone().set({ h: 2, m: 0 }),

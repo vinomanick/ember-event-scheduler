@@ -3,6 +3,12 @@ import { setupRenderingTest } from 'ember-qunit';
 import { find } from '@ember/test-helpers';
 import { setupScheduler, renderScheduler } from 'dummy/tests/test-support';
 
+const SELECTORS = {
+  externalEvents: '[data-test-es=external-event-wrapper]',
+  events: '[data-test-es=event-wrapper]',
+  resources: '[data-test-es=resource]'
+};
+
 module('Integration | Component | event-scheduler', function(hooks) {
   setupRenderingTest(hooks);
   setupScheduler(hooks);
@@ -14,8 +20,8 @@ module('Integration | Component | event-scheduler', function(hooks) {
     assert.dom('[data-test-es="es-calendar"]').exists();
 
     assert.ok(this.publicApi);
-    assert.dom('[data-test-es=resource]').exists({ count: 2 });
-    assert.dom('[data-test-es="external-event-wrapper"]').exists({ count: 1 });
-    assert.equal(find(`[data-resource-id="${this.resourceId}"]`).querySelectorAll('[data-test-es=event-wrapper]').length, 1);
+    assert.dom(SELECTORS.resources).exists({ count: 2 });
+    assert.dom(SELECTORS.externalEvents).exists({ count: 1 });
+    assert.equal(find(`[data-resource-id="${this.resourceId}"]`).querySelectorAll(SELECTORS.externalEvents).length, 1);
   });
 });
