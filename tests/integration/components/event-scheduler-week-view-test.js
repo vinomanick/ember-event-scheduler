@@ -28,7 +28,7 @@ module('Integration | Component | event-scheduler | Week view', function(hooks) 
     hooks.beforeEach(async function() {
       this.set('selectedView', 'week');
       await renderScheduler();
-      this.resourceId = 102;
+      this.resourceId = this.resourceId2;
       element = find(`[data-resource-id="${this.resourceId}"]`);
       element.classList.add('activated');
 

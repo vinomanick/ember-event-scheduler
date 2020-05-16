@@ -22,6 +22,6 @@ module('Integration | Component | event-scheduler', function(hooks) {
     assert.ok(this.publicApi);
     assert.dom(SELECTORS.resources).exists({ count: 2 });
     assert.dom(SELECTORS.externalEvents).exists({ count: 1 });
-    assert.equal(find(`[data-resource-id="${this.resourceId}"]`).querySelectorAll(SELECTORS.externalEvents).length, 1);
+    assert.equal(find(`[data-resource-id="${this.resourceId}"]`).querySelectorAll(SELECTORS.events).length, 1);
   });
 });

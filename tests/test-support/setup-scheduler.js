@@ -11,6 +11,7 @@ const setupScheduler = (hooks) => {
     this.moment.setLocale('en');
 
     let resourceId = 101;
+    let resourceId2 = 102;
     let eventId = 1;
     let currentDate = this.get('moment').moment().startOf('day');
 
@@ -21,6 +22,7 @@ const setupScheduler = (hooks) => {
       currentDate,
       config,
       resourceId,
+      resourceId2,
       eventId
     });
 
@@ -47,7 +49,7 @@ const setupScheduler = (hooks) => {
         }]);
         this.publicApi.actions.add('resources', [
           { id: resourceId, name: 'Resource 1' },
-          { id: 102, name: 'Resource 2' }]);
+          { id: resourceId2, name: 'Resource 2' }]);
         this.publicApi.actions.add('events', [{
           id: eventId,
           resourceId,
