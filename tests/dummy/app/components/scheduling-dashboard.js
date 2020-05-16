@@ -9,7 +9,7 @@ export default Component.extend({
   moment: service(),
   layout,
   config,
-  classNames: ['scheduling-dashboard'],
+  classNames: ['scheduling-dashboard', 'overflow--scroll'],
   attributeBindings: ['data-test-es'],
   'data-test-es': 'scheduling-dashboard',
   isExternalEventsExpanded: true,

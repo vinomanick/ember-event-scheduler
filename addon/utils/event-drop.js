@@ -26,7 +26,7 @@ const getResourceElement = (target) => {
 
 const getResourceId = (resourceElement) => {
   if(resourceElement) {
-    return resourceElement.getAttribute('data-resource-id');
+    return parseInt(resourceElement.getAttribute('data-resource-id'));
   }
 };
 

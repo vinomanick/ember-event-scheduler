@@ -105,7 +105,7 @@ module('Integration | Component | event-scheduler/calendar', function(hooks) {
     assert.dom('[data-test-es="es-calendar"]').exists();
     assert.dom('[data-test-es="es-calendar-header"]').exists();
     assert.dom('[data-test-es="resource"]').doesNotExist();
-    assert.dom('[data-test-es="empty-row"]').doesNotExist;
+    assert.dom('[data-test-es="empty-row"]').doesNotExist();
     assert.dom('[data-test-es="resource-loader"]').exists();
   });
 });
