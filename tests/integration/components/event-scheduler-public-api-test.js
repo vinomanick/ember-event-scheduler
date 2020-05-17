@@ -14,10 +14,44 @@ module('Integration | Component | event-scheduler | Public API', function(hooks)
   setupRenderingTest(hooks);
   setupScheduler(hooks);
 
-  let element;
+  let element, newEvent;
 
   hooks.beforeEach(async function() {
     await renderScheduler();
+    newEvent = () => ({
+      id: 2,
+      resourceId: this.resourceId2,
+      title: 'First event for Resource 2',
+      startTime: this.currentDate.clone().set({ h: 4, m: 0 }),
+      endTime: this.currentDate.clone().set({ h: 7, m: 0 })
+    });
+  });
+
+  test('#add - should ignore the addition if existing event is added', async function(assert) {
+    element = find(SELECTORS.events);
+    // Initial state assertions
+    assert.equal(this.store.peekAll('event').length, 1);
+    let { startPosition, endPosition } = getEventPosition(element);
+    assert.equal(find(`[data-resource-id="${this.resourceId}"]`).querySelectorAll(SELECTORS.events).length, 1);
+    assert.equal(startPosition, '5');
+    assert.equal(endPosition, '7');
+
+    this.publicApi.actions.add('events', [{
+      id: 1,
+      resourceId: this.resourceId,
+      title: 'First event for Resource 1',
+      startTime: this.currentDate.clone().set({ h: 4, m: 0 }),
+      endTime: this.currentDate.clone().set({ h: 7, m: 0 })
+    }]);
+    await settled();
+
+    // After update state assertions
+    assert.equal(this.store.peekAll('event').length, 1);
+    let { startPosition: newStartPos, endPosition: newEndPos } = getEventPosition(find(SELECTORS.events));
+    assert.equal(find(`[data-resource-id="${this.resourceId}"]`).querySelectorAll(SELECTORS.events).length, 1);
+    assert.equal(newStartPos, '5');
+    assert.equal(newEndPos, '7');
+
   });
 
   test('#update - should update the calendar event and revert to original position if reverted', async function(assert) {
@@ -66,45 +100,63 @@ module('Integration | Component | event-scheduler | Public API', function(hooks)
     assert.equal(this.store.peekAll('event').length, 1);
     assert.equal(find(`[data-resource-id="${this.resourceId}"]`).querySelectorAll(SELECTORS.events).length, 1);
 
-    this.publicApi.actions.update('externalEvents', {
-      id: 2,
-      resourceId: this.resourceId,
-      title: 'Second event for Resource 1',
-      startTime: this.currentDate.clone().set({ h: 4, m: 0 }),
-      endTime: this.currentDate.clone().set({ h: 7, m: 0 })
-    });
+    let _newEvent = newEvent();
+    _newEvent.startTime = null;
+    _newEvent.endTime = null;
+    this.publicApi.actions.add('externalEvents', [_newEvent]);
+    await settled();
 
-    this.publicApi.actions.update('events', {
-      id: 2,
-      resourceId: this.resourceId,
-      title: 'Second event for Resource 1',
-      startTime: this.currentDate.clone().set({ h: 4, m: 0 }),
-      endTime: this.currentDate.clone().set({ h: 7, m: 0 })
-    });
+    this.publicApi.actions.update('events', newEvent());
     await settled();
 
     // After update state assertions
     assert.equal(this.store.peekAll('event').length, 2);
     let { startPosition, endPosition } = getEventPosition(find('[data-event-id="2"]'));
-    assert.equal(find(`[data-resource-id="${this.resourceId}"]`).querySelectorAll(SELECTORS.events).length, 2);
+    assert.equal(find(`[data-resource-id="${this.resourceId}"]`).querySelectorAll(SELECTORS.events).length, 1);
+    assert.equal(find(`[data-resource-id="${this.resourceId2}"]`).querySelectorAll(SELECTORS.events).length, 1);
     assert.equal(startPosition, '9');
     assert.equal(endPosition, '15');
 
-    this.publicApi.actions.revertEvent(this.eventId);
+    this.publicApi.actions.revertEvent(newEvent().id);
     await settled();
 
     assert.equal(this.store.peekAll('event').length, 2); // It will remain 2 as this is present in sidebar
     assert.equal(find(`[data-resource-id="${this.resourceId}"]`).querySelectorAll(SELECTORS.events).length, 1);
+    assert.equal(find(`[data-resource-id="${this.resourceId2}"]`).querySelectorAll(SELECTORS.events).length, 0);
+  });
+
+  module('#delete', function() {
+    test('#resource - should delete and remove the record from store', function(assert) {
+      assert.equal(this.store.peekAll('resource').length, 2);
+      this.publicApi.actions.delete('resources', this.resourceId2);
+      assert.equal(this.store.peekAll('resource').length, 1);
+    });
+
+    test('#event - should delete and remove the record from store if not present in sidebar', async function(assert) {
+      this.publicApi.actions.add('events', [newEvent()]);
+      await settled();
+
+      assert.equal(this.store.peekAll('event').length, 2);
+      this.publicApi.actions.delete('events', 2);
+      assert.equal(this.store.peekAll('event').length, 1);
+      this.publicApi.actions.delete('events', 1);
+      assert.equal(this.store.peekAll('event').length, 1);
+    });
+
+    test('#externalEvent - should delete and remove the record from store if not present in calendar', async function(assert) {
+      this.publicApi.actions.add('externalEvents', [newEvent()]);
+      await settled();
+
+      assert.equal(this.store.peekAll('event').length, 2);
+      this.publicApi.actions.delete('externalEvents', 2);
+      assert.equal(this.store.peekAll('event').length, 1);
+      this.publicApi.actions.delete('externalEvents', 1);
+      assert.equal(this.store.peekAll('event').length, 1);
+    });
   });
 
   test('#resetCalendar should delete all the events and resources inside the calendar', async function(assert) {
-    this.publicApi.actions.add('events', [{
-      id: 2,
-      resourceId: this.resourceId2,
-      title: 'First event for Resource 2',
-      startTime: this.currentDate.clone().set({ h: 4, m: 0 }),
-      endTime: this.currentDate.clone().set({ h: 7, m: 0 })
-    }]);
+    this.publicApi.actions.add('events', [newEvent()]);
     await settled();
 
     assert.dom(SELECTORS.resources).exists({ count: 2 });
@@ -123,13 +175,7 @@ module('Integration | Component | event-scheduler | Public API', function(hooks)
   });
 
   test('#resetExternalEvents should delete all the external events from the sidebar', async function(assert) {
-    this.publicApi.actions.add('externalEvents', [{
-      id: 2,
-      resourceId: this.resourceId2,
-      title: 'First event for Resource 2',
-      startTime: this.currentDate.clone().set({ h: 4, m: 0 }),
-      endTime: this.currentDate.clone().set({ h: 7, m: 0 })
-    }]);
+    this.publicApi.actions.add('externalEvents', [newEvent()]);
     await settled();
 
     assert.dom(SELECTORS.externalEvents).exists({ count: 2 });

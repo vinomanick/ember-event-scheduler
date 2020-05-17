@@ -3,7 +3,6 @@ import layout from '../../../../templates/components/event-scheduler/toolbar/wra
 import { computed } from '@ember/object';
 import { getCalendarPeriod } from '../../../../utils/event-scheduler';
 import { inject as service } from '@ember/service';
-import { assert } from '@ember/debug';
 
 export default Component.extend({
   moment: service(),
@@ -15,14 +14,7 @@ export default Component.extend({
   }),
   init() {
     this._super(...arguments);
-    let minYear = this.minYear;
-    let maxYear = this.maxYear
-    let selectedDate =  this.selectedDate || new Date();
-    this.center = selectedDate;
-
-    if (minYear > maxYear) {
-      assert(`minYear should not be greater than maxYear. minYear=${minYear}:maxYear=${maxYear}`);
-    }
+    this.center = this.selectedDate || new Date();
   },
   actions: {
     selectDate(dropdown, { date: selectedDate }) {

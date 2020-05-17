@@ -11,6 +11,16 @@ const event = {
   endTime: '2019-01-03T09:00:00.000Z'
 };
 
+const renderComponent = async () => {
+  await render(hbs` {{event-scheduler/calendar/wrappers/event/event-card
+    event=event
+    draggable=draggable
+    dragState=dragState
+    slotsLength=slotsLength
+    startPosition=startPosition
+    endPosition=endPosition }}`);
+};
+
 const wrapperElement = '[data-test-es="event-wrapper"]';
 
 module('Integration | Component | event-scheduler/calendar/wrappers/event/event-card', function(hooks) {
@@ -21,41 +31,28 @@ module('Integration | Component | event-scheduler/calendar/wrappers/event/event-
       slotsLength: 48,
       startPosition: 4,
       endPosition: 8,
+      draggable: true,
       event
     });
   });
 
   test('renders', async function(assert) {
-    await render(hbs` {{event-scheduler/calendar/wrappers/event/event-card
-      event=event
-      draggable=draggable
-      slotsLength=slotsLength
-      startPosition=startPosition
-      endPosition=endPosition }}`);
+    this.set('draggable', false);
+    await renderComponent();
     let eventCard = find(wrapperElement);
     assert.ok(eventCard);
-    assert.dom(eventCard).doesNotHaveAttribute('draggable');
+    assert.dom(eventCard).hasAttribute('draggable', 'false');
   });
 
   test('should set the event to be draggable when draggable property is set to true', async function(assert) {
-    await render(hbs`{{event-scheduler/calendar/wrappers/event/event-card
-      event=event
-      draggable=true
-      slotsLength=slotsLength
-      startPosition=startPosition
-      endPosition=endPosition }}`);
+    await renderComponent();
     let eventCard = find(wrapperElement);
     assert.ok(eventCard);
     assert.dom(eventCard).hasAttribute('draggable', 'true');
   });
 
   test('should add dragged class when the event is dragged', async function(assert) {
-    await render(hbs`{{event-scheduler/calendar/wrappers/event/event-card
-       event=event
-       draggable=true
-       slotsLength=slotsLength
-       startPosition=startPosition
-       endPosition=endPosition }}`);
+    await renderComponent();
     let element = find(wrapperElement);
     assert.dom(element).hasAttribute('draggable', 'true');
 
@@ -72,13 +69,7 @@ module('Integration | Component | event-scheduler/calendar/wrappers/event/event-
 
   test('should remove the dragged class when the drag is stopped', async function(assert) {
     this.set('dragState', 'dragged');
-    await render(hbs`{{event-scheduler/calendar/wrappers/event/event-card
-      dragState=dragState
-      draggable=true
-      event=event
-      slotsLength=slotsLength
-      startPosition=startPosition
-      endPosition=endPosition }}`);
+    await renderComponent();
     let element = find(wrapperElement);
     assert.dom(element).hasClass('dragged');
 

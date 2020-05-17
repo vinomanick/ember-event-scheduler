@@ -2,26 +2,24 @@ import { DEFAULT_CONFIG } from 'dummy/tests/constants/event-scheduler';
 import sinon from 'sinon';
 import { render, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import { setupMoment, setupTranslations } from 'dummy/tests/test-support';
 
 const setupScheduler = (hooks) => {
+  setupMoment(hooks);
+  setupTranslations(hooks);
+
   hooks.beforeEach(function() {
-    // Inject moment service and setting the zone
-    this.moment = this.owner.lookup('service:moment');
-    this.moment.setTimeZone('Europe/Amsterdam');
-    this.moment.setLocale('en');
 
     this.store = this.owner.lookup('service:store');
 
     let resourceId = 101;
     let resourceId2 = 102;
     let eventId = 1;
-    let currentDate = this.get('moment').moment().startOf('day');
 
     let config = DEFAULT_CONFIG();
 
     // Exposing this default properties to tests so that they can modify it if needed
     this.setProperties({
-      currentDate,
       config,
       resourceId,
       resourceId2,
@@ -29,7 +27,7 @@ const setupScheduler = (hooks) => {
     });
 
     this.setProperties({
-      selectedDate: currentDate,
+      selectedDate: this.currentDate,
       selectedView: config.defaultView,
       selectedDuration: config.toolbar.duration.default,
       isExternalEventsLoading: true,
@@ -46,8 +44,8 @@ const setupScheduler = (hooks) => {
           id: eventId,
           resourceId,
           title: 'First event for Resource 1',
-          startTime: currentDate.clone().set({ h: 2, m: 0 }),
-          endTime: currentDate.clone().set({ h: 3, m: 0 })
+          startTime: this.currentDate.clone().set({ h: 2, m: 0 }),
+          endTime: this.currentDate.clone().set({ h: 3, m: 0 })
         }]);
         this.publicApi.actions.add('resources', [
           { id: resourceId, name: 'Resource 1' },
@@ -56,8 +54,8 @@ const setupScheduler = (hooks) => {
           id: eventId,
           resourceId,
           title: 'First event for Resource 1',
-          startTime: currentDate.clone().set({ h: 2, m: 0 }),
-          endTime: currentDate.clone().set({ h: 3, m: 0 })
+          startTime: this.currentDate.clone().set({ h: 2, m: 0 }),
+          endTime: this.currentDate.clone().set({ h: 3, m: 0 })
         }]);
       }
     });

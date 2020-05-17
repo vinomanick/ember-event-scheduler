@@ -1,3 +1,11 @@
+# validate this file:
+#   curl --data-binary @.codecov.yml https://codecov.io/validate
+
+# docs:
+#   https://codecov.readme.io/v4.3.6/docs/commit-status
+#   Link to Sample configuration
+#   https://gist.github.com/stevepeak/53bee7b2c326b24a9b4a
+
 codecov:
   require_ci_to_pass: yes
 

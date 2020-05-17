@@ -50,24 +50,24 @@ export default class PublicAPI {
 
       if (typeof pointer === 'object') {
         let nestedProp = (this.actions) ? this[prop] : {};
-        descriptor['get'] = function() { return nestedProp; };
+        descriptor['get'] = () => nestedProp;
 
         this.defineProxyProperties(pointer, nestedProp);
       } else {
         let self = this;
-        descriptor['get'] = function() { return self.get(pointer); };
+        descriptor['get'] = () => self.get(pointer);
       }
 
       Object.defineProperty(target, prop, descriptor);
     });
   }
 
-  remove() {
-    proxy.set(this, null);
-  }
+  // remove() {
+  //   proxy.set(this, null);
+  // }
 
-  reopen(schema) {
-    this.defineProxyProperties(schema);
-    return this;
-  }
+  // reopen(schema) {
+  //   this.defineProxyProperties(schema);
+  //   return this;
+  // }
 }

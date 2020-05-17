@@ -2,8 +2,8 @@ import moment from 'moment';
 import { getTimeRange, getDurationAs } from './date-util';
 
 const getEventMandates = (event) => {
-  let { startTime, endTime, resourceId } = event;
-  return { startTime, endTime, resourceId }
+  let { startTime, endTime, resourceId, isCalendarEvent } = event;
+  return { startTime, endTime, resourceId, isCalendarEvent }
 };
 
 const getSlots = (selectedDate, options) => {
@@ -81,12 +81,12 @@ const getEventPeriodCompact = (startTime, endTime, _moment) => {
   }
 };
 
-const getTimerPos = (durationInMins, slotConfig) => {
-  let { width, interval } = slotConfig;
-  let intervalInMins = moment.duration(interval.value, interval.format).asMinutes();
-  return (durationInMins * width) / intervalInMins;
-};
+// const getTimerPos = (durationInMins, slotConfig) => {
+//   let { width, interval } = slotConfig;
+//   let intervalInMins = moment.duration(interval.value, interval.format).asMinutes();
+//   return (durationInMins * width) / intervalInMins;
+// };
 
-export { getSlots, getTimerPos,
+export { getSlots,
   getEventMandates,
   getCalendarPeriod, getExternalEventPeriod, getEventPeriodDayView, getEventPeriodCompact };

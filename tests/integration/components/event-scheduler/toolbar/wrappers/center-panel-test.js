@@ -5,23 +5,25 @@ import { clickTrigger } from 'ember-basic-dropdown/test-support/helpers';
 import hbs from 'htmlbars-inline-precompile';
 import sinon from 'sinon';
 import { DEFAULT_CONFIG } from 'dummy/tests/constants/event-scheduler';
+import { setupMoment } from 'dummy/tests/test-support';
+
+const renderComponent = async () => {
+  await render(hbs`{{event-scheduler/toolbar/wrappers/center-panel
+    selectedDate=selectedDate dateFormat=dateFormat
+    viewType=viewType slotConfig=slotConfig
+    onDateChange=(action onDateChangeSpy)
+  }}`);
+};
 
 module('Integration | Component | event-scheduler/toolbar/wrappers/center-panel', function(hooks) {
   setupRenderingTest(hooks);
-
-  let currentDate;
+  setupMoment(hooks);
 
   hooks.beforeEach(function() {
-    // Inject moment service and setting the zone
-    this.moment = this.owner.lookup('service:moment');
-    this.moment.setTimeZone('Europe/Amsterdam');
-    this.moment.setLocale('en');
-    currentDate = this.get('moment').moment().startOf('day');
-
     let { toolbar: { dateFormat },  views: { day: { type: viewType, slot: slotConfig }} } = DEFAULT_CONFIG();
 
     this.setProperties({
-      selectedDate: currentDate,
+      selectedDate: this.currentDate,
       viewType,
       slotConfig,
       dateFormat,
@@ -30,13 +32,9 @@ module('Integration | Component | event-scheduler/toolbar/wrappers/center-panel'
   });
 
   test('should trigger the date change action with selected date on selecting a date from the date picker and current date on clicking today', async function(assert) {
-    let newDate = currentDate.clone().add(1, 'day');
-    await render(hbs`{{event-scheduler/toolbar/wrappers/center-panel
-      selectedDate=selectedDate dateFormat=dateFormat
-      viewType=viewType slotConfig=slotConfig
-      onDateChange=(action onDateChangeSpy)
-    }}`);
-    assert.dom('[data-test-es="current-period"]').hasText(currentDate.format(this.dateFormat));
+    let newDate = this.currentDate.clone().add(1, 'day');
+    await renderComponent();
+    assert.dom('[data-test-es="current-period"]').hasText(this.currentDate.format(this.dateFormat));
 
     await clickTrigger('[data-test-es=date-picker]');
     await click(`[data-date="${newDate.format('YYYY-MM-DD')}"]`);
@@ -44,6 +42,6 @@ module('Integration | Component | event-scheduler/toolbar/wrappers/center-panel'
 
     await clickTrigger('[data-test-es=date-picker]');
     await click('.ember-power-calendar-day--today');
-    assert.dom('[data-test-es="current-period"]').hasText(currentDate.format(this.dateFormat));
+    assert.dom('[data-test-es="current-period"]').hasText(this.currentDate.format(this.dateFormat));
   });
 });

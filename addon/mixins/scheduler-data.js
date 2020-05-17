@@ -78,13 +78,15 @@ export default Mixin.create({
     if(event) {
       let record = this.store.peekRecord('event', id);
       if(record.prevData) {
-        let { startTime, endTime, resourceId } = record.prevData;
-        record.setProperties({ startTime, endTime, resourceId, prevData: null });
+        let { startTime, endTime, resourceId, isCalendarEvent } = record.prevData;
+        record.setProperties({ startTime, endTime, resourceId, isCalendarEvent, prevData: null });
 
-        this.events.set(id, undefined);
-        run.next(() => this.events.set(id, record));
-      } else {
-        this.delete(TYPES.EVENT, id);
+        if (isCalendarEvent) {
+          this.events.set(id, undefined);
+          run.next(() => this.events.set(id, record));
+        } else {
+          this.delete(TYPES.EVENT, id);
+        }
       }
     }
   },

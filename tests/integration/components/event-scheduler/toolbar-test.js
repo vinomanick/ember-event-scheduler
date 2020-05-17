@@ -6,19 +6,13 @@ import sinon from 'sinon';
 import { DEFAULT_CONFIG } from 'dummy/tests/constants/event-scheduler';
 import { selectChoose } from 'ember-power-select/test-support/helpers';
 import { clickTrigger } from 'ember-basic-dropdown/test-support/helpers';
+import { setupMoment } from 'dummy/tests/test-support';
 
 module('Integration | Component | event-scheduler/toolbar', function(hooks) {
   setupRenderingTest(hooks);
-
-  let currentDate;
+  setupMoment(hooks);
 
   hooks.beforeEach(function() {
-    // Inject moment service and setting the zone
-    this.moment = this.owner.lookup('service:moment');
-    this.moment.setTimeZone('Europe/Amsterdam');
-    this.moment.setLocale('en');
-    currentDate = this.get('moment').moment().startOf('day');
-
     let config = DEFAULT_CONFIG();
 
     let viewConfig = config.views.day;
@@ -29,7 +23,7 @@ module('Integration | Component | event-scheduler/toolbar', function(hooks) {
       viewConfig,
       slotConfig,
       viewType,
-      selectedDate: currentDate,
+      selectedDate: this.currentDate,
       selectedView: config.defaultView,
       selectedDuration: config.toolbar.duration.default,
       isExternalEventsExpanded: true,
@@ -69,7 +63,7 @@ module('Integration | Component | event-scheduler/toolbar', function(hooks) {
     await click('[data-test-es=previous-btn]');
     assert.equal(this.onDateChangeSpy.calledTwice, true);
 
-    let newDate = currentDate.clone().add(1, 'day');
+    let newDate = this.currentDate.clone().add(1, 'day');
     await clickTrigger('[data-test-es=date-picker]');
     await click(`[data-date="${newDate.format('YYYY-MM-DD')}"]`);
     assert.equal(this.onDateChangeSpy.callCount, 3);

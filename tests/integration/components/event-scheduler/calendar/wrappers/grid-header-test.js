@@ -6,22 +6,28 @@ import { getMonthSlotConfig } from 'dummy/tests/helpers/utils/scheduler-util';
 import { find, render, click } from '@ember/test-helpers';
 import sinon from 'sinon';
 import { DEFAULT_CONFIG } from 'dummy/tests/constants/event-scheduler';
+import { setupMoment } from 'dummy/tests/test-support';
 
 const headerElement = '[data-test-es="grid-header"]';
 
+const renderComponent = async () => {
+  await render(hbs`{{event-scheduler/calendar/wrappers/grid-header
+    slots=slots
+    slotFormat=slotFormat
+    viewType=viewType
+    selectedDate=selectedDate
+    onDateViewChange=(action dateViewChangeSpy)
+  }}`);
+};
+
 module('Integration | Component | event-scheduler/calendar/wrappers/grid-header', function(hooks) {
   setupRenderingTest(hooks);
+  setupMoment(hooks);
 
-  let currentDate, dateViewChangeSpy;
+  let dateViewChangeSpy;
 
   hooks.beforeEach(function() {
-    // Inject moment service and setting the zone
-    this.moment = this.owner.lookup('service:moment');
-    this.moment.setTimeZone('Europe/Amsterdam');
-    this.moment.setLocale('en');
-    currentDate = this.get('moment').moment().startOf('day');
-
-    this.set('selectedDate', currentDate);
+    this.set('selectedDate', this.currentDate);
     dateViewChangeSpy = sinon.spy();
     this.set('dateViewChangeSpy', dateViewChangeSpy);
   });
@@ -30,19 +36,13 @@ module('Integration | Component | event-scheduler/calendar/wrappers/grid-header'
 
     hooks.beforeEach(function() {
       let { type: viewType, slot: slotConfig } = DEFAULT_CONFIG().views.day;
-      let slots = getSlots(currentDate, slotConfig);
+      let slots = getSlots(this.currentDate, slotConfig);
 
       this.setProperties({ viewType, slots, slotFormat: slotConfig.format });
     });
 
     test('should render day view as expected', async function(assert) {
-      await render(hbs`{{event-scheduler/calendar/wrappers/grid-header
-        slots=slots
-        slotFormat=slotFormat
-        viewType=viewType
-        selectedDate=selectedDate
-        onDateViewChange=(action dateViewChangeSpy)
-      }}`);
+      await renderComponent();
       assert.dom(headerElement).exists();
       // In day view, for 0th and 24th hour alone we are displaying it as two separate slots
       assert.dom('.calendar__row__slot').exists({ count: (this.slots.length / 2) + 1 });
@@ -69,32 +69,20 @@ module('Integration | Component | event-scheduler/calendar/wrappers/grid-header'
 
     hooks.beforeEach(function() {
       let { type: viewType, slot: slotConfig } = DEFAULT_CONFIG().views.week;
-      let slots = getSlots(currentDate, slotConfig);
+      let slots = getSlots(this.currentDate, slotConfig);
 
       this.setProperties({ viewType, slots, slotFormat: slotConfig.format });
     });
 
     test('should render week view as expected', async function(assert) {
-      await render(hbs`{{event-scheduler/calendar/wrappers/grid-header
-        slots=slots
-        slotFormat=slotFormat
-        viewType=viewType
-        selectedDate=selectedDate
-        onDateViewChange=(action dateViewChangeSpy)
-      }}`);
+      await renderComponent();
       assert.dom(headerElement).exists();
       assert.dom('.calendar__row__slot').exists({ count: this.get('slots').length });
     });
 
     test('should trigger the day view change action on clicking the date button', async function(assert) {
-      await render(hbs`{{event-scheduler/calendar/wrappers/grid-header
-        slots=slots
-        slotFormat=slotFormat
-        viewType=viewType
-        selectedDate=selectedDate
-        onDateViewChange=(action dateViewChangeSpy)
-      }}`);
-      let startOfWeek = currentDate.clone().startOf('week');
+      await renderComponent();
+      let startOfWeek = this.currentDate.clone().startOf('week');
       await click(`[data-test-es="${startOfWeek.format('DD-MM-YYYY')}"]`);
       assert.equal(dateViewChangeSpy.args[0][0].toISOString(), startOfWeek.toISOString());
       assert.equal(dateViewChangeSpy.args[0][1], 'day');
@@ -105,33 +93,21 @@ module('Integration | Component | event-scheduler/calendar/wrappers/grid-header'
 
     hooks.beforeEach(function() {
       let { type: viewType, slot } = DEFAULT_CONFIG().views.month;
-      let slotConfig = getMonthSlotConfig(slot, currentDate);
-      let slots = getSlots(currentDate, slotConfig);
+      let slotConfig = getMonthSlotConfig(slot, this.currentDate);
+      let slots = getSlots(this.currentDate, slotConfig);
 
       this.setProperties({ viewType, slots, slotFormat: slotConfig.format });
     });
 
     test('should render month view as expected', async function(assert) {
-      await render(hbs`{{event-scheduler/calendar/wrappers/grid-header
-        slots=slots
-        slotFormat=slotFormat
-        viewType=viewType
-        selectedDate=selectedDate
-        onDateViewChange=(action dateViewChangeSpy)
-      }}`);
+      await renderComponent();
       assert.dom(headerElement).exists();
       assert.dom('.calendar__row__slot').exists({ count: this.get('slots').length });
     });
 
     test('should trigger the day view change action on clicking the date button', async function(assert) {
-      await render(hbs`{{event-scheduler/calendar/wrappers/grid-header
-        slots=slots
-        slotFormat=slotFormat
-        viewType=viewType
-        selectedDate=selectedDate
-        onDateViewChange=(action dateViewChangeSpy)
-      }}`);
-      let startOfMonth = currentDate.clone().startOf('month');
+      await renderComponent();
+      let startOfMonth = this.currentDate.clone().startOf('month');
       await click(`[data-test-es="${startOfMonth.format('DD-MM-YYYY')}"]`);
       assert.equal(dateViewChangeSpy.args[0][0].toISOString(), startOfMonth.toISOString());
       assert.equal(dateViewChangeSpy.args[0][1], 'day');

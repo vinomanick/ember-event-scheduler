@@ -72,7 +72,7 @@ export default Component.extend(schedulerData, {
 
   init() {
     this._super(...arguments);
-    if(!this.intl.get('locale')) {
+    if(!this.intl.get('locale').length) {
       this.intl.setLocale(['en-us']);
     }
     if(!this.moment.locale) {
