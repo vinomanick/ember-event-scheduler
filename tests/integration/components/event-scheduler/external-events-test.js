@@ -3,8 +3,8 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { DEFAULT_CONFIG } from 'dummy/tests/constants/event-scheduler';
-import EmberObject from '@ember/object';
 import { setupMoment } from 'dummy/tests/test-support';
+import { set } from '@ember/object';
 
 const renderComponent = async () => {
   await render(hbs`
@@ -24,14 +24,15 @@ module('Integration | Component | event-scheduler/external-events', function(hoo
 
     this.setProperties({
       config,
-      events: EmberObject.create(),
+      events: {},
       isLoading: false,
       isLoadedAll: false
     });
   });
 
   test('renders', async function(assert) {
-    this.events.set('1', {
+    let _events = this.events;
+    set(_events, '1', {
       id: '1',
       resourceId: '101',
       title: 'First event for Resource 1',

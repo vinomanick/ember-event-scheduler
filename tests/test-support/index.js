@@ -1,4 +1,7 @@
-export { setupScheduler , renderScheduler } from './setup-scheduler';
+export {
+  setupScheduler ,
+  renderScheduler
+} from './setup-scheduler';
 
 export { setupMoment } from './setup-moment';
 

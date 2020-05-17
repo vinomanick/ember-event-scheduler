@@ -3,8 +3,8 @@ import {
   getEventMandates
 } from 'ember-event-scheduler/utils/event-scheduler';
 import { run } from '@ember/runloop';
-import EmberObject from '@ember/object';
 import { inject as service } from '@ember/service';
+import { set } from '@ember/object';
 
 const TYPES = {
   EVENT: 'events',
@@ -20,7 +20,7 @@ export default Mixin.create({
     data.forEach((item) => {
       let record;
       if ([TYPES.EVENT, TYPES.EXTERNAL_EVENT].includes(type)) {
-        let event = this.get(type).get(item.id);
+        let event = _data[item.id];
 
         // Event already present so ignoring it
         if(event) {
@@ -51,12 +51,12 @@ export default Mixin.create({
           record = this.store.createRecord('resource', { id, name });
         }
       }
-      _data.set(item.id, record);
+      set(_data, item.id, record);
     });
   },
 
   update(type, item) {
-    let event = this.get(type).get(item.id);
+    let event = this.get(type)[item.id];
     let record = this.store.peekRecord('event', item.id);
     if(record) {
       let prevData = getEventMandates(record);
@@ -66,15 +66,16 @@ export default Mixin.create({
       let { id, startTime, endTime, resourceId } = item;
       record.setProperties({ startTime, endTime, resourceId });
 
-      this.events.set(id, undefined);
-      run.next(() => this.events.set(id, record));
+      let _events = this.events;
+      set(_events, id, undefined);
+      run.next(() => set(_events, id, record));
     } else {
       this.add(TYPES.EVENT, [item]);
     }
   },
 
   revertEvent(id) {
-    let event = this.events.get(id);
+    let event = this.events[id];
     if(event) {
       let record = this.store.peekRecord('event', id);
       if(record.prevData) {
@@ -82,8 +83,9 @@ export default Mixin.create({
         record.setProperties({ startTime, endTime, resourceId, isCalendarEvent, prevData: null });
 
         if (isCalendarEvent) {
-          this.events.set(id, undefined);
-          run.next(() => this.events.set(id, record));
+          let _events = this.events;
+          set(_events, id, undefined);
+          run.next(() => set(_events, id, record));
         } else {
           this.delete(TYPES.EVENT, id);
         }
@@ -93,9 +95,9 @@ export default Mixin.create({
 
   delete(type, id) {
     let _data = this.get(type);
-    if (_data.get(id)) {
+    if (_data[id]) {
       this.clearStore(type, id);
-      _data.set(id, undefined); // This will trigger the observers/computed properties
+      set(_data, id, undefined); // This will trigger the observers/computed properties
       delete _data[id]; // This will delete the property from the object
     }
   },
@@ -118,7 +120,7 @@ export default Mixin.create({
       if([TYPES.EVENT, TYPES.EXTERNAL_EVENT].includes(type)) {
         let _data = this.get(type);
         Object.keys(_data).forEach((id) => {
-          let event = _data.get(id);
+          let event = _data[id];
           if((type === TYPES.EVENT && !event.isExternalEvent)
             || (type === TYPES.EXTERNAL_EVENT && !event.isCalendarEvent)) {
             this.store.unloadRecord(event);
@@ -127,7 +129,7 @@ export default Mixin.create({
       } else if (type === TYPES.RESOURCE) {
         this.store.unloadAll('resource');
       }
-      this.set(type, EmberObject.create())
+      this.set(type, {});
     });
   },
 

@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import layout from '../templates/components/event-scheduler';
 import PublicAPI from 'ember-event-scheduler/utils/public-api';
 import { inject as service } from '@ember/service';
-import EmberObject, { computed } from '@ember/object';
+import { computed } from '@ember/object';
 import { reads } from '@ember/object/computed';
 import { DEFAULT_CONFIG } from '../constants/event-scheduler';
 import { assign } from '@ember/polyfills';
@@ -92,9 +92,9 @@ export default Component.extend(schedulerData, {
     }
 
     this.setProperties( {
-      events: EmberObject.create(),
-      externalEvents: EmberObject.create(),
-      resources: EmberObject.create()
+      events: {},
+      externalEvents: {},
+      resources: {}
     });
 
     run.next(() => this.onSchedulerLoad(this.publicAPI));

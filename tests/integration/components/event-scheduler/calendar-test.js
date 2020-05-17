@@ -5,8 +5,8 @@ import { render } from '@ember/test-helpers';
 import sinon from 'sinon';
 import { DEFAULT_CONFIG } from 'dummy/tests/constants/event-scheduler';
 import { getSlots } from 'ember-event-scheduler/utils/event-scheduler';
-import EmberObject from '@ember/object';
 import { setupMoment } from 'dummy/tests/test-support';
+import { set } from '@ember/object';
 
 const renderComponent = async () => {
   await render(hbs`
@@ -38,8 +38,8 @@ module('Integration | Component | event-scheduler/calendar', function(hooks) {
     let slots = getSlots(this.currentDate, slotConfig);
 
     this.setProperties({
-      events: EmberObject.create(),
-      resources: EmberObject.create(),
+      events: {},
+      resources: {},
       isLoading: false,
       config,
       viewConfig,
@@ -54,14 +54,15 @@ module('Integration | Component | event-scheduler/calendar', function(hooks) {
   });
 
   test('renders', async function(assert) {
-    this.events.set('1', {
+    let { events, resources } = this;
+    set(events, '1', {
       id: '1',
       resourceId: '101',
       title: 'First event for Resource 1',
       startTime: this.currentDate.clone().set({ h: 2, m: 0 }),
       endTime: this.currentDate.clone().set({ h: 3, m: 0 })
     });
-    this.resources.set('101', { id: 101, name: 'Resource 1' });
+    set(resources, '101', { id: 101, name: 'Resource 1' });
     await renderComponent();
     assert.dom('[data-test-es="es-calendar"]').exists();
     assert.dom('[data-test-es="es-calendar-header"]').exists();

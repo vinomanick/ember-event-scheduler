@@ -1,8 +1,7 @@
 import { find, render } from '@ember/test-helpers';
-import { module, test, skip } from 'qunit';
+import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import wait from 'ember-test-helpers/wait';
 
 const event = { id: 1, title: 'Event title', startTime: '2019-11-27T00:00:00.000Z', endTime: '2019-11-27T01:00:00.000Z' };
 
